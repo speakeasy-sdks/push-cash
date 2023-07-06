@@ -6,22 +6,22 @@ info:
   version: 0.0.1
 tags:
   - name: introduction
-    description: 
+    # description:
       # $ref: gettingstarted.md
   - name: user
-    description: 
+    # description:
       # $ref: user.md
   - name: intent
-    description: 
+    # description:
       # $ref: paymentintent.md
   - name: balance
-    description: 
+    # description:
       # $ref: balance.md
   - name: transfer
-    description: 
+    # description: 
       # $ref: transfer.md
   - name: events
-    description:
+    # description:
       # $ref: events.md
 security:
  - bearer: []
