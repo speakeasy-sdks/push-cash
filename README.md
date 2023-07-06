@@ -1,7 +1,7 @@
 <div align="center">
    <img src="https://github.com/speakeasy-sdks/push-cash/assets/68016351/40cf454f-d017-4aa4-ae41-a546e26a7d3a">
    <h1>Push Cash SDK</h1>
-   <p><strong>Instant Transfers, Gauranteed></p>
+   <p>Instant Transfers, Gauranteed></p>
    <a href="https://www.pushcash.co/docs"><img src="https://img.shields.io/static/v1?label=Docs&message=Docs&color=000&style=for-the-badge" /></a>
    <a href="https://github.com/speakeasy-sdks/push-cash/actions"><img src="https://img.shields.io/github/actions/workflow/status/speakeasy-sdks/push-cash/speakeasy_sdk_generation.yml?style=for-the-badge" /></a>
   <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-blue.svg?style=for-the-badge" /></a>
