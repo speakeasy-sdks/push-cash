@@ -10,12 +10,17 @@ import (
 	"time"
 )
 
+const (
+	// ServerProd - Production API
+	ServerProd string = "prod"
+	// ServerSandbox - Sandbox API used for developing an integration with Push
+	ServerSandbox string = "sandbox"
+)
+
 // ServerList contains the list of servers available to the SDK
-var ServerList = []string{
-	// Production API
-	"https://api.pushcash.co",
-	// Sandbox API used for developing an integration with Push
-	"https://sandbox.pushcash.co",
+var ServerList = map[string]string{
+	ServerProd:    "https://api.pushcash.co",
+	ServerSandbox: "https://sandbox.pushcash.co",
 }
 
 // HTTPClient provides an interface for suplying the SDK with a custom HTTP client
@@ -46,7 +51,7 @@ type sdkConfiguration struct {
 	SecurityClient    HTTPClient
 	Security          *shared.Security
 	ServerURL         string
-	ServerIndex       int
+	Server            string
 	Language          string
 	OpenAPIDocVersion string
 	SDKVersion        string
@@ -58,7 +63,11 @@ func (c *sdkConfiguration) GetServerDetails() (string, map[string]string) {
 		return c.ServerURL, nil
 	}
 
-	return ServerList[c.ServerIndex], nil
+	if c.Server == "" {
+		c.Server = "prod"
+	}
+
+	return ServerList[c.Server], nil
 }
 
 // PushCash
@@ -92,14 +101,15 @@ func WithTemplatedServerURL(serverURL string, params map[string]string) SDKOptio
 	}
 }
 
-// WithServerIndex allows the overriding of the default server by index
-func WithServerIndex(serverIndex int) SDKOption {
+// WithServer allows the overriding of the default server by name
+func WithServer(server string) SDKOption {
 	return func(sdk *PushCash) {
-		if serverIndex < 0 || serverIndex >= len(ServerList) {
-			panic(fmt.Errorf("server index %d out of range", serverIndex))
+		_, ok := ServerList[server]
+		if !ok {
+			panic(fmt.Errorf("server %s not found", server))
 		}
 
-		sdk.sdkConfiguration.ServerIndex = serverIndex
+		sdk.sdkConfiguration.Server = server
 	}
 }
 
@@ -123,7 +133,7 @@ func New(opts ...SDKOption) *PushCash {
 		sdkConfiguration: sdkConfiguration{
 			Language:          "go",
 			OpenAPIDocVersion: "0.0.1",
-			SDKVersion:        "1.0.0",
+			SDKVersion:        "1.0.1",
 			GenVersion:        "2.58.0",
 		},
 	}

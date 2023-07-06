@@ -5,7 +5,7 @@
 * [CancelIntent](#cancelintent) - Cancel an intent
 * [CreateIntent](#createintent) - Create intent
 * [GetIntent](#getintent) - Get an intent
-* [ListIntents](#listintents) - List intents
+* [List](#list) - List intents
 
 ## CancelIntent
 
@@ -164,7 +164,7 @@ func main() {
 **[*operations.GetIntentResponse](../../models/operations/getintentresponse.md), error**
 
 
-## ListIntents
+## List
 
 Retrieves a list of intents
 
@@ -190,7 +190,7 @@ func main() {
     )
 
     ctx := context.Background()
-    res, err := s.Intent.ListIntents(ctx, operations.ListIntentsRequest{
+    res, err := s.Intent.List(ctx, operations.ListIntentsRequest{
         CreatedAtAfter: types.MustTimeFromString("2020-12-24T08:13:29.299Z"),
         CreatedAtBefore: types.MustTimeFromString("2022-01-11T05:45:42.485Z"),
         Cursor: pushcash.String("vjl8vk3l4o8dhsjlzh=="),

@@ -1,6 +1,6 @@
 configVersion: 1.0.0
 management:
-  docChecksum: cf56a6c6f00939e450cc2ec832282feb
+  docChecksum: 652c7395dce528446ba648c0ecb47796
   docVersion: 0.0.1
   speakeasyVersion: 1.53.0
   generationVersion: 2.58.0
@@ -13,6 +13,6 @@ generation:
   singleTagPerOp: false
   tagNamespacingDisabled: false
 go:
-  version: 1.0.0
+  version: 1.0.1
   maxMethodParams: 0
   packageName: push-cash

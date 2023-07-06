@@ -4,11 +4,11 @@
 
 * [CreateTransfer](#createtransfer) - Create a transfer
 * [GetTransfer](#gettransfer) - Retrieve a transfer
-* [ListTransfers](#listtransfers) - List transfers
+* [List](#list) - List transfers
 
 ## CreateTransfer
 
-create a transfer
+Create a transfer
 
 ### Example Usage
 
@@ -112,7 +112,7 @@ func main() {
 **[*operations.GetTransferResponse](../../models/operations/gettransferresponse.md), error**
 
 
-## ListTransfers
+## List
 
 Retrieves a list of transfers.
 
@@ -138,7 +138,7 @@ func main() {
     )
 
     ctx := context.Background()
-    res, err := s.Transfer.ListTransfers(ctx, operations.ListTransfersRequest{
+    res, err := s.Transfer.List(ctx, operations.ListTransfersRequest{
         CreatedAtAfter: types.MustTimeFromString("2022-03-02T21:33:21.372Z"),
         CreatedAtBefore: types.MustTimeFromString("2022-12-28T14:02:06.064Z"),
         Cursor: pushcash.String("vjl8vk3l4o8dhsjlzh=="),

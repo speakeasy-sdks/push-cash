@@ -3,7 +3,7 @@
 ### Available Operations
 
 * [GetEvent](#getevent) - Retrieve an event
-* [ListEvents](#listevents) - List events
+* [List](#list) - List events
 
 ## GetEvent
 
@@ -55,7 +55,7 @@ func main() {
 **[*operations.GetEventResponse](../../models/operations/geteventresponse.md), error**
 
 
-## ListEvents
+## List
 
 Retrieves a list of events.
 
@@ -80,7 +80,7 @@ func main() {
     )
 
     ctx := context.Background()
-    res, err := s.Events.ListEvents(ctx, operations.ListEventsRequest{
+    res, err := s.Events.List(ctx, operations.ListEventsRequest{
         CreatedAtAfter: types.MustTimeFromString("2022-12-25T03:24:03.949Z"),
         CreatedAtBefore: types.MustTimeFromString("2022-05-20T13:30:46.463Z"),
         Cursor: pushcash.String("vjl8vk3l4o8dhsjlzh=="),

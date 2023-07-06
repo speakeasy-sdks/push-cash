@@ -9,7 +9,6 @@
 
 <!-- Start SDK Installation -->
 ## SDK Installation
-![Uploading 64812dddd94ab3eeda765cc5_logo.svg…]()
 
 ```bash
 go get github.com/speakeasy-sdks/push-cash
@@ -55,31 +54,31 @@ func main() {
 
 * [GetBalance](docs/sdks/balance/README.md#getbalance) - Get Push Account balance
 * [GetTransaction](docs/sdks/balance/README.md#gettransaction) - Get a transaction
-* [ListTransactions](docs/sdks/balance/README.md#listtransactions) - List transactions
+* [List](docs/sdks/balance/README.md#list) - List transactions
 
 ### [Events](docs/sdks/events/README.md)
 
 * [GetEvent](docs/sdks/events/README.md#getevent) - Retrieve an event
-* [ListEvents](docs/sdks/events/README.md#listevents) - List events
+* [List](docs/sdks/events/README.md#list) - List events
 
 ### [Intent](docs/sdks/intent/README.md)
 
 * [CancelIntent](docs/sdks/intent/README.md#cancelintent) - Cancel an intent
 * [CreateIntent](docs/sdks/intent/README.md#createintent) - Create intent
 * [GetIntent](docs/sdks/intent/README.md#getintent) - Get an intent
-* [ListIntents](docs/sdks/intent/README.md#listintents) - List intents
+* [List](docs/sdks/intent/README.md#list) - List intents
 
 ### [Transfer](docs/sdks/transfer/README.md)
 
 * [CreateTransfer](docs/sdks/transfer/README.md#createtransfer) - Create a transfer
 * [GetTransfer](docs/sdks/transfer/README.md#gettransfer) - Retrieve a transfer
-* [ListTransfers](docs/sdks/transfer/README.md#listtransfers) - List transfers
+* [List](docs/sdks/transfer/README.md#list) - List transfers
 
 ### [User](docs/sdks/user/README.md)
 
 * [CreateUser](docs/sdks/user/README.md#createuser) - Create user
 * [GetUser](docs/sdks/user/README.md#getuser) - Get a user
-* [ListUsers](docs/sdks/user/README.md#listusers) - List users
+* [List](docs/sdks/user/README.md#list) - List users
 * [UpdateUser](docs/sdks/user/README.md#updateuser) - Update a user's status
 <!-- End SDK Available Operations -->
 

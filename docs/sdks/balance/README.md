@@ -4,7 +4,7 @@
 
 * [GetBalance](#getbalance) - Get Push Account balance
 * [GetTransaction](#gettransaction) - Get a transaction
-* [ListTransactions](#listtransactions) - List transactions
+* [List](#list) - List transactions
 
 ## GetBalance
 
@@ -102,7 +102,7 @@ func main() {
 **[*operations.GetTransactionResponse](../../models/operations/gettransactionresponse.md), error**
 
 
-## ListTransactions
+## List
 
 Retrieves a list of transactions
 
@@ -128,7 +128,7 @@ func main() {
     )
 
     ctx := context.Background()
-    res, err := s.Balance.ListTransactions(ctx, operations.ListTransactionsRequest{
+    res, err := s.Balance.List(ctx, operations.ListTransactionsRequest{
         CreatedAtAfter: types.MustTimeFromString("2022-12-17T05:46:24.151Z"),
         CreatedAtBefore: types.MustTimeFromString("2022-03-03T02:15:00.468Z"),
         Cursor: pushcash.String("vjl8vk3l4o8dhsjlzh=="),

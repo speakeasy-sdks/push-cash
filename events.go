@@ -90,9 +90,9 @@ func (s *events) GetEvent(ctx context.Context, request operations.GetEventReques
 	return res, nil
 }
 
-// ListEvents - List events
+// List - List events
 // Retrieves a list of events.
-func (s *events) ListEvents(ctx context.Context, request operations.ListEventsRequest) (*operations.ListEventsResponse, error) {
+func (s *events) List(ctx context.Context, request operations.ListEventsRequest) (*operations.ListEventsResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/event/list"
 

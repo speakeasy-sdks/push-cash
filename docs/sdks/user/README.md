@@ -4,7 +4,7 @@
 
 * [CreateUser](#createuser) - Create user
 * [GetUser](#getuser) - Get a user
-* [ListUsers](#listusers) - List users
+* [List](#list) - List users
 * [UpdateUser](#updateuser) - Update a user's status
 
 ## CreateUser
@@ -119,7 +119,7 @@ func main() {
 **[*operations.GetUserResponse](../../models/operations/getuserresponse.md), error**
 
 
-## ListUsers
+## List
 
 Retrieves a list of users
 
@@ -144,7 +144,7 @@ func main() {
     )
 
     ctx := context.Background()
-    res, err := s.User.ListUsers(ctx, operations.ListUsersRequest{
+    res, err := s.User.List(ctx, operations.ListUsersRequest{
         CreatedAtAfter: types.MustTimeFromString("2022-07-21T01:01:39.776Z"),
         CreatedAtBefore: types.MustTimeFromString("2020-01-25T11:09:22.009Z"),
     })

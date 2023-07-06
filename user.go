@@ -165,9 +165,9 @@ func (s *user) GetUser(ctx context.Context, request operations.GetUserRequest) (
 	return res, nil
 }
 
-// ListUsers - List users
+// List - List users
 // Retrieves a list of users
-func (s *user) ListUsers(ctx context.Context, request operations.ListUsersRequest) (*operations.ListUsersResponse, error) {
+func (s *user) List(ctx context.Context, request operations.ListUsersRequest) (*operations.ListUsersResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/user/list"
 

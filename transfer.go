@@ -25,7 +25,6 @@ func newTransfer(sdkConfig sdkConfiguration) *transfer {
 }
 
 // CreateTransfer - Create a transfer
-// create a transfer
 func (s *transfer) CreateTransfer(ctx context.Context, request operations.CreateTransferRequest) (*operations.CreateTransferResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/transfer"
@@ -162,9 +161,9 @@ func (s *transfer) GetTransfer(ctx context.Context, request operations.GetTransf
 	return res, nil
 }
 
-// ListTransfers - List transfers
+// List - List transfers
 // Retrieves a list of transfers.
-func (s *transfer) ListTransfers(ctx context.Context, request operations.ListTransfersRequest) (*operations.ListTransfersResponse, error) {
+func (s *transfer) List(ctx context.Context, request operations.ListTransfersRequest) (*operations.ListTransfersResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/transfer/list"
 

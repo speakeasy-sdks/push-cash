@@ -228,9 +228,9 @@ func (s *intent) GetIntent(ctx context.Context, request operations.GetIntentRequ
 	return res, nil
 }
 
-// ListIntents - List intents
+// List - List intents
 // Retrieves a list of intents
-func (s *intent) ListIntents(ctx context.Context, request operations.ListIntentsRequest) (*operations.ListIntentsResponse, error) {
+func (s *intent) List(ctx context.Context, request operations.ListIntentsRequest) (*operations.ListIntentsResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/intent/list"
 
