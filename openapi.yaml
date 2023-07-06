@@ -33,8 +33,6 @@ servers:
     description: Sandbox API used for developing an integration with Push
     x-speakeasy-server-id: sandbox
 x-speakeasy-name-override:
-  - operationId: ^get.*
-    methodNameOverride: get
   - operationId: ^post.*
     methodNameOverride: create
   - operationId: ^put.*
@@ -413,6 +411,7 @@ paths:
         - balance
       summary: Get a transaction
       operationId: getTransaction
+      x-speakeasy-name-oveerride: getTransaction
       description: Retrieves a specific transaction by its ID.
       parameters:
         - in: path
@@ -440,7 +439,7 @@ paths:
         - transfer
       summary: Create a transfer
       operationId: createTransfer
-      description: 
+      # description:
       #  $ref: transfer.md
       parameters:
         - in: header
