@@ -441,7 +441,7 @@ paths:
       summary: Create a transfer
       operationId: createTransfer
       description: 
-       $ref: transfer.md
+      #  $ref: transfer.md
       parameters:
         - in: header
           name: X-Idempotency-Key
