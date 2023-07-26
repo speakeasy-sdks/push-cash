@@ -14,6 +14,20 @@ type IntentFailureDetails struct {
 	Description string `json:"description"`
 }
 
+func (o *IntentFailureDetails) GetCode() int64 {
+	if o == nil {
+		return 0
+	}
+	return o.Code
+}
+
+func (o *IntentFailureDetails) GetDescription() string {
+	if o == nil {
+		return ""
+	}
+	return o.Description
+}
+
 // Intent - successful operation
 type Intent struct {
 	// amount (in cents) for the transaction
@@ -29,4 +43,60 @@ type Intent struct {
 	ID             string               `json:"id"`
 	Status         IntentStatus         `json:"status"`
 	UserID         string               `json:"user_id"`
+}
+
+func (o *Intent) GetAmount() int64 {
+	if o == nil {
+		return 0
+	}
+	return o.Amount
+}
+
+func (o *Intent) GetCreatedAt() time.Time {
+	if o == nil {
+		return time.Time{}
+	}
+	return o.CreatedAt
+}
+
+func (o *Intent) GetCurrency() Currency {
+	if o == nil {
+		return Currency("")
+	}
+	return o.Currency
+}
+
+func (o *Intent) GetDirection() Direction {
+	if o == nil {
+		return Direction("")
+	}
+	return o.Direction
+}
+
+func (o *Intent) GetFailureDetails() IntentFailureDetails {
+	if o == nil {
+		return IntentFailureDetails{}
+	}
+	return o.FailureDetails
+}
+
+func (o *Intent) GetID() string {
+	if o == nil {
+		return ""
+	}
+	return o.ID
+}
+
+func (o *Intent) GetStatus() IntentStatus {
+	if o == nil {
+		return IntentStatus("")
+	}
+	return o.Status
+}
+
+func (o *Intent) GetUserID() string {
+	if o == nil {
+		return ""
+	}
+	return o.UserID
 }

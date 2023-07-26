@@ -12,6 +12,13 @@ type GetTransferRequest struct {
 	ID string `pathParam:"style=simple,explode=false,name=id"`
 }
 
+func (o *GetTransferRequest) GetID() string {
+	if o == nil {
+		return ""
+	}
+	return o.ID
+}
+
 type GetTransferResponse struct {
 	ContentType string
 	StatusCode  int
@@ -20,4 +27,39 @@ type GetTransferResponse struct {
 	Transfer *shared.Transfer
 	// Error
 	Error *shared.Error
+}
+
+func (o *GetTransferResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *GetTransferResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *GetTransferResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
+}
+
+func (o *GetTransferResponse) GetTransfer() *shared.Transfer {
+	if o == nil {
+		return nil
+	}
+	return o.Transfer
+}
+
+func (o *GetTransferResponse) GetError() *shared.Error {
+	if o == nil {
+		return nil
+	}
+	return o.Error
 }

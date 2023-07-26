@@ -16,3 +16,24 @@ type AccountBalance struct {
 	//
 	Pending int64 `json:"pending"`
 }
+
+func (o *AccountBalance) GetAvailable() int64 {
+	if o == nil {
+		return 0
+	}
+	return o.Available
+}
+
+func (o *AccountBalance) GetCurrency() Currency {
+	if o == nil {
+		return Currency("")
+	}
+	return o.Currency
+}
+
+func (o *AccountBalance) GetPending() int64 {
+	if o == nil {
+		return 0
+	}
+	return o.Pending
+}

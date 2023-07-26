@@ -15,12 +15,40 @@ type ListUsersRequest struct {
 	CreatedAtBefore *time.Time `queryParam:"style=form,explode=true,name=created_at.before"`
 }
 
+func (o *ListUsersRequest) GetCreatedAtAfter() *time.Time {
+	if o == nil {
+		return nil
+	}
+	return o.CreatedAtAfter
+}
+
+func (o *ListUsersRequest) GetCreatedAtBefore() *time.Time {
+	if o == nil {
+		return nil
+	}
+	return o.CreatedAtBefore
+}
+
 // ListUsers200ApplicationJSON - successful operation
 type ListUsers200ApplicationJSON struct {
 	Data []shared.User `json:"data"`
 	// Use cursor for paginating list endpoints in conjunction with the cursor request parameter.
 	//
 	NextCursor string `json:"next_cursor"`
+}
+
+func (o *ListUsers200ApplicationJSON) GetData() []shared.User {
+	if o == nil {
+		return []shared.User{}
+	}
+	return o.Data
+}
+
+func (o *ListUsers200ApplicationJSON) GetNextCursor() string {
+	if o == nil {
+		return ""
+	}
+	return o.NextCursor
 }
 
 type ListUsersResponse struct {
@@ -31,4 +59,39 @@ type ListUsersResponse struct {
 	Error *shared.Error
 	// successful operation
 	ListUsers200ApplicationJSONObject *ListUsers200ApplicationJSON
+}
+
+func (o *ListUsersResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *ListUsersResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *ListUsersResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
+}
+
+func (o *ListUsersResponse) GetError() *shared.Error {
+	if o == nil {
+		return nil
+	}
+	return o.Error
+}
+
+func (o *ListUsersResponse) GetListUsers200ApplicationJSONObject() *ListUsers200ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.ListUsers200ApplicationJSONObject
 }

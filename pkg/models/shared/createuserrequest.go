@@ -16,3 +16,45 @@ type CreateUserRequest struct {
 	// the tag for the user, use this field for example to store your own internal identifier for a given user
 	Tag string `json:"tag"`
 }
+
+func (o *CreateUserRequest) GetAddress() string {
+	if o == nil {
+		return ""
+	}
+	return o.Address
+}
+
+func (o *CreateUserRequest) GetEmail() string {
+	if o == nil {
+		return ""
+	}
+	return o.Email
+}
+
+func (o *CreateUserRequest) GetKyc() Kyc {
+	if o == nil {
+		return Kyc{}
+	}
+	return o.Kyc
+}
+
+func (o *CreateUserRequest) GetName() string {
+	if o == nil {
+		return ""
+	}
+	return o.Name
+}
+
+func (o *CreateUserRequest) GetPhone() string {
+	if o == nil {
+		return ""
+	}
+	return o.Phone
+}
+
+func (o *CreateUserRequest) GetTag() string {
+	if o == nil {
+		return ""
+	}
+	return o.Tag
+}

@@ -9,6 +9,7 @@ import (
 	"io"
 	"net/http"
 	"push-cash/pkg/models/operations"
+	"push-cash/pkg/models/sdkerrors"
 	"push-cash/pkg/models/shared"
 	"push-cash/pkg/utils"
 	"strings"
@@ -79,6 +80,8 @@ func (s *transfer) CreateTransfer(ctx context.Context, request operations.Create
 			}
 
 			res.Transfer = out
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	default:
 		switch {
@@ -89,6 +92,8 @@ func (s *transfer) CreateTransfer(ctx context.Context, request operations.Create
 			}
 
 			res.Error = out
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	}
 
@@ -145,6 +150,8 @@ func (s *transfer) GetTransfer(ctx context.Context, request operations.GetTransf
 			}
 
 			res.Transfer = out
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	default:
 		switch {
@@ -155,6 +162,8 @@ func (s *transfer) GetTransfer(ctx context.Context, request operations.GetTransf
 			}
 
 			res.Error = out
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	}
 
@@ -212,6 +221,8 @@ func (s *transfer) List(ctx context.Context, request operations.ListTransfersReq
 			}
 
 			res.ListTransfers200ApplicationJSONObject = out
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	default:
 		switch {
@@ -222,6 +233,8 @@ func (s *transfer) List(ctx context.Context, request operations.ListTransfersReq
 			}
 
 			res.Error = out
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	}
 

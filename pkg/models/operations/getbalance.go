@@ -16,3 +16,38 @@ type GetBalanceResponse struct {
 	// Error
 	Error *shared.Error
 }
+
+func (o *GetBalanceResponse) GetAccountBalance() *shared.AccountBalance {
+	if o == nil {
+		return nil
+	}
+	return o.AccountBalance
+}
+
+func (o *GetBalanceResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *GetBalanceResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *GetBalanceResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
+}
+
+func (o *GetBalanceResponse) GetError() *shared.Error {
+	if o == nil {
+		return nil
+	}
+	return o.Error
+}

@@ -12,3 +12,31 @@ type CreateIntentRequest struct {
 	// Push's unique identifier for the user
 	UserID string `json:"user_id"`
 }
+
+func (o *CreateIntentRequest) GetAmount() int64 {
+	if o == nil {
+		return 0
+	}
+	return o.Amount
+}
+
+func (o *CreateIntentRequest) GetCurrency() Currency {
+	if o == nil {
+		return Currency("")
+	}
+	return o.Currency
+}
+
+func (o *CreateIntentRequest) GetDirection() Direction {
+	if o == nil {
+		return Direction("")
+	}
+	return o.Direction
+}
+
+func (o *CreateIntentRequest) GetUserID() string {
+	if o == nil {
+		return ""
+	}
+	return o.UserID
+}

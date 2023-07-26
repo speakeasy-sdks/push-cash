@@ -9,6 +9,7 @@ import (
 	"io"
 	"net/http"
 	"push-cash/pkg/models/operations"
+	"push-cash/pkg/models/sdkerrors"
 	"push-cash/pkg/models/shared"
 	"push-cash/pkg/utils"
 	"strings"
@@ -74,6 +75,8 @@ func (s *intent) CancelIntent(ctx context.Context, request operations.CancelInte
 			}
 
 			res.Intent = out
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	default:
 		switch {
@@ -84,6 +87,8 @@ func (s *intent) CancelIntent(ctx context.Context, request operations.CancelInte
 			}
 
 			res.Error = out
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	}
 
@@ -146,6 +151,8 @@ func (s *intent) CreateIntent(ctx context.Context, request operations.CreateInte
 			}
 
 			res.Intent = out
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	default:
 		switch {
@@ -156,6 +163,8 @@ func (s *intent) CreateIntent(ctx context.Context, request operations.CreateInte
 			}
 
 			res.Error = out
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	}
 
@@ -212,6 +221,8 @@ func (s *intent) GetIntent(ctx context.Context, request operations.GetIntentRequ
 			}
 
 			res.Intent = out
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	default:
 		switch {
@@ -222,6 +233,8 @@ func (s *intent) GetIntent(ctx context.Context, request operations.GetIntentRequ
 			}
 
 			res.Error = out
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	}
 
@@ -279,6 +292,8 @@ func (s *intent) List(ctx context.Context, request operations.ListIntentsRequest
 			}
 
 			res.ListIntents200ApplicationJSONObject = out
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	default:
 		switch {
@@ -289,6 +304,8 @@ func (s *intent) List(ctx context.Context, request operations.ListIntentsRequest
 			}
 
 			res.Error = out
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	}
 

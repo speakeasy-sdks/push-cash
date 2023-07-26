@@ -17,12 +17,47 @@ type ListEventsRequest struct {
 	Cursor *string `queryParam:"style=form,explode=true,name=cursor"`
 }
 
+func (o *ListEventsRequest) GetCreatedAtAfter() *time.Time {
+	if o == nil {
+		return nil
+	}
+	return o.CreatedAtAfter
+}
+
+func (o *ListEventsRequest) GetCreatedAtBefore() *time.Time {
+	if o == nil {
+		return nil
+	}
+	return o.CreatedAtBefore
+}
+
+func (o *ListEventsRequest) GetCursor() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Cursor
+}
+
 // ListEvents200ApplicationJSON - Successful operation
 type ListEvents200ApplicationJSON struct {
 	Data []shared.Event `json:"data"`
 	// Use cursor for paginating list endpoints in conjunction with the cursor request parameter.
 	//
 	NextCursor string `json:"next_cursor"`
+}
+
+func (o *ListEvents200ApplicationJSON) GetData() []shared.Event {
+	if o == nil {
+		return []shared.Event{}
+	}
+	return o.Data
+}
+
+func (o *ListEvents200ApplicationJSON) GetNextCursor() string {
+	if o == nil {
+		return ""
+	}
+	return o.NextCursor
 }
 
 type ListEventsResponse struct {
@@ -33,4 +68,39 @@ type ListEventsResponse struct {
 	Error *shared.Error
 	// Successful operation
 	ListEvents200ApplicationJSONObject *ListEvents200ApplicationJSON
+}
+
+func (o *ListEventsResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *ListEventsResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *ListEventsResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
+}
+
+func (o *ListEventsResponse) GetError() *shared.Error {
+	if o == nil {
+		return nil
+	}
+	return o.Error
+}
+
+func (o *ListEventsResponse) GetListEvents200ApplicationJSONObject() *ListEvents200ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.ListEvents200ApplicationJSONObject
 }

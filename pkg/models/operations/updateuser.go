@@ -13,6 +13,20 @@ type UpdateUserRequest struct {
 	ID string `pathParam:"style=simple,explode=false,name=id"`
 }
 
+func (o *UpdateUserRequest) GetUpdateUserRequest() *shared.UpdateUserRequest {
+	if o == nil {
+		return nil
+	}
+	return o.UpdateUserRequest
+}
+
+func (o *UpdateUserRequest) GetID() string {
+	if o == nil {
+		return ""
+	}
+	return o.ID
+}
+
 type UpdateUserResponse struct {
 	ContentType string
 	StatusCode  int
@@ -21,4 +35,39 @@ type UpdateUserResponse struct {
 	User *shared.User
 	// Error
 	Error *shared.Error
+}
+
+func (o *UpdateUserResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *UpdateUserResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *UpdateUserResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
+}
+
+func (o *UpdateUserResponse) GetUser() *shared.User {
+	if o == nil {
+		return nil
+	}
+	return o.User
+}
+
+func (o *UpdateUserResponse) GetError() *shared.Error {
+	if o == nil {
+		return nil
+	}
+	return o.Error
 }

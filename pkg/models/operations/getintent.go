@@ -12,6 +12,13 @@ type GetIntentRequest struct {
 	ID string `pathParam:"style=simple,explode=false,name=id"`
 }
 
+func (o *GetIntentRequest) GetID() string {
+	if o == nil {
+		return ""
+	}
+	return o.ID
+}
+
 type GetIntentResponse struct {
 	ContentType string
 	// successful operation
@@ -20,4 +27,39 @@ type GetIntentResponse struct {
 	RawResponse *http.Response
 	// Error
 	Error *shared.Error
+}
+
+func (o *GetIntentResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *GetIntentResponse) GetIntent() *shared.Intent {
+	if o == nil {
+		return nil
+	}
+	return o.Intent
+}
+
+func (o *GetIntentResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *GetIntentResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
+}
+
+func (o *GetIntentResponse) GetError() *shared.Error {
+	if o == nil {
+		return nil
+	}
+	return o.Error
 }

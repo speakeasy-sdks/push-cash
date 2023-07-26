@@ -9,6 +9,7 @@ import (
 	"io"
 	"net/http"
 	"push-cash/pkg/models/operations"
+	"push-cash/pkg/models/sdkerrors"
 	"push-cash/pkg/models/shared"
 	"push-cash/pkg/utils"
 	"strings"
@@ -74,6 +75,8 @@ func (s *events) GetEvent(ctx context.Context, request operations.GetEventReques
 			}
 
 			res.Event = out
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	default:
 		switch {
@@ -84,6 +87,8 @@ func (s *events) GetEvent(ctx context.Context, request operations.GetEventReques
 			}
 
 			res.Error = out
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	}
 
@@ -141,6 +146,8 @@ func (s *events) List(ctx context.Context, request operations.ListEventsRequest)
 			}
 
 			res.ListEvents200ApplicationJSONObject = out
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	default:
 		switch {
@@ -151,6 +158,8 @@ func (s *events) List(ctx context.Context, request operations.ListEventsRequest)
 			}
 
 			res.Error = out
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	}
 

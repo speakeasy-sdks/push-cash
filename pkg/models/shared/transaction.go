@@ -50,6 +50,34 @@ type TransactionFeeDetails struct {
 	Type TransactionFeeDetailsType `json:"type"`
 }
 
+func (o *TransactionFeeDetails) GetAmount() int64 {
+	if o == nil {
+		return 0
+	}
+	return o.Amount
+}
+
+func (o *TransactionFeeDetails) GetCurrency() Currency {
+	if o == nil {
+		return Currency("")
+	}
+	return o.Currency
+}
+
+func (o *TransactionFeeDetails) GetDescription() string {
+	if o == nil {
+		return ""
+	}
+	return o.Description
+}
+
+func (o *TransactionFeeDetails) GetType() TransactionFeeDetailsType {
+	if o == nil {
+		return TransactionFeeDetailsType("")
+	}
+	return o.Type
+}
+
 // TransactionSourceType - The type for the source entity of this transaction
 type TransactionSourceType string
 
@@ -85,6 +113,20 @@ type TransactionSource struct {
 	Type TransactionSourceType `json:"type"`
 }
 
+func (o *TransactionSource) GetID() string {
+	if o == nil {
+		return ""
+	}
+	return o.ID
+}
+
+func (o *TransactionSource) GetType() TransactionSourceType {
+	if o == nil {
+		return TransactionSourceType("")
+	}
+	return o.Type
+}
+
 // Transaction - Successful operation
 type Transaction struct {
 	// Gross amount of the transaction
@@ -106,4 +148,74 @@ type Transaction struct {
 	Source TransactionSource `json:"source"`
 	// Indicates how the funds from the transaction are represented in the account balance
 	Status TransactionStatus `json:"status"`
+}
+
+func (o *Transaction) GetAmount() int64 {
+	if o == nil {
+		return 0
+	}
+	return o.Amount
+}
+
+func (o *Transaction) GetAvailableAt() time.Time {
+	if o == nil {
+		return time.Time{}
+	}
+	return o.AvailableAt
+}
+
+func (o *Transaction) GetCreatedAt() time.Time {
+	if o == nil {
+		return time.Time{}
+	}
+	return o.CreatedAt
+}
+
+func (o *Transaction) GetCurrency() Currency {
+	if o == nil {
+		return Currency("")
+	}
+	return o.Currency
+}
+
+func (o *Transaction) GetFee() int64 {
+	if o == nil {
+		return 0
+	}
+	return o.Fee
+}
+
+func (o *Transaction) GetFeeDetails() []TransactionFeeDetails {
+	if o == nil {
+		return []TransactionFeeDetails{}
+	}
+	return o.FeeDetails
+}
+
+func (o *Transaction) GetID() string {
+	if o == nil {
+		return ""
+	}
+	return o.ID
+}
+
+func (o *Transaction) GetNet() int64 {
+	if o == nil {
+		return 0
+	}
+	return o.Net
+}
+
+func (o *Transaction) GetSource() TransactionSource {
+	if o == nil {
+		return TransactionSource{}
+	}
+	return o.Source
+}
+
+func (o *Transaction) GetStatus() TransactionStatus {
+	if o == nil {
+		return TransactionStatus("")
+	}
+	return o.Status
 }

@@ -38,3 +38,17 @@ type Kyc struct {
 	// the token representing the user entity at your KYC provider
 	Token string `json:"token"`
 }
+
+func (o *Kyc) GetMethod() KYCMethod {
+	if o == nil {
+		return KYCMethod("")
+	}
+	return o.Method
+}
+
+func (o *Kyc) GetToken() string {
+	if o == nil {
+		return ""
+	}
+	return o.Token
+}
