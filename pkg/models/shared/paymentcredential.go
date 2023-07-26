@@ -14,11 +14,39 @@ type PaymentCredentialAccount struct {
 	Routing string `json:"routing"`
 }
 
+func (o *PaymentCredentialAccount) GetNumberMask() string {
+	if o == nil {
+		return ""
+	}
+	return o.NumberMask
+}
+
+func (o *PaymentCredentialAccount) GetRouting() string {
+	if o == nil {
+		return ""
+	}
+	return o.Routing
+}
+
 type PaymentCredentialCard struct {
 	// the expiration date for the card
 	Expiration types.Date `json:"expiration"`
 	// the primary account number (mask)
 	PrimaryAccountNumberMask string `json:"primary_account_number_mask"`
+}
+
+func (o *PaymentCredentialCard) GetExpiration() types.Date {
+	if o == nil {
+		return types.Date{}
+	}
+	return o.Expiration
+}
+
+func (o *PaymentCredentialCard) GetPrimaryAccountNumberMask() string {
+	if o == nil {
+		return ""
+	}
+	return o.PrimaryAccountNumberMask
 }
 
 // PaymentCredential - The array will be empty until the user completes their first transaction. Additional transactions will utilize stored payment credentials
@@ -29,4 +57,32 @@ type PaymentCredential struct {
 	Card     PaymentCredentialCard `json:"card"`
 	// Datetime for when the payment credential was created for the user
 	CreatedAt time.Time `json:"created_at"`
+}
+
+func (o *PaymentCredential) GetAccount() PaymentCredentialAccount {
+	if o == nil {
+		return PaymentCredentialAccount{}
+	}
+	return o.Account
+}
+
+func (o *PaymentCredential) GetBankName() string {
+	if o == nil {
+		return ""
+	}
+	return o.BankName
+}
+
+func (o *PaymentCredential) GetCard() PaymentCredentialCard {
+	if o == nil {
+		return PaymentCredentialCard{}
+	}
+	return o.Card
+}
+
+func (o *PaymentCredential) GetCreatedAt() time.Time {
+	if o == nil {
+		return time.Time{}
+	}
+	return o.CreatedAt
 }

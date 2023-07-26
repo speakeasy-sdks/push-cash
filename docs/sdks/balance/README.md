@@ -19,6 +19,7 @@ import(
 	"context"
 	"log"
 	"push-cash"
+	"push-cash/pkg/models/shared"
 )
 
 func main() {
@@ -65,6 +66,7 @@ import(
 	"context"
 	"log"
 	"push-cash"
+	"push-cash/pkg/models/shared"
 	"push-cash/pkg/models/operations"
 )
 
@@ -115,9 +117,9 @@ import(
 	"context"
 	"log"
 	"push-cash"
+	"push-cash/pkg/models/shared"
 	"push-cash/pkg/models/operations"
 	"push-cash/pkg/types"
-	"push-cash/pkg/models/shared"
 )
 
 func main() {

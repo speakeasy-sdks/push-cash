@@ -37,3 +37,10 @@ func (e *UpdateUserRequestStatus) UnmarshalJSON(data []byte) error {
 type UpdateUserRequest struct {
 	Status UpdateUserRequestStatus `json:"status"`
 }
+
+func (o *UpdateUserRequest) GetStatus() UpdateUserRequestStatus {
+	if o == nil {
+		return UpdateUserRequestStatus("")
+	}
+	return o.Status
+}

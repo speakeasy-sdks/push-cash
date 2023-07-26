@@ -12,6 +12,13 @@ type CancelIntentRequest struct {
 	ID string `pathParam:"style=simple,explode=false,name=id"`
 }
 
+func (o *CancelIntentRequest) GetID() string {
+	if o == nil {
+		return ""
+	}
+	return o.ID
+}
+
 type CancelIntentResponse struct {
 	ContentType string
 	// Intent cancellation successful
@@ -20,4 +27,39 @@ type CancelIntentResponse struct {
 	RawResponse *http.Response
 	// Error
 	Error *shared.Error
+}
+
+func (o *CancelIntentResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *CancelIntentResponse) GetIntent() *shared.Intent {
+	if o == nil {
+		return nil
+	}
+	return o.Intent
+}
+
+func (o *CancelIntentResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *CancelIntentResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
+}
+
+func (o *CancelIntentResponse) GetError() *shared.Error {
+	if o == nil {
+		return nil
+	}
+	return o.Error
 }

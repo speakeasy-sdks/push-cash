@@ -10,3 +10,24 @@ type CreateTransferRequest struct {
 	// Direction of the money
 	Direction Direction `json:"direction"`
 }
+
+func (o *CreateTransferRequest) GetAmount() int64 {
+	if o == nil {
+		return 0
+	}
+	return o.Amount
+}
+
+func (o *CreateTransferRequest) GetCurrency() Currency {
+	if o == nil {
+		return Currency("")
+	}
+	return o.Currency
+}
+
+func (o *CreateTransferRequest) GetDirection() Direction {
+	if o == nil {
+		return Direction("")
+	}
+	return o.Direction
+}

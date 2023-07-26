@@ -80,3 +80,38 @@ type Event struct {
 	// the type of the resource which has been updated
 	SourceType EventSourceType `json:"source_type"`
 }
+
+func (o *Event) GetCreatedAt() *time.Time {
+	if o == nil {
+		return nil
+	}
+	return o.CreatedAt
+}
+
+func (o *Event) GetEventType() EventEventType {
+	if o == nil {
+		return EventEventType("")
+	}
+	return o.EventType
+}
+
+func (o *Event) GetID() string {
+	if o == nil {
+		return ""
+	}
+	return o.ID
+}
+
+func (o *Event) GetSourceID() string {
+	if o == nil {
+		return ""
+	}
+	return o.SourceID
+}
+
+func (o *Event) GetSourceType() EventSourceType {
+	if o == nil {
+		return EventSourceType("")
+	}
+	return o.SourceType
+}

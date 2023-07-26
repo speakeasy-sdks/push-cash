@@ -19,12 +19,54 @@ type ListTransfersRequest struct {
 	Status []shared.TransferStatus `queryParam:"style=form,explode=true,name=status"`
 }
 
+func (o *ListTransfersRequest) GetCreatedAtAfter() *time.Time {
+	if o == nil {
+		return nil
+	}
+	return o.CreatedAtAfter
+}
+
+func (o *ListTransfersRequest) GetCreatedAtBefore() *time.Time {
+	if o == nil {
+		return nil
+	}
+	return o.CreatedAtBefore
+}
+
+func (o *ListTransfersRequest) GetCursor() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Cursor
+}
+
+func (o *ListTransfersRequest) GetStatus() []shared.TransferStatus {
+	if o == nil {
+		return nil
+	}
+	return o.Status
+}
+
 // ListTransfers200ApplicationJSON - Successful operation
 type ListTransfers200ApplicationJSON struct {
 	Data []shared.Transfer `json:"data"`
 	// Use cursor for paginating list endpoints in conjunction with the cursor request parameter.
 	//
 	NextCursor string `json:"next_cursor"`
+}
+
+func (o *ListTransfers200ApplicationJSON) GetData() []shared.Transfer {
+	if o == nil {
+		return []shared.Transfer{}
+	}
+	return o.Data
+}
+
+func (o *ListTransfers200ApplicationJSON) GetNextCursor() string {
+	if o == nil {
+		return ""
+	}
+	return o.NextCursor
 }
 
 type ListTransfersResponse struct {
@@ -35,4 +77,39 @@ type ListTransfersResponse struct {
 	Error *shared.Error
 	// Successful operation
 	ListTransfers200ApplicationJSONObject *ListTransfers200ApplicationJSON
+}
+
+func (o *ListTransfersResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *ListTransfersResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *ListTransfersResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
+}
+
+func (o *ListTransfersResponse) GetError() *shared.Error {
+	if o == nil {
+		return nil
+	}
+	return o.Error
+}
+
+func (o *ListTransfersResponse) GetListTransfers200ApplicationJSONObject() *ListTransfers200ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.ListTransfers200ApplicationJSONObject
 }

@@ -9,6 +9,7 @@ import (
 	"io"
 	"net/http"
 	"push-cash/pkg/models/operations"
+	"push-cash/pkg/models/sdkerrors"
 	"push-cash/pkg/models/shared"
 	"push-cash/pkg/utils"
 	"strings"
@@ -71,6 +72,8 @@ func (s *balance) GetBalance(ctx context.Context) (*operations.GetBalanceRespons
 			}
 
 			res.AccountBalance = out
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	default:
 		switch {
@@ -81,6 +84,8 @@ func (s *balance) GetBalance(ctx context.Context) (*operations.GetBalanceRespons
 			}
 
 			res.Error = out
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	}
 
@@ -137,6 +142,8 @@ func (s *balance) GetTransaction(ctx context.Context, request operations.GetTran
 			}
 
 			res.Transaction = out
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	default:
 		switch {
@@ -147,6 +154,8 @@ func (s *balance) GetTransaction(ctx context.Context, request operations.GetTran
 			}
 
 			res.Error = out
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	}
 
@@ -204,6 +213,8 @@ func (s *balance) List(ctx context.Context, request operations.ListTransactionsR
 			}
 
 			res.ListTransactions200ApplicationJSONObject = out
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	default:
 		switch {
@@ -214,6 +225,8 @@ func (s *balance) List(ctx context.Context, request operations.ListTransactionsR
 			}
 
 			res.Error = out
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	}
 

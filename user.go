@@ -9,6 +9,7 @@ import (
 	"io"
 	"net/http"
 	"push-cash/pkg/models/operations"
+	"push-cash/pkg/models/sdkerrors"
 	"push-cash/pkg/models/shared"
 	"push-cash/pkg/utils"
 	"strings"
@@ -83,6 +84,8 @@ func (s *user) CreateUser(ctx context.Context, request operations.CreateUserRequ
 			}
 
 			res.User = out
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	default:
 		switch {
@@ -93,6 +96,8 @@ func (s *user) CreateUser(ctx context.Context, request operations.CreateUserRequ
 			}
 
 			res.Error = out
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	}
 
@@ -149,6 +154,8 @@ func (s *user) GetUser(ctx context.Context, request operations.GetUserRequest) (
 			}
 
 			res.User = out
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	default:
 		switch {
@@ -159,6 +166,8 @@ func (s *user) GetUser(ctx context.Context, request operations.GetUserRequest) (
 			}
 
 			res.Error = out
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	}
 
@@ -216,6 +225,8 @@ func (s *user) List(ctx context.Context, request operations.ListUsersRequest) (*
 			}
 
 			res.ListUsers200ApplicationJSONObject = out
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	default:
 		switch {
@@ -226,6 +237,8 @@ func (s *user) List(ctx context.Context, request operations.ListUsersRequest) (*
 			}
 
 			res.Error = out
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	}
 
@@ -289,6 +302,8 @@ func (s *user) UpdateUser(ctx context.Context, request operations.UpdateUserRequ
 			}
 
 			res.User = out
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	default:
 		switch {
@@ -299,6 +314,8 @@ func (s *user) UpdateUser(ctx context.Context, request operations.UpdateUserRequ
 			}
 
 			res.Error = out
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	}
 

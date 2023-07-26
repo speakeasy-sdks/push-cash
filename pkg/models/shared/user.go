@@ -23,3 +23,73 @@ type User struct {
 	// the tag for the user
 	Tag string `json:"tag"`
 }
+
+func (o *User) GetAddress() string {
+	if o == nil {
+		return ""
+	}
+	return o.Address
+}
+
+func (o *User) GetCreatedAt() time.Time {
+	if o == nil {
+		return time.Time{}
+	}
+	return o.CreatedAt
+}
+
+func (o *User) GetEmail() string {
+	if o == nil {
+		return ""
+	}
+	return o.Email
+}
+
+func (o *User) GetID() string {
+	if o == nil {
+		return ""
+	}
+	return o.ID
+}
+
+func (o *User) GetKyc() Kyc {
+	if o == nil {
+		return Kyc{}
+	}
+	return o.Kyc
+}
+
+func (o *User) GetName() string {
+	if o == nil {
+		return ""
+	}
+	return o.Name
+}
+
+func (o *User) GetPaymentCredentials() []PaymentCredential {
+	if o == nil {
+		return []PaymentCredential{}
+	}
+	return o.PaymentCredentials
+}
+
+func (o *User) GetPhone() string {
+	if o == nil {
+		return ""
+	}
+	return o.Phone
+}
+
+func (o *User) GetStatus() UserStatus {
+	if o == nil {
+		return UserStatus("")
+	}
+	return o.Status
+}
+
+func (o *User) GetTag() string {
+	if o == nil {
+		return ""
+	}
+	return o.Tag
+}

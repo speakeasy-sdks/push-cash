@@ -20,3 +20,45 @@ type Transfer struct {
 	ID     string         `json:"id"`
 	Status TransferStatus `json:"status"`
 }
+
+func (o *Transfer) GetAmount() int64 {
+	if o == nil {
+		return 0
+	}
+	return o.Amount
+}
+
+func (o *Transfer) GetArrivalDate() types.Date {
+	if o == nil {
+		return types.Date{}
+	}
+	return o.ArrivalDate
+}
+
+func (o *Transfer) GetCurrency() Currency {
+	if o == nil {
+		return Currency("")
+	}
+	return o.Currency
+}
+
+func (o *Transfer) GetDirection() Direction {
+	if o == nil {
+		return Direction("")
+	}
+	return o.Direction
+}
+
+func (o *Transfer) GetID() string {
+	if o == nil {
+		return ""
+	}
+	return o.ID
+}
+
+func (o *Transfer) GetStatus() TransferStatus {
+	if o == nil {
+		return TransferStatus("")
+	}
+	return o.Status
+}

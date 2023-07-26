@@ -17,6 +17,8 @@ go get github.com/speakeasy-sdks/push-cash
 
 ## SDK Example Usage
 <!-- Start SDK Example Usage -->
+
+
 ```go
 package main
 
@@ -24,6 +26,7 @@ import(
 	"context"
 	"log"
 	"push-cash"
+	"push-cash/pkg/models/shared"
 )
 
 func main() {
