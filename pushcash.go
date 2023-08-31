@@ -133,8 +133,8 @@ func New(opts ...SDKOption) *PushCash {
 		sdkConfiguration: sdkConfiguration{
 			Language:          "go",
 			OpenAPIDocVersion: "0.0.1",
-			SDKVersion:        "1.1.0",
-			GenVersion:        "2.73.0",
+			SDKVersion:        "1.2.0",
+			GenVersion:        "2.89.1",
 		},
 	}
 	for _, opt := range opts {
