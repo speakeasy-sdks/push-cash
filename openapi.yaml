@@ -5,101 +5,122 @@ info:
     email: andrew@pushcash.co
   version: 0.0.1
 tags:
-  - name: introduction
-    # description:
-      # $ref: gettingstarted.md
-  - name: user
-    # description:
-      # $ref: user.md
-  - name: intent
-    # description:
-      # $ref: paymentintent.md
-  - name: balance
-    # description:
-      # $ref: balance.md
-  - name: transfer
-    # description: 
-      # $ref: transfer.md
-  - name: events
-    # description:
-      # $ref: events.md
+- name: introduction
+- name: user
+- name: intent
+- name: balance
+- name: transfer
+- name: events
 security:
- - bearer: []
+- bearer: []
 servers:
-  - url: 'https://api.pushcash.co'
-    description: Production API
-    x-speakeasy-server-id: prod
-  - url: 'https://sandbox.pushcash.co'
-    description: Sandbox API used for developing an integration with Push
-    x-speakeasy-server-id: sandbox
+- url: https://api.pushcash.co
+  description: Production API
+  x-speakeasy-server-id: prod
+- url: https://sandbox.pushcash.co
+  description: Sandbox API used for developing an integration with Push
+  x-speakeasy-server-id: sandbox
 x-speakeasy-name-override:
-  - operationId: ^post.*
-    methodNameOverride: create
-  - operationId: ^put.*
-    methodNameOverride: update
-  - operationId: ^delete.*
-    methodNameOverride: delete
-  - operationId: ^list.*
-    methodNameOverride: list
+- operationId: ^post.*
+  methodNameOverride: create
+- operationId: ^put.*
+  methodNameOverride: update
+- operationId: ^delete.*
+  methodNameOverride: delete
+- operationId: ^list.*
+  methodNameOverride: list
 paths:
   /user:
     post:
       tags:
-        - user
+      - user
       summary: Create user
       operationId: createUser
       description: Create new Push users
       parameters:
-        - in: header
-          name: X-Idempotency-Key
-          description: The idempotency key for the request
-          schema:
-            type: string
-            example: f1bbb856-fb17-11ed-be56-0242ac120002
-          required: true
+      - in: header
+        name: X-Idempotency-Key
+        description: The idempotency key for the request
+        schema:
+          type: string
+          example: f1bbb856-fb17-11ed-be56-0242ac120002
+        required: true
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/CreateUserRequest'
+            example:
+              tag: dlsjleurvlkrweru
+              name: Alfred Hitchcock
+              email: alfred@imdb.com
+              address: 1609 10th Ave, Bodega Bay, CA 94923
+              phone: (555) 681-3485
+              kyc:
+                token: vjl257dsdko48ch38
+                method: alloy
       responses:
-        '200':
+        "200":
           description: User created successfully
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/User'
+              example:
+                id: user_28CJjV7P4Go5PNJvfzghiD
+                tag: kdljgeu348jfluri
+                name: Alfred Hitchcock
+                email: null
+                address: 1609 10th Ave, Bodega Bay, CA 94923
+                phone: (555) 681-3485
+                kyc:
+                  token: vjl257dsdko48ch38
+                  method: alloy
+                payment_credentials:
+                - bank_name: Space Coast Credit Union
+                  account:
+                    number_mask: "5978"
+                    routing: "263177903"
+                  card:
+                    primary_account_number_mask: "6018"
+                    expiration: "2024-05-01"
+                created_at: "2023-04-10T05:10:14.532Z"
+                status: Active
         default:
           description: Error
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/error'
+              example:
+                description: An error occurred
   /user/list:
     get:
       tags:
-        - user
+      - user
       summary: List users
       description: Retrieves a list of users
       operationId: listUsers
       parameters:
-        - in: query
-          name: created_at.after
-          description: Return users created after this [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) timestamp.
-          required: false
-          schema:
-            type: string
-            format: date-time
-        - in: query
-          name: created_at.before
-          description: Return users created before this [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) timestamp.
-          required: false
-          schema:
-            type: string
-            format: date-time
+      - in: query
+        name: created_at.after
+        description: Return users created after this [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601)
+          timestamp.
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: created_at.before
+        description: Return users created before this [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601)
+          timestamp.
+        required: false
+        schema:
+          type: string
+          format: date-time
       responses:
-        '200':
+        "200":
           description: successful operation
           content:
             application/json:
@@ -113,8 +134,8 @@ paths:
                   next_cursor:
                     $ref: '#/components/schemas/Cursor'
                 required:
-                  - data
-                  - next_cursor
+                - data
+                - next_cursor
         default:
           description: Error
           content:
@@ -124,25 +145,45 @@ paths:
   /user/{id}:
     get:
       tags:
-       - user
+      - user
       summary: Get a user
       description: Retrieve a user by ID
       operationId: getUser
       parameters:
-        - name: id
-          in: path
-          description: The push identifier for the user
-          required: true
-          schema:
-            type: string
-            example: user_28CJjV7P4Go5PNJvfzghiD
+      - name: id
+        in: path
+        description: The push identifier for the user
+        required: true
+        schema:
+          type: string
+          example: user_28CJjV7P4Go5PNJvfzghiD
       responses:
-        '200':
+        "200":
           description: successful operation
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/User'
+              example:
+                id: user_28CJjV7P4Go5PNJvfzghiD
+                tag: kdljgeu348jfluri
+                name: Alfred Hitchcock
+                email: null
+                address: 1609 10th Ave, Bodega Bay, CA 94923
+                phone: (555) 681-3485
+                kyc:
+                  token: vjl257dsdko48ch38
+                  method: alloy
+                payment_credentials:
+                - bank_name: Space Coast Credit Union
+                  account:
+                    number_mask: "5978"
+                    routing: "263177903"
+                  card:
+                    primary_account_number_mask: "6018"
+                    expiration: "2024-05-01"
+                created_at: "2023-04-10T05:10:14.532Z"
+                status: Active
         default:
           description: Error
           content:
@@ -151,25 +192,25 @@ paths:
                 $ref: '#/components/schemas/error'
     put:
       tags:
-        - user
+      - user
       summary: Update a user's status
       operationId: updateUser
       description: Updates a user's status to either active or suspended
       parameters:
-        - in: path
-          name: id
-          description: The ID of the user to update.
-          required: true
-          schema:
-            type: string
-            example: user_28CJjV7P4Go5PNJvfzghiD
+      - in: path
+        name: id
+        description: The ID of the user to update.
+        required: true
+        schema:
+          type: string
+          example: user_28CJjV7P4Go5PNJvfzghiD
       requestBody:
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/UpdateUserRequest'
       responses:
-        '200':
+        "200":
           description: User update successful
           content:
             application/json:
@@ -184,25 +225,25 @@ paths:
   /intent:
     post:
       tags:
-        - intent
+      - intent
       summary: Create intent
       description: Create a payment intent
       operationId: createIntent
       parameters:
-        - in: header
-          name: X-Idempotency-Key
-          description: The idempotency key for the request
-          schema:
-            type: string
-            example: f1bbb856-fb17-11ed-be56-0242ac120002
-          required: true
+      - in: header
+        name: X-Idempotency-Key
+        description: The idempotency key for the request
+        schema:
+          type: string
+          example: f1bbb856-fb17-11ed-be56-0242ac120002
+        required: true
       requestBody:
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CreateIntentRequest'
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateIntentRequest'
       responses:
-        '200':
+        "200":
           description: successful operation
           content:
             application/json:
@@ -217,42 +258,45 @@ paths:
   /intent/list:
     get:
       tags:
-        - intent
+      - intent
       summary: List intents
       description: Retrieves a list of intents
       operationId: listIntents
       parameters:
-        - in: query
-          name: created_at.after
-          description: Return intents created after this [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) timestamp.
-          required: false
-          schema:
-            description: Return intents created after this [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) timestamp.
-            type: string
-            format: date-time
-        - in: query
-          name: created_at.before
-          description: Return intents created before this [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) timestamp.
-          required: false
-          schema:
-            type: string
-            format: date-time
-        - in: query
-          name: cursor
-          description: the cursor for the next page of results to fetch
-          required: false
-          schema:
-            type: string
-            example: vjl8vk3l4o8dhsjlzh==
-        - in: query
-          name: status
-          description: filter intents by status, can provide multiple values
-          schema:
-            type: array
-            items:
-              $ref: '#/components/schemas/IntentStatus'
+      - in: query
+        name: created_at.after
+        description: Return intents created after this [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601)
+          timestamp.
+        required: false
+        schema:
+          description: Return intents created after this [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601)
+            timestamp.
+          type: string
+          format: date-time
+      - in: query
+        name: created_at.before
+        description: Return intents created before this [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601)
+          timestamp.
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: cursor
+        description: the cursor for the next page of results to fetch
+        required: false
+        schema:
+          type: string
+          example: vjl8vk3l4o8dhsjlzh==
+      - in: query
+        name: status
+        description: filter intents by status, can provide multiple values
+        schema:
+          type: array
+          items:
+            $ref: '#/components/schemas/IntentStatus'
       responses:
-        '200':
+        "200":
           description: successful operation
           content:
             application/json:
@@ -266,8 +310,8 @@ paths:
                   next_cursor:
                     $ref: '#/components/schemas/Cursor'
                 required:
-                  - data
-                  - next_cursor
+                - data
+                - next_cursor
         default:
           description: Error
           content:
@@ -277,19 +321,19 @@ paths:
   /intent/{id}:
     get:
       tags:
-       - intent
+      - intent
       summary: Get an intent
       description: Get an intent by ID
       operationId: getIntent
       parameters:
-        - name: id
-          in: path
-          description: The intent ID
-          required: true
-          schema:
-            type: string
+      - name: id
+        in: path
+        description: The intent ID
+        required: true
+        schema:
+          type: string
       responses:
-        '200':
+        "200":
           description: successful operation
           content:
             application/json:
@@ -304,19 +348,19 @@ paths:
   /intent/{id}/cancel:
     put:
       tags:
-        - intent
+      - intent
       summary: Cancel an intent
       operationId: cancelIntent
       description: Cancels a specific intent identified by its ID
       parameters:
-        - in: path
-          name: id
-          description: The ID of the intent
-          required: true
-          schema:
-            type: string
+      - in: path
+        name: id
+        description: The ID of the intent
+        required: true
+        schema:
+          type: string
       responses:
-        '200':
+        "200":
           description: Intent cancellation successful
           content:
             application/json:
@@ -331,12 +375,12 @@ paths:
   /balance:
     get:
       tags:
-        - balance
+      - balance
       summary: Get Push Account balance
       description: View Push Account balance
       operationId: getBalance
       responses:
-        '200':
+        "200":
           description: Account balance retrieved successfully
           content:
             application/json:
@@ -351,39 +395,41 @@ paths:
   /transaction/list:
     get:
       tags:
-        - balance 
+      - balance
       summary: List transactions
       operationId: listTransactions
       description: Retrieves a list of transactions
       parameters:
-        - in: query
-          name: created_at.after
-          description: Return transactions created after this [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) timestamp.
-          required: false
-          schema:
-            type: string
-            format: date-time
-        - in: query
-          name: created_at.before
-          description: Return transactions created before this [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) timestamp.
-          required: false
-          schema:
-            type: string
-            format: date-time
-        - in: query
-          name: status
-          description: filter transactions by status
-          schema:
-            $ref: '#/components/schemas/TransactionStatus'
-        - in: query
-          name: cursor
-          description: the cursor for the next page of results to fetch
-          required: false
-          schema:
-            type: string
-            example: vjl8vk3l4o8dhsjlzh==
+      - in: query
+        name: created_at.after
+        description: Return transactions created after this [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601)
+          timestamp.
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: created_at.before
+        description: Return transactions created before this [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601)
+          timestamp.
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: status
+        description: filter transactions by status
+        schema:
+          $ref: '#/components/schemas/TransactionStatus'
+      - in: query
+        name: cursor
+        description: the cursor for the next page of results to fetch
+        required: false
+        schema:
+          type: string
+          example: vjl8vk3l4o8dhsjlzh==
       responses:
-        '200':
+        "200":
           description: Successful operation
           content:
             application/json:
@@ -397,8 +443,8 @@ paths:
                   next_cursor:
                     $ref: '#/components/schemas/Cursor'
                 required:
-                  - data
-                  - next_cursor
+                - data
+                - next_cursor
         default:
           description: Error
           content:
@@ -407,21 +453,21 @@ paths:
                 $ref: '#/components/schemas/error'
   /transaction/{id}:
     get:
-      tags: 
-        - balance
+      tags:
+      - balance
       summary: Get a transaction
       operationId: getTransaction
       x-speakeasy-name-oveerride: getTransaction
       description: Retrieves a specific transaction by its ID.
       parameters:
-        - in: path
-          name: id
-          description: The ID of the transaction to retrieve.
-          required: true
-          schema:
-            type: string
+      - in: path
+        name: id
+        description: The ID of the transaction to retrieve.
+        required: true
+        schema:
+          type: string
       responses:
-        '200':
+        "200":
           description: Successful operation
           content:
             application/json:
@@ -436,26 +482,24 @@ paths:
   /transfer:
     post:
       tags:
-        - transfer
+      - transfer
       summary: Create a transfer
       operationId: createTransfer
-      # description:
-      #  $ref: transfer.md
       parameters:
-        - in: header
-          name: X-Idempotency-Key
-          description: The idempotency key for the request
-          schema:
-            type: string
-            example: f1bbb856-fb17-11ed-be56-0242ac120002
-          required: true
+      - in: header
+        name: X-Idempotency-Key
+        description: The idempotency key for the request
+        schema:
+          type: string
+          example: f1bbb856-fb17-11ed-be56-0242ac120002
+        required: true
       requestBody:
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CreateTransferRequest'
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateTransferRequest'
       responses:
-        '200':
+        "200":
           description: Successful operation
           content:
             application/json:
@@ -470,41 +514,43 @@ paths:
   /transfer/list:
     get:
       tags:
-        - transfer
+      - transfer
       summary: List transfers
       operationId: listTransfers
       description: Retrieves a list of transfers.
       parameters:
-        - in: query
-          name: created_at.after
-          description: Return transfers created after this [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) timestamp.
-          required: false
-          schema:
-            type: string
-            format: date-time
-        - in: query
-          name: created_at.before
-          description: Return transfers created before this [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) timestamp.
-          required: false
-          schema:
-            type: string
-            format: date-time
-        - in: query
-          name: cursor
-          description: the cursor for the next page of results to fetch
-          required: false
-          schema:
-            type: string
-            example: vjl8vk3l4o8dhsjlzh==
-        - in: query
-          name: status
-          description: filter transfers by status, can provide multiple values
-          schema:
-            type: array
-            items:
-              $ref: '#/components/schemas/TransferStatus'
+      - in: query
+        name: created_at.after
+        description: Return transfers created after this [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601)
+          timestamp.
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: created_at.before
+        description: Return transfers created before this [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601)
+          timestamp.
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: cursor
+        description: the cursor for the next page of results to fetch
+        required: false
+        schema:
+          type: string
+          example: vjl8vk3l4o8dhsjlzh==
+      - in: query
+        name: status
+        description: filter transfers by status, can provide multiple values
+        schema:
+          type: array
+          items:
+            $ref: '#/components/schemas/TransferStatus'
       responses:
-        '200':
+        "200":
           description: Successful operation
           content:
             application/json:
@@ -518,8 +564,8 @@ paths:
                   next_cursor:
                     $ref: '#/components/schemas/Cursor'
                 required:
-                  - data
-                  - next_cursor
+                - data
+                - next_cursor
         default:
           description: Error
           content:
@@ -529,19 +575,19 @@ paths:
   /transfer/{id}:
     get:
       tags:
-        - transfer
+      - transfer
       summary: Retrieve a transfer
       operationId: getTransfer
       description: Retrieves a specific transfer by its ID.
       parameters:
-        - in: path
-          name: id
-          description: The ID of the transfer to retrieve.
-          required: true
-          schema:
-            type: string
+      - in: path
+        name: id
+        description: The ID of the transfer to retrieve.
+        required: true
+        schema:
+          type: string
       responses:
-        '200':
+        "200":
           description: Successful operation
           content:
             application/json:
@@ -556,19 +602,19 @@ paths:
   /event/{id}:
     get:
       tags:
-        - events
+      - events
       summary: Retrieve an event
       operationId: getEvent
       description: Retrieves a specific event by its ID.
       parameters:
-        - in: path
-          name: id
-          description: The ID of the event to retrieve
-          required: true
-          schema:
-            type: string
+      - in: path
+        name: id
+        description: The ID of the event to retrieve
+        required: true
+        schema:
+          type: string
       responses:
-        '200':
+        "200":
           description: Successful operation
           content:
             application/json:
@@ -583,34 +629,36 @@ paths:
   /event/list:
     get:
       tags:
-        - events
+      - events
       summary: List events
       operationId: listEvents
       description: Retrieves a list of events.
       parameters:
-        - in: query
-          name: created_at.after
-          description: Return events created after this [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) timestamp.
-          required: false
-          schema:
-            type: string
-            format: date-time
-        - in: query
-          name: created_at.before
-          description: Return events created before this [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) timestamp.
-          required: false
-          schema:
-            type: string
-            format: date-time
-        - in: query
-          name: cursor
-          description: the cursor for the next page of results to fetch
-          required: false
-          schema:
-            type: string
-            example: vjl8vk3l4o8dhsjlzh==
+      - in: query
+        name: created_at.after
+        description: Return events created after this [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601)
+          timestamp.
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: created_at.before
+        description: Return events created before this [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601)
+          timestamp.
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: cursor
+        description: the cursor for the next page of results to fetch
+        required: false
+        schema:
+          type: string
+          example: vjl8vk3l4o8dhsjlzh==
       responses:
-        '200':
+        "200":
           description: Successful operation
           content:
             application/json:
@@ -624,8 +672,8 @@ paths:
                   next_cursor:
                     $ref: '#/components/schemas/Cursor'
                 required:
-                  - data
-                  - next_cursor
+                - data
+                - next_cursor
         default:
           description: Error
           content:
@@ -649,7 +697,8 @@ components:
       properties:
         tag:
           type: string
-          description: the tag for the user, use this field for example to store your own internal identifier for a given user
+          description: the tag for the user, use this field for example to store your
+            own internal identifier for a given user
           nullable: true
         name:
           type: string
@@ -668,12 +717,12 @@ components:
         kyc:
           $ref: '#/components/schemas/KYC'
       required:
-        - tag
-        - name
-        - email
-        - address
-        - phone
-        - kyc
+      - tag
+      - name
+      - email
+      - address
+      - phone
+      - kyc
     UpdateUserRequest:
       type: object
       example:
@@ -682,10 +731,10 @@ components:
         status:
           type: string
           enum:
-            - active
-            - suspended
+          - active
+          - suspended
       required:
-        - status
+      - status
     User:
       type: object
       properties:
@@ -707,12 +756,13 @@ components:
           nullable: true
         phone:
           type: string
-          example: '15559283950'
+          example: "15559283950"
           nullable: true
         kyc:
           $ref: '#/components/schemas/KYC'
         payment_credentials:
-          description: The array will be empty until the user completes their first transaction. Additional transactions will utilize stored payment credentials
+          description: The array will be empty until the user completes their first
+            transaction. Additional transactions will utilize stored payment credentials
           type: array
           items:
             $ref: '#/components/schemas/PaymentCredential'
@@ -733,77 +783,79 @@ components:
           token: vjl257dsdko48ch38
           method: alloy
         payment_credentials:
-          - bank_name: Space Coast Credit Union
-            account:
-              number_mask: '5978'
-              routing: '263177903'
-            card:
-              primary_account_number_mask: '6018'
-              expiration: '2024-05-01'
-        created_at: '2023-04-10T05:10:14.532Z'
+        - bank_name: Space Coast Credit Union
+          account:
+            number_mask: "5978"
+            routing: "263177903"
+          card:
+            primary_account_number_mask: "6018"
+            expiration: "2024-05-01"
+        created_at: "2023-04-10T05:10:14.532Z"
         status: Active
       required:
-        - id
-        - tag
-        - name
-        - email
-        - address
-        - phone
-        - kyc
-        - payment_credentials
-        - created_at
-        - status
+      - id
+      - tag
+      - name
+      - email
+      - address
+      - phone
+      - kyc
+      - payment_credentials
+      - created_at
+      - status
     PaymentCredential:
       type: object
-      description: The array will be empty until the user completes their first transaction. Additional transactions will utilize stored payment credentials
+      description: The array will be empty until the user completes their first transaction.
+        Additional transactions will utilize stored payment credentials
       example:
         bank_name: Space Coast Credit Union
         account:
-          number_mask: '5978'
-          routing: '263177903'
+          number_mask: "5978"
+          routing: "263177903"
         card:
-          primary_account_number_mask: '6018'
-          expiration: '2024-05-01'
-        created_at: '2023-04-10T05:10:14.532Z'
+          primary_account_number_mask: "6018"
+          expiration: "2024-05-01"
+        created_at: "2023-04-10T05:10:14.532Z"
       properties:
         bank_name:
           type: string
           description: the name of the bank associated with the credential
-          example: "Space Coast Credit Union"
+          example: Space Coast Credit Union
         account:
           type: object
           properties:
             number_mask:
               type: string
-              description: "the account number (mask)"
+              description: the account number (mask)
             routing:
               type: string
-              description: "the routing number for the account"
+              description: the routing number for the account
           required:
-            - number_mask
-            - routing
+          - number_mask
+          - routing
         card:
           type: object
           properties:
             primary_account_number_mask:
               type: string
-              description: "the primary account number (mask)"
+              description: the primary account number (mask)
             expiration:
               type: string
               description: the expiration date for the card
               format: date
           required:
-            - primary_account_number_mask
-            - expiration
+          - primary_account_number_mask
+          - expiration
         created_at:
           type: string
-          description: Datetime for when the payment credential was created for the user
+          description: Datetime for when the payment credential was created for the
+            user
           format: date-time
       required:
-        - bank_name
-        - account
-        - card
-        - created_at
+      - bank_name
+      - account
+      - card
+      - created_at
     KYC:
       type: object
       example:
@@ -814,12 +866,13 @@ components:
           description: the token representing the user entity at your KYC provider
           type: string
         method:
-          enum: [alloy]
+          enum:
+          - alloy
           description: The KYC provider
           type: string
       required:
-        - token
-        - method
+      - token
+      - method
     UserStatus:
       type: string
       enum:
@@ -834,22 +887,22 @@ components:
           $ref: '#/components/schemas/Direction'
         user_id:
           type: string
-          description: "Push's unique identifier for the user"
+          description: Push's unique identifier for the user
         amount:
           type: integer
-          description: "amount (in cents) for the transaction"
+          description: amount (in cents) for the transaction
         currency:
           $ref: '#/components/schemas/Currency'
       example:
-        direction: "cash_in"
+        direction: cash_in
         user_id: user_28CJjV7P4Go5PNJvfzghiD
         amount: 1450
         currency: USD
       required:
-        - direction
-        - user_id
-        - amount
-        - currency
+      - direction
+      - user_id
+      - amount
+      - currency
     CreateTransferRequest:
       type: object
       properties:
@@ -857,7 +910,7 @@ components:
           $ref: '#/components/schemas/Direction'
         amount:
           type: integer
-          description: "amount (in cents) for the transaction"
+          description: amount (in cents) for the transaction
         currency:
           $ref: '#/components/schemas/Currency'
       example:
@@ -865,14 +918,14 @@ components:
         amount: 500000
         currency: USD
       required:
-        - direction
-        - amount
-        - currency
+      - direction
+      - amount
+      - currency
     Intent:
       type: object
       example:
         id: intent_CpiSd1bptYB5P55ysTDHgh
-        created_at: '2023-05-24T20:36:50.694Z'
+        created_at: "2023-05-24T20:36:50.694Z"
         direction: cash_in
         user_id: user_28CJjV7P4Go5PNJvfzghiD
         amount: 1450
@@ -899,7 +952,8 @@ components:
           $ref: '#/components/schemas/IntentStatus'
         failure_details:
           type: object
-          description: Failure details is non-null only for 'declined', 'error', 'timedout', 'chargedback'
+          description: Failure details is non-null only for 'declined', 'error', 'timedout',
+            'chargedback'
           nullable: true
           properties:
             code:
@@ -909,37 +963,40 @@ components:
               type: string
               description: Description of the failure
           required:
-            - code
-            - description
+          - code
+          - description
       required:
-        - id
-        - created_at
-        - direction
-        - user_id
-        - amount
-        - currency
-        - status
-        - failure_details
+      - id
+      - created_at
+      - direction
+      - user_id
+      - amount
+      - currency
+      - status
+      - failure_details
     IntentStatus:
       type: string
       enum:
-        - requires_init
-        - initialized
-        - approved
-        - canceled
-        - declined
-        - error
-        - processed
-        - timedout
-        - chargedback
+      - requires_init
+      - initialized
+      - approved
+      - canceled
+      - declined
+      - error
+      - processed
+      - timedout
+      - chargedback
     Direction:
       type: string
       description: Direction of the money
-      enum: ['cash_in', 'cash_out']
+      enum:
+      - cash_in
+      - cash_out
     Currency:
       type: string
       description: Currency associated with the amount
-      enum: [USD]
+      enum:
+      - USD
     AccountBalance:
       type: object
       example:
@@ -954,16 +1011,16 @@ components:
             or used to fund your users “cash-out” transactions.
         pending:
           type: integer
-          description: |
-            Funds that are not yet available to be used for a bank_transfer or used for cash_out. 
-            Examples of transactions that would impact this balance type include pending bank_transfers 
-            (e.g. ACH credit not yet initiated, ACH debit has not yet settled). 
+          description: "Funds that are not yet available to be used for a bank_transfer
+            or used for cash_out. \nExamples of transactions that would impact this
+            balance type include pending bank_transfers \n(e.g. ACH credit not yet
+            initiated, ACH debit has not yet settled). \n"
         currency:
           $ref: '#/components/schemas/Currency'
       required:
-        - available
-        - pending
-        - currency
+      - available
+      - pending
+      - currency
     Transaction:
       type: object
       example:
@@ -973,13 +1030,13 @@ components:
         fee: 47
         currency: USD
         fee_details:
-          - amount: 47
-            currency: USD
-            description: Payment for initialion
-            type: initiation_fee
+        - amount: 47
+          currency: USD
+          description: Payment for initialion
+          type: initiation_fee
         status: available
-        created_at: '2023-05-24T20:15:18.158Z'
-        available_at: '2023-05-25T20:15:18.158Z'
+        created_at: "2023-05-24T20:15:18.158Z"
+        available_at: "2023-05-25T20:15:18.158Z"
         source:
           type: intent
           id: intent_CpiSd1bptYB5P55ysTDHgh
@@ -1012,62 +1069,71 @@ components:
                 description: Description of the fee
               type:
                 type: string
-                enum: [user_setup_fee, initiation_fee, push_txn_fee]
+                enum:
+                - user_setup_fee
+                - initiation_fee
+                - push_txn_fee
                 description: Type of the fee
             required:
-              - amount
-              - currency
-              - description
-              - type
+            - amount
+            - currency
+            - description
+            - type
         currency:
           $ref: '#/components/schemas/Currency'
         status:
           $ref: '#/components/schemas/TransactionStatus'
-        created_at: 
+        created_at:
           type: string
           format: date-time
           description: When the transaction was created (ISO 8061 date string)
         available_at:
           type: string
           format: date-time
-          description: When the funds from the transaction will be made available in the account balance (ISO 8061 date string)
+          description: When the funds from the transaction will be made available
+            in the account balance (ISO 8061 date string)
         source:
           type: object
           properties:
             type:
               type: string
               description: The type for the source entity of this transaction
-              enum: [intent,transfer]
+              enum:
+              - intent
+              - transfer
             id:
               type: string
               description: The identifier of the source entity
           required:
-            - type
-            - id
+          - type
+          - id
       required:
-        - id
-        - amount
-        - net
-        - fee
-        - fee_details
-        - currency 
-        - status
-        - created_at
-        - available_at
-        - source
+      - id
+      - amount
+      - net
+      - fee
+      - fee_details
+      - currency
+      - status
+      - created_at
+      - available_at
+      - source
     TransactionStatus:
       type: string
       enum:
-        - pending
-        - available
-      description: Indicates how the funds from the transaction are represented in the account balance
+      - pending
+      - available
+      description: Indicates how the funds from the transaction are represented in
+        the account balance
       x-enumDescriptions:
-        pending: the funds from this transaction are pending and not yet made available in the Push Account
-        available: the funds from this transaction are now reflected in the available balance of the Push Account
+        pending: the funds from this transaction are pending and not yet made available
+          in the Push Account
+        available: the funds from this transaction are now reflected in the available
+          balance of the Push Account
     Cursor:
       type: string
-      description: |
-        Use cursor for paginating list endpoints in conjunction with the cursor request parameter. 
+      description: "Use cursor for paginating list endpoints in conjunction with the
+        cursor request parameter. \n"
       example: vjl8vk3l4o8dhsjlzh==
     Transfer:
       type: object
@@ -1076,7 +1142,7 @@ components:
         amount: 700284
         direction: cash_out
         currency: USD
-        arrival_date: '2023-05-10'
+        arrival_date: "2023-05-10"
         status: submitted
       properties:
         id:
@@ -1096,17 +1162,17 @@ components:
         status:
           $ref: '#/components/schemas/TransferStatus'
       required:
-        - id
-        - amount
-        - direction
-        - currency
-        - arrival_date
-        - status
+      - id
+      - amount
+      - direction
+      - currency
+      - arrival_date
+      - status
     Event:
       type: object
       example:
         id: event_vjdle582ladk8222w
-        created_at: '2023-04-10T05:10:14.532Z'
+        created_at: "2023-04-10T05:10:14.532Z"
         source_id: intent_CpiSd1bptYB5P55ysTDHgh
         source_type: intent
         event_type: intent.processed
@@ -1125,25 +1191,27 @@ components:
           type: string
           description: the type of the resource which has been updated
           enum:
-            - intent
-            - transaction
+          - intent
+          - transaction
         event_type:
           type: string
-          description: the type of event indicates how the status of the resource has changed
+          description: the type of event indicates how the status of the resource
+            has changed
           enum:
-            - intent.processed
-            - intent.chargedback
-            - transaction.available
+          - intent.processed
+          - intent.chargedback
+          - transaction.available
           x-enumDescriptions:
             intent.processed: An intent was processed
             intent.chargedback: The payment for the intent was chargedback
-            transaction.available: A transaction became available in the Push Account balance
+            transaction.available: A transaction became available in the Push Account
+              balance
       required:
-        - id
-        - source_id
-        - source_type
-        - event_type
-        - transfer_status
+      - id
+      - source_id
+      - source_type
+      - event_type
+      - transfer_status
     TransferStatus:
       type: string
       enum:
