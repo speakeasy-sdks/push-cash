@@ -241,7 +241,7 @@ func (s *intent) GetIntent(ctx context.Context, request operations.GetIntentRequ
 	return res, nil
 }
 
-// List - List intents
+// List intents
 // Retrieves a list of intents
 func (s *intent) List(ctx context.Context, request operations.ListIntentsRequest) (*operations.ListIntentsResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())

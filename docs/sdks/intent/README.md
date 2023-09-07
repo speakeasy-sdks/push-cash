@@ -197,9 +197,6 @@ func main() {
         CreatedAtBefore: types.MustTimeFromString("2022-01-11T05:45:42.485Z"),
         Cursor: pushcash.String("vjl8vk3l4o8dhsjlzh=="),
         Status: []shared.IntentStatus{
-            shared.IntentStatusTimedout,
-            shared.IntentStatusDeclined,
-            shared.IntentStatusDeclined,
             shared.IntentStatusChargedback,
         },
     })

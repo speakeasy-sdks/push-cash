@@ -170,7 +170,7 @@ func (s *transfer) GetTransfer(ctx context.Context, request operations.GetTransf
 	return res, nil
 }
 
-// List - List transfers
+// List transfers
 // Retrieves a list of transfers.
 func (s *transfer) List(ctx context.Context, request operations.ListTransfersRequest) (*operations.ListTransfersResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())

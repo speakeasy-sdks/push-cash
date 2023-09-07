@@ -33,9 +33,9 @@ func main() {
     ctx := context.Background()
     res, err := s.Transfer.CreateTransfer(ctx, operations.CreateTransferRequest{
         CreateTransferRequest: &shared.CreateTransferRequest{
-            Amount: 55714,
+            Amount: 878194,
             Currency: shared.CurrencyUsd,
-            Direction: shared.DirectionCashOut,
+            Direction: shared.DirectionCashIn,
         },
         XIdempotencyKey: "f1bbb856-fb17-11ed-be56-0242ac120002",
     })
@@ -88,7 +88,7 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Transfer.GetTransfer(ctx, operations.GetTransferRequest{
-        ID: "7b0074f1-5471-4b5e-ae13-b99d488e1e91",
+        ID: "8f097b00-74f1-4547-9b5e-6e13b99d488e",
     })
     if err != nil {
         log.Fatal(err)
@@ -140,13 +140,11 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Transfer.List(ctx, operations.ListTransfersRequest{
-        CreatedAtAfter: types.MustTimeFromString("2022-03-02T21:33:21.372Z"),
-        CreatedAtBefore: types.MustTimeFromString("2022-12-28T14:02:06.064Z"),
+        CreatedAtAfter: types.MustTimeFromString("2022-01-29T18:39:33.469Z"),
+        CreatedAtBefore: types.MustTimeFromString("2022-11-01T07:52:08.326Z"),
         Cursor: pushcash.String("vjl8vk3l4o8dhsjlzh=="),
         Status: []shared.TransferStatus{
             shared.TransferStatusFailed,
-            shared.TransferStatusCreated,
-            shared.TransferStatusSubmitted,
         },
     })
     if err != nil {

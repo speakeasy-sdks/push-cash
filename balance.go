@@ -162,7 +162,7 @@ func (s *balance) GetTransaction(ctx context.Context, request operations.GetTran
 	return res, nil
 }
 
-// List - List transactions
+// List transactions
 // Retrieves a list of transactions
 func (s *balance) List(ctx context.Context, request operations.ListTransactionsRequest) (*operations.ListTransactionsResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())

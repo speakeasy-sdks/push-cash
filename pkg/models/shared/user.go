@@ -6,7 +6,7 @@ import (
 	"time"
 )
 
-// User - User created successfully
+// User created successfully
 type User struct {
 	Address string `json:"address"`
 	// Date and time in which user was first created in system

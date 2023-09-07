@@ -174,7 +174,7 @@ func (s *user) GetUser(ctx context.Context, request operations.GetUserRequest) (
 	return res, nil
 }
 
-// List - List users
+// List users
 // Retrieves a list of users
 func (s *user) List(ctx context.Context, request operations.ListUsersRequest) (*operations.ListUsersResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())

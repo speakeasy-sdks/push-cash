@@ -95,7 +95,7 @@ func (s *events) GetEvent(ctx context.Context, request operations.GetEventReques
 	return res, nil
 }
 
-// List - List events
+// List events
 // Retrieves a list of events.
 func (s *events) List(ctx context.Context, request operations.ListEventsRequest) (*operations.ListEventsResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())

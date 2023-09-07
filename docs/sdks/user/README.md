@@ -34,15 +34,15 @@ func main() {
     ctx := context.Background()
     res, err := s.User.CreateUser(ctx, operations.CreateUserRequest{
         CreateUserRequest: shared.CreateUserRequest{
-            Address: "822 Grant Oval",
-            Email: "Aiyana.Cummerata0@yahoo.com",
+            Address: "30681 Rau Street",
+            Email: "Dillan_Deckow@gmail.com",
             Kyc: shared.Kyc{
                 Method: shared.KYCMethodAlloy,
-                Token: "fugit",
+                Token: "quos",
             },
-            Name: "Marshall Glover",
-            Phone: "942-853-5856 x289",
-            Tag: "dolorum",
+            Name: "Louise Simonis Sr.",
+            Phone: "1-627-729-4275 x3585",
+            Tag: "officia",
         },
         XIdempotencyKey: "f1bbb856-fb17-11ed-be56-0242ac120002",
     })
@@ -147,8 +147,8 @@ func main() {
 
     ctx := context.Background()
     res, err := s.User.List(ctx, operations.ListUsersRequest{
-        CreatedAtAfter: types.MustTimeFromString("2022-07-21T01:01:39.776Z"),
-        CreatedAtBefore: types.MustTimeFromString("2020-01-25T11:09:22.009Z"),
+        CreatedAtAfter: types.MustTimeFromString("2022-02-09T13:58:59.361Z"),
+        CreatedAtBefore: types.MustTimeFromString("2020-12-17T08:08:22.040Z"),
     })
     if err != nil {
         log.Fatal(err)
@@ -200,7 +200,7 @@ func main() {
     ctx := context.Background()
     res, err := s.User.UpdateUser(ctx, operations.UpdateUserRequest{
         UpdateUserRequest: &shared.UpdateUserRequest{
-            Status: shared.UpdateUserRequestStatusSuspended,
+            Status: shared.UpdateUserRequestStatusActive,
         },
         ID: "user_28CJjV7P4Go5PNJvfzghiD",
     })
