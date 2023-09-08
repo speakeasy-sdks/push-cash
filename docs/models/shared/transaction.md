@@ -1,7 +1,5 @@
 # Transaction
 
-Successful operation
-
 
 ## Fields
 

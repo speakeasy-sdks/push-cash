@@ -67,7 +67,6 @@ func (e *EventSourceType) UnmarshalJSON(data []byte) error {
 	}
 }
 
-// Event - Successful operation
 type Event struct {
 	// when the event occurred
 	CreatedAt *time.Time `json:"created_at,omitempty"`

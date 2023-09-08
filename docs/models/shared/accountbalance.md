@@ -1,7 +1,5 @@
 # AccountBalance
 
-Account balance retrieved successfully
-
 
 ## Fields
 

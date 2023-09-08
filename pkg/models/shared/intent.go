@@ -28,7 +28,6 @@ func (o *IntentFailureDetails) GetDescription() string {
 	return o.Description
 }
 
-// Intent - successful operation
 type Intent struct {
 	// amount (in cents) for the transaction
 	Amount int64 `json:"amount"`
@@ -39,10 +38,10 @@ type Intent struct {
 	// Direction of the money
 	Direction Direction `json:"direction"`
 	// Failure details is non-null only for 'declined', 'error', 'timedout', 'chargedback'
-	FailureDetails IntentFailureDetails `json:"failure_details"`
-	ID             string               `json:"id"`
-	Status         IntentStatus         `json:"status"`
-	UserID         string               `json:"user_id"`
+	FailureDetails *IntentFailureDetails `json:"failure_details"`
+	ID             string                `json:"id"`
+	Status         IntentStatus          `json:"status"`
+	UserID         string                `json:"user_id"`
 }
 
 func (o *Intent) GetAmount() int64 {
@@ -73,9 +72,9 @@ func (o *Intent) GetDirection() Direction {
 	return o.Direction
 }
 
-func (o *Intent) GetFailureDetails() IntentFailureDetails {
+func (o *Intent) GetFailureDetails() *IntentFailureDetails {
 	if o == nil {
-		return IntentFailureDetails{}
+		return nil
 	}
 	return o.FailureDetails
 }

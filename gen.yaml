@@ -2,8 +2,8 @@ configVersion: 1.0.0
 management:
   docChecksum: 652c7395dce528446ba648c0ecb47796
   docVersion: 0.0.1
-  speakeasyVersion: 1.79.0
-  generationVersion: 2.101.0
+  speakeasyVersion: 1.82.0
+  generationVersion: 2.107.0
 generation:
   comments:
     disableComments: false
@@ -14,13 +14,12 @@ generation:
   tagNamespacingDisabled: false
 features:
   go:
-    core: 2.86.4
-    docs: 0.1.0
+    core: 2.88.0
     globalSecurity: 2.81.1
     globalServerURLs: 2.82.0
     nameOverrides: 2.81.1
     serverIDs: 2.81.1
 go:
-  version: 1.3.0
+  version: 1.4.0
   maxMethodParams: 0
   packageName: push-cash

@@ -6,7 +6,6 @@ import (
 	"push-cash/pkg/types"
 )
 
-// Transfer - Successful operation
 type Transfer struct {
 	// Amount of the transfer
 	Amount int64 `json:"amount"`

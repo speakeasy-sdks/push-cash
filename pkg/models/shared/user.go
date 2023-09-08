@@ -6,19 +6,18 @@ import (
 	"time"
 )
 
-// User created successfully
 type User struct {
 	Address string `json:"address"`
 	// Date and time in which user was first created in system
 	CreatedAt time.Time `json:"created_at"`
-	Email     string    `json:"email"`
+	Email     *string   `json:"email"`
 	// Push's identifier assigned to the user
 	ID   string `json:"id"`
 	Kyc  Kyc    `json:"kyc"`
 	Name string `json:"name"`
 	// The array will be empty until the user completes their first transaction. Additional transactions will utilize stored payment credentials
 	PaymentCredentials []PaymentCredential `json:"payment_credentials"`
-	Phone              string              `json:"phone"`
+	Phone              *string             `json:"phone"`
 	Status             UserStatus          `json:"status"`
 	// the tag for the user
 	Tag string `json:"tag"`
@@ -38,9 +37,9 @@ func (o *User) GetCreatedAt() time.Time {
 	return o.CreatedAt
 }
 
-func (o *User) GetEmail() string {
+func (o *User) GetEmail() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.Email
 }
@@ -73,9 +72,9 @@ func (o *User) GetPaymentCredentials() []PaymentCredential {
 	return o.PaymentCredentials
 }
 
-func (o *User) GetPhone() string {
+func (o *User) GetPhone() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.Phone
 }

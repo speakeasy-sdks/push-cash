@@ -127,7 +127,6 @@ func (o *TransactionSource) GetType() TransactionSourceType {
 	return o.Type
 }
 
-// Transaction - Successful operation
 type Transaction struct {
 	// Gross amount of the transaction
 	Amount int64 `json:"amount"`

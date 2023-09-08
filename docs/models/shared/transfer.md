@@ -1,7 +1,5 @@
 # Transfer
 
-Successful operation
-
 
 ## Fields
 
