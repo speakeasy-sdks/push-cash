@@ -3,47 +3,29 @@
 package shared
 
 import (
-	"encoding/json"
-	"fmt"
+	"push-cash/pkg/utils"
 )
-
-// KYCMethod - The KYC provider
-type KYCMethod string
-
-const (
-	KYCMethodAlloy KYCMethod = "alloy"
-)
-
-func (e KYCMethod) ToPointer() *KYCMethod {
-	return &e
-}
-
-func (e *KYCMethod) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "alloy":
-		*e = KYCMethod(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for KYCMethod: %v", v)
-	}
-}
 
 type Kyc struct {
 	// The KYC provider
-	Method KYCMethod `json:"method"`
+	method string `const:"alloy" json:"method"`
 	// the token representing the user entity at your KYC provider
 	Token string `json:"token"`
 }
 
-func (o *Kyc) GetMethod() KYCMethod {
-	if o == nil {
-		return KYCMethod("")
+func (k Kyc) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(k, "", false)
+}
+
+func (k *Kyc) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &k, "", false, false); err != nil {
+		return err
 	}
-	return o.Method
+	return nil
+}
+
+func (o *Kyc) GetMethod() string {
+	return "alloy"
 }
 
 func (o *Kyc) GetToken() string {

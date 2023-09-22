@@ -7,7 +7,7 @@ package main
 import(
 	"context"
 	"log"
-	"push-cash"
+	pushcash "push-cash"
 	"push-cash/pkg/models/shared"
 )
 

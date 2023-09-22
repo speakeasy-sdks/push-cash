@@ -2,19 +2,33 @@
 
 package shared
 
-// AccountBalance - Account balance retrieved successfully
+import (
+	"push-cash/pkg/utils"
+)
+
 type AccountBalance struct {
 	// Funds that are available to be transferred to your primary business checking account,
 	// or used to fund your users “cash-out” transactions.
 	//
 	Available int64 `json:"available"`
 	// Currency associated with the amount
-	Currency Currency `json:"currency"`
+	currency string `const:"USD" json:"currency"`
 	// Funds that are not yet available to be used for a bank_transfer or used for cash_out.
 	// Examples of transactions that would impact this balance type include pending bank_transfers
 	// (e.g. ACH credit not yet initiated, ACH debit has not yet settled).
 	//
 	Pending int64 `json:"pending"`
+}
+
+func (a AccountBalance) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(a, "", false)
+}
+
+func (a *AccountBalance) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &a, "", false, false); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (o *AccountBalance) GetAvailable() int64 {
@@ -24,11 +38,8 @@ func (o *AccountBalance) GetAvailable() int64 {
 	return o.Available
 }
 
-func (o *AccountBalance) GetCurrency() Currency {
-	if o == nil {
-		return Currency("")
-	}
-	return o.Currency
+func (o *AccountBalance) GetCurrency() string {
+	return "USD"
 }
 
 func (o *AccountBalance) GetPending() int64 {

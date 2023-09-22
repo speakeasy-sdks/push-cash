@@ -1,7 +1,5 @@
 # Intent
 
-successful operation
-
 
 ## Fields
 
@@ -9,7 +7,7 @@ successful operation
 | ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
 | `Amount`                                                                            | *int64*                                                                             | :heavy_check_mark:                                                                  | amount (in cents) for the transaction                                               |
 | `CreatedAt`                                                                         | [time.Time](https://pkg.go.dev/time#Time)                                           | :heavy_check_mark:                                                                  | Creation timestamp for the Intent                                                   |
-| `Currency`                                                                          | [Currency](../../models/shared/currency.md)                                         | :heavy_check_mark:                                                                  | Currency associated with the amount                                                 |
+| `Currency`                                                                          | *string*                                                                            | :heavy_check_mark:                                                                  | Currency associated with the amount                                                 |
 | `Direction`                                                                         | [Direction](../../models/shared/direction.md)                                       | :heavy_check_mark:                                                                  | Direction of the money                                                              |
 | `FailureDetails`                                                                    | [IntentFailureDetails](../../models/shared/intentfailuredetails.md)                 | :heavy_check_mark:                                                                  | Failure details is non-null only for 'declined', 'error', 'timedout', 'chargedback' |
 | `ID`                                                                                | *string*                                                                            | :heavy_check_mark:                                                                  | N/A                                                                                 |

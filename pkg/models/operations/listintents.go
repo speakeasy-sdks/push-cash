@@ -5,6 +5,7 @@ package operations
 import (
 	"net/http"
 	"push-cash/pkg/models/shared"
+	"push-cash/pkg/utils"
 	"time"
 )
 
@@ -17,6 +18,17 @@ type ListIntentsRequest struct {
 	Cursor *string `queryParam:"style=form,explode=true,name=cursor"`
 	// filter intents by status, can provide multiple values
 	Status []shared.IntentStatus `queryParam:"style=form,explode=true,name=status"`
+}
+
+func (l ListIntentsRequest) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(l, "", false)
+}
+
+func (l *ListIntentsRequest) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &l, "", false, false); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (o *ListIntentsRequest) GetCreatedAtAfter() *time.Time {

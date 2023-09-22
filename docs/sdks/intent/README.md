@@ -19,7 +19,7 @@ package main
 import(
 	"context"
 	"log"
-	"push-cash"
+	pushcash "push-cash"
 	"push-cash/pkg/models/shared"
 	"push-cash/pkg/models/operations"
 )
@@ -70,7 +70,7 @@ package main
 import(
 	"context"
 	"log"
-	"push-cash"
+	pushcash "push-cash"
 	"push-cash/pkg/models/shared"
 	"push-cash/pkg/models/operations"
 )
@@ -86,9 +86,9 @@ func main() {
     res, err := s.Intent.CreateIntent(ctx, operations.CreateIntentRequest{
         CreateIntentRequest: &shared.CreateIntentRequest{
             Amount: 438601,
-            Currency: shared.CurrencyUsd,
+            Currency: "culpa",
             Direction: shared.DirectionCashOut,
-            UserID: "doloribus",
+            UserID: "sapiente",
         },
         XIdempotencyKey: "f1bbb856-fb17-11ed-be56-0242ac120002",
     })
@@ -127,7 +127,7 @@ package main
 import(
 	"context"
 	"log"
-	"push-cash"
+	pushcash "push-cash"
 	"push-cash/pkg/models/shared"
 	"push-cash/pkg/models/operations"
 )
@@ -141,7 +141,7 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Intent.GetIntent(ctx, operations.GetIntentRequest{
-        ID: "f1a3a2fa-9467-4739-a51a-a52c3f5ad019",
+        ID: "1a3a2fa9-4677-4392-91aa-52c3f5ad019d",
     })
     if err != nil {
         log.Fatal(err)
@@ -178,7 +178,7 @@ package main
 import(
 	"context"
 	"log"
-	"push-cash"
+	pushcash "push-cash"
 	"push-cash/pkg/models/shared"
 	"push-cash/pkg/models/operations"
 	"push-cash/pkg/types"
@@ -193,14 +193,11 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Intent.List(ctx, operations.ListIntentsRequest{
-        CreatedAtAfter: types.MustTimeFromString("2020-12-24T08:13:29.299Z"),
-        CreatedAtBefore: types.MustTimeFromString("2022-01-11T05:45:42.485Z"),
+        CreatedAtAfter: types.MustTimeFromString("2022-10-22T20:21:20.741Z"),
+        CreatedAtBefore: types.MustTimeFromString("2020-01-27T18:38:42.890Z"),
         Cursor: pushcash.String("vjl8vk3l4o8dhsjlzh=="),
         Status: []shared.IntentStatus{
             shared.IntentStatusTimedout,
-            shared.IntentStatusDeclined,
-            shared.IntentStatusDeclined,
-            shared.IntentStatusChargedback,
         },
     })
     if err != nil {

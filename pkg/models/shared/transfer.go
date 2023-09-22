@@ -4,21 +4,32 @@ package shared
 
 import (
 	"push-cash/pkg/types"
+	"push-cash/pkg/utils"
 )
 
-// Transfer - Successful operation
 type Transfer struct {
 	// Amount of the transfer
 	Amount int64 `json:"amount"`
 	// Date the funds will arrive, formatted "YYYY-MM-DD"
 	ArrivalDate types.Date `json:"arrival_date"`
 	// Currency associated with the amount
-	Currency Currency `json:"currency"`
+	currency string `const:"USD" json:"currency"`
 	// Direction of the money
 	Direction Direction `json:"direction"`
 	// The unique identifier assigned by Push, prefix is "transfer_"
 	ID     string         `json:"id"`
 	Status TransferStatus `json:"status"`
+}
+
+func (t Transfer) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(t, "", false)
+}
+
+func (t *Transfer) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &t, "", false, false); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (o *Transfer) GetAmount() int64 {
@@ -35,11 +46,8 @@ func (o *Transfer) GetArrivalDate() types.Date {
 	return o.ArrivalDate
 }
 
-func (o *Transfer) GetCurrency() Currency {
-	if o == nil {
-		return Currency("")
-	}
-	return o.Currency
+func (o *Transfer) GetCurrency() string {
+	return "USD"
 }
 
 func (o *Transfer) GetDirection() Direction {

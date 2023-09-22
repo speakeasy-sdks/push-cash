@@ -2,15 +2,30 @@
 
 package shared
 
+import (
+	"push-cash/pkg/utils"
+)
+
 type CreateIntentRequest struct {
 	// amount (in cents) for the transaction
 	Amount int64 `json:"amount"`
 	// Currency associated with the amount
-	Currency Currency `json:"currency"`
+	currency string `const:"USD" json:"currency"`
 	// Direction of the money
 	Direction Direction `json:"direction"`
 	// Push's unique identifier for the user
 	UserID string `json:"user_id"`
+}
+
+func (c CreateIntentRequest) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(c, "", false)
+}
+
+func (c *CreateIntentRequest) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &c, "", false, false); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (o *CreateIntentRequest) GetAmount() int64 {
@@ -20,11 +35,8 @@ func (o *CreateIntentRequest) GetAmount() int64 {
 	return o.Amount
 }
 
-func (o *CreateIntentRequest) GetCurrency() Currency {
-	if o == nil {
-		return Currency("")
-	}
-	return o.Currency
+func (o *CreateIntentRequest) GetCurrency() string {
+	return "USD"
 }
 
 func (o *CreateIntentRequest) GetDirection() Direction {

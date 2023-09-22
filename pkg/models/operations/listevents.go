@@ -5,6 +5,7 @@ package operations
 import (
 	"net/http"
 	"push-cash/pkg/models/shared"
+	"push-cash/pkg/utils"
 	"time"
 )
 
@@ -15,6 +16,17 @@ type ListEventsRequest struct {
 	CreatedAtBefore *time.Time `queryParam:"style=form,explode=true,name=created_at.before"`
 	// the cursor for the next page of results to fetch
 	Cursor *string `queryParam:"style=form,explode=true,name=cursor"`
+}
+
+func (l ListEventsRequest) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(l, "", false)
+}
+
+func (l *ListEventsRequest) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &l, "", false, false); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (o *ListEventsRequest) GetCreatedAtAfter() *time.Time {

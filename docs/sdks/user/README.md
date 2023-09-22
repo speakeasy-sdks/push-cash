@@ -19,7 +19,7 @@ package main
 import(
 	"context"
 	"log"
-	"push-cash"
+	pushcash "push-cash"
 	"push-cash/pkg/models/shared"
 	"push-cash/pkg/models/operations"
 )
@@ -34,15 +34,15 @@ func main() {
     ctx := context.Background()
     res, err := s.User.CreateUser(ctx, operations.CreateUserRequest{
         CreateUserRequest: shared.CreateUserRequest{
-            Address: "822 Grant Oval",
-            Email: "Aiyana.Cummerata0@yahoo.com",
+            Address: "68167 Green Ford",
+            Email: "Grant.McGlynn@gmail.com",
             Kyc: shared.Kyc{
-                Method: shared.KYCMethodAlloy,
-                Token: "fugit",
+                Method: "magni",
+                Token: "assumenda",
             },
-            Name: "Marshall Glover",
-            Phone: "942-853-5856 x289",
-            Tag: "dolorum",
+            Name: "Linda Corkery",
+            Phone: "772-942-7535 x856",
+            Tag: "dolor",
         },
         XIdempotencyKey: "f1bbb856-fb17-11ed-be56-0242ac120002",
     })
@@ -81,7 +81,7 @@ package main
 import(
 	"context"
 	"log"
-	"push-cash"
+	pushcash "push-cash"
 	"push-cash/pkg/models/shared"
 	"push-cash/pkg/models/operations"
 )
@@ -132,7 +132,7 @@ package main
 import(
 	"context"
 	"log"
-	"push-cash"
+	pushcash "push-cash"
 	"push-cash/pkg/models/shared"
 	"push-cash/pkg/models/operations"
 	"push-cash/pkg/types"
@@ -147,8 +147,8 @@ func main() {
 
     ctx := context.Background()
     res, err := s.User.List(ctx, operations.ListUsersRequest{
-        CreatedAtAfter: types.MustTimeFromString("2022-07-21T01:01:39.776Z"),
-        CreatedAtBefore: types.MustTimeFromString("2020-01-25T11:09:22.009Z"),
+        CreatedAtAfter: types.MustTimeFromString("2020-02-22T17:45:21.686Z"),
+        CreatedAtBefore: types.MustTimeFromString("2022-02-08T14:21:47.573Z"),
     })
     if err != nil {
         log.Fatal(err)
@@ -185,7 +185,7 @@ package main
 import(
 	"context"
 	"log"
-	"push-cash"
+	pushcash "push-cash"
 	"push-cash/pkg/models/shared"
 	"push-cash/pkg/models/operations"
 )
@@ -200,7 +200,7 @@ func main() {
     ctx := context.Background()
     res, err := s.User.UpdateUser(ctx, operations.UpdateUserRequest{
         UpdateUserRequest: &shared.UpdateUserRequest{
-            Status: shared.UpdateUserRequestStatusSuspended,
+            Status: shared.UpdateUserRequestStatusActive,
         },
         ID: "user_28CJjV7P4Go5PNJvfzghiD",
     })

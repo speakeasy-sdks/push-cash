@@ -5,6 +5,7 @@ package shared
 import (
 	"encoding/json"
 	"fmt"
+	"push-cash/pkg/utils"
 	"time"
 )
 
@@ -43,11 +44,22 @@ type TransactionFeeDetails struct {
 	// Push User ID associated with payment credential
 	Amount int64 `json:"amount"`
 	// Currency associated with the amount
-	Currency Currency `json:"currency"`
+	currency string `const:"USD" json:"currency"`
 	// Description of the fee
 	Description string `json:"description"`
 	// Type of the fee
 	Type TransactionFeeDetailsType `json:"type"`
+}
+
+func (t TransactionFeeDetails) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(t, "", false)
+}
+
+func (t *TransactionFeeDetails) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &t, "", false, false); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (o *TransactionFeeDetails) GetAmount() int64 {
@@ -57,11 +69,8 @@ func (o *TransactionFeeDetails) GetAmount() int64 {
 	return o.Amount
 }
 
-func (o *TransactionFeeDetails) GetCurrency() Currency {
-	if o == nil {
-		return Currency("")
-	}
-	return o.Currency
+func (o *TransactionFeeDetails) GetCurrency() string {
+	return "USD"
 }
 
 func (o *TransactionFeeDetails) GetDescription() string {
@@ -127,7 +136,6 @@ func (o *TransactionSource) GetType() TransactionSourceType {
 	return o.Type
 }
 
-// Transaction - Successful operation
 type Transaction struct {
 	// Gross amount of the transaction
 	Amount int64 `json:"amount"`
@@ -136,7 +144,7 @@ type Transaction struct {
 	// When the transaction was created (ISO 8061 date string)
 	CreatedAt time.Time `json:"created_at"`
 	// Currency associated with the amount
-	Currency Currency `json:"currency"`
+	currency string `const:"USD" json:"currency"`
 	// Fee paid to Push for the transaction
 	Fee int64 `json:"fee"`
 	// Details on the fees paid
@@ -148,6 +156,17 @@ type Transaction struct {
 	Source TransactionSource `json:"source"`
 	// Indicates how the funds from the transaction are represented in the account balance
 	Status TransactionStatus `json:"status"`
+}
+
+func (t Transaction) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(t, "", false)
+}
+
+func (t *Transaction) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &t, "", false, false); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (o *Transaction) GetAmount() int64 {
@@ -171,11 +190,8 @@ func (o *Transaction) GetCreatedAt() time.Time {
 	return o.CreatedAt
 }
 
-func (o *Transaction) GetCurrency() Currency {
-	if o == nil {
-		return Currency("")
-	}
-	return o.Currency
+func (o *Transaction) GetCurrency() string {
+	return "USD"
 }
 
 func (o *Transaction) GetFee() int64 {

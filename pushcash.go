@@ -11,9 +11,9 @@ import (
 )
 
 const (
-	// ServerProd - Production API
+	// Production API
 	ServerProd string = "prod"
-	// ServerSandbox - Sandbox API used for developing an integration with Push
+	// Sandbox API used for developing an integration with Push
 	ServerSandbox string = "sandbox"
 )
 
@@ -56,6 +56,7 @@ type sdkConfiguration struct {
 	OpenAPIDocVersion string
 	SDKVersion        string
 	GenVersion        string
+	RetryConfig       *utils.RetryConfig
 }
 
 func (c *sdkConfiguration) GetServerDetails() (string, map[string]string) {
@@ -70,7 +71,6 @@ func (c *sdkConfiguration) GetServerDetails() (string, map[string]string) {
 	return ServerList[c.Server], nil
 }
 
-// PushCash
 type PushCash struct {
 	Balance  *balance
 	Events   *events
@@ -127,14 +127,20 @@ func WithSecurity(security shared.Security) SDKOption {
 	}
 }
 
+func WithRetryConfig(retryConfig utils.RetryConfig) SDKOption {
+	return func(sdk *PushCash) {
+		sdk.sdkConfiguration.RetryConfig = &retryConfig
+	}
+}
+
 // New creates a new instance of the SDK with the provided options
 func New(opts ...SDKOption) *PushCash {
 	sdk := &PushCash{
 		sdkConfiguration: sdkConfiguration{
 			Language:          "go",
 			OpenAPIDocVersion: "0.0.1",
-			SDKVersion:        "1.1.0",
-			GenVersion:        "2.73.0",
+			SDKVersion:        "1.2.0",
+			GenVersion:        "2.125.1",
 		},
 	}
 	for _, opt := range opts {

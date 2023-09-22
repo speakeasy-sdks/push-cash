@@ -5,6 +5,7 @@ package operations
 import (
 	"net/http"
 	"push-cash/pkg/models/shared"
+	"push-cash/pkg/utils"
 	"time"
 )
 
@@ -17,6 +18,17 @@ type ListTransactionsRequest struct {
 	Cursor *string `queryParam:"style=form,explode=true,name=cursor"`
 	// filter transactions by status
 	Status *shared.TransactionStatus `queryParam:"style=form,explode=true,name=status"`
+}
+
+func (l ListTransactionsRequest) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(l, "", false)
+}
+
+func (l *ListTransactionsRequest) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &l, "", false, false); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (o *ListTransactionsRequest) GetCreatedAtAfter() *time.Time {
