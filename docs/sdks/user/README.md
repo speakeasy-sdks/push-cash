@@ -1,4 +1,5 @@
 # User
+(*User*)
 
 ### Available Operations
 
@@ -34,15 +35,15 @@ func main() {
     ctx := context.Background()
     res, err := s.User.CreateUser(ctx, operations.CreateUserRequest{
         CreateUserRequest: shared.CreateUserRequest{
-            Address: "68167 Green Ford",
-            Email: "Grant.McGlynn@gmail.com",
+            Address: "4290 Kutch Courts",
+            Email: "Americo26@gmail.com",
             Kyc: shared.Kyc{
-                Method: "magni",
-                Token: "assumenda",
+                Method: "Cargo silver Toys",
+                Token: "connect projection Plastic",
             },
-            Name: "Linda Corkery",
-            Phone: "772-942-7535 x856",
-            Tag: "dolor",
+            Name: "Bespoke",
+            Phone: "(712) 600-8072 x0568",
+            Tag: "rudely utilize",
         },
         XIdempotencyKey: "f1bbb856-fb17-11ed-be56-0242ac120002",
     })
@@ -147,8 +148,8 @@ func main() {
 
     ctx := context.Background()
     res, err := s.User.List(ctx, operations.ListUsersRequest{
-        CreatedAtAfter: types.MustTimeFromString("2020-02-22T17:45:21.686Z"),
-        CreatedAtBefore: types.MustTimeFromString("2022-02-08T14:21:47.573Z"),
+        CreatedAtAfter: types.MustTimeFromString("2023-04-22T14:13:10.937Z"),
+        CreatedAtBefore: types.MustTimeFromString("2021-04-20T09:15:20.369Z"),
     })
     if err != nil {
         log.Fatal(err)

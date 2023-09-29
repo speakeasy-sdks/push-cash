@@ -1,4 +1,5 @@
 # Intent
+(*Intent*)
 
 ### Available Operations
 
@@ -33,7 +34,7 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Intent.CancelIntent(ctx, operations.CancelIntentRequest{
-        ID: "29396fea-7596-4eb1-8faa-a2352c595590",
+        ID: "<ID>",
     })
     if err != nil {
         log.Fatal(err)
@@ -85,10 +86,10 @@ func main() {
     ctx := context.Background()
     res, err := s.Intent.CreateIntent(ctx, operations.CreateIntentRequest{
         CreateIntentRequest: &shared.CreateIntentRequest{
-            Amount: 438601,
-            Currency: "culpa",
-            Direction: shared.DirectionCashOut,
-            UserID: "sapiente",
+            Amount: 135934,
+            Currency: "Seychelles Rupee",
+            Direction: shared.DirectionCashIn,
+            UserID: "Chair Music failing",
         },
         XIdempotencyKey: "f1bbb856-fb17-11ed-be56-0242ac120002",
     })
@@ -141,7 +142,7 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Intent.GetIntent(ctx, operations.GetIntentRequest{
-        ID: "1a3a2fa9-4677-4392-91aa-52c3f5ad019d",
+        ID: "<ID>",
     })
     if err != nil {
         log.Fatal(err)
@@ -193,11 +194,11 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Intent.List(ctx, operations.ListIntentsRequest{
-        CreatedAtAfter: types.MustTimeFromString("2022-10-22T20:21:20.741Z"),
-        CreatedAtBefore: types.MustTimeFromString("2020-01-27T18:38:42.890Z"),
+        CreatedAtAfter: types.MustTimeFromString("2023-04-22T14:13:10.937Z"),
+        CreatedAtBefore: types.MustTimeFromString("2021-04-20T09:15:20.369Z"),
         Cursor: pushcash.String("vjl8vk3l4o8dhsjlzh=="),
         Status: []shared.IntentStatus{
-            shared.IntentStatusTimedout,
+            shared.IntentStatusDeclined,
         },
     })
     if err != nil {

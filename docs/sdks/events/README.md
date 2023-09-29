@@ -1,4 +1,5 @@
 # Events
+(*Events*)
 
 ### Available Operations
 
@@ -31,7 +32,7 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Events.GetEvent(ctx, operations.GetEventRequest{
-        ID: "c2ddf7cc-78ca-41ba-928f-c816742cb739",
+        ID: "<ID>",
     })
     if err != nil {
         log.Fatal(err)
@@ -83,8 +84,8 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Events.List(ctx, operations.ListEventsRequest{
-        CreatedAtAfter: types.MustTimeFromString("2022-12-25T03:24:03.949Z"),
-        CreatedAtBefore: types.MustTimeFromString("2022-05-20T13:30:46.463Z"),
+        CreatedAtAfter: types.MustTimeFromString("2023-04-22T14:13:10.937Z"),
+        CreatedAtBefore: types.MustTimeFromString("2021-04-20T09:15:20.369Z"),
         Cursor: pushcash.String("vjl8vk3l4o8dhsjlzh=="),
     })
     if err != nil {

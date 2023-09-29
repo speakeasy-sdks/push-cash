@@ -1,4 +1,5 @@
 # Balance
+(*Balance*)
 
 ### Available Operations
 
@@ -79,7 +80,7 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Balance.GetTransaction(ctx, operations.GetTransactionRequest{
-        ID: "89bd9d8d-69a6-474e-8f46-7cc8796ed151",
+        ID: "<ID>",
     })
     if err != nil {
         log.Fatal(err)
@@ -131,8 +132,8 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Balance.List(ctx, operations.ListTransactionsRequest{
-        CreatedAtAfter: types.MustTimeFromString("2022-12-17T05:46:24.151Z"),
-        CreatedAtBefore: types.MustTimeFromString("2022-03-03T02:15:00.468Z"),
+        CreatedAtAfter: types.MustTimeFromString("2023-04-22T14:13:10.937Z"),
+        CreatedAtBefore: types.MustTimeFromString("2021-04-20T09:15:20.369Z"),
         Cursor: pushcash.String("vjl8vk3l4o8dhsjlzh=="),
         Status: shared.TransactionStatusAvailable.ToPointer(),
     })
