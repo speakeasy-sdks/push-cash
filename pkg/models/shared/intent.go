@@ -35,7 +35,7 @@ type Intent struct {
 	// Creation timestamp for the Intent
 	CreatedAt time.Time `json:"created_at"`
 	// Currency associated with the amount
-	currency string `const:"USD" json:"currency"`
+	Currency Currency `json:"currency"`
 	// Direction of the money
 	Direction Direction `json:"direction"`
 	// Failure details is non-null only for 'declined', 'error', 'timedout', 'chargedback'
@@ -70,8 +70,11 @@ func (o *Intent) GetCreatedAt() time.Time {
 	return o.CreatedAt
 }
 
-func (o *Intent) GetCurrency() string {
-	return "USD"
+func (o *Intent) GetCurrency() Currency {
+	if o == nil {
+		return Currency("")
+	}
+	return o.Currency
 }
 
 func (o *Intent) GetDirection() Direction {

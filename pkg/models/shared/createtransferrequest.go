@@ -2,28 +2,13 @@
 
 package shared
 
-import (
-	"push-cash/pkg/utils"
-)
-
 type CreateTransferRequest struct {
 	// amount (in cents) for the transaction
 	Amount int64 `json:"amount"`
 	// Currency associated with the amount
-	currency string `const:"USD" json:"currency"`
+	Currency Currency `json:"currency"`
 	// Direction of the money
 	Direction Direction `json:"direction"`
-}
-
-func (c CreateTransferRequest) MarshalJSON() ([]byte, error) {
-	return utils.MarshalJSON(c, "", false)
-}
-
-func (c *CreateTransferRequest) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &c, "", false, false); err != nil {
-		return err
-	}
-	return nil
 }
 
 func (o *CreateTransferRequest) GetAmount() int64 {
@@ -33,8 +18,11 @@ func (o *CreateTransferRequest) GetAmount() int64 {
 	return o.Amount
 }
 
-func (o *CreateTransferRequest) GetCurrency() string {
-	return "USD"
+func (o *CreateTransferRequest) GetCurrency() Currency {
+	if o == nil {
+		return Currency("")
+	}
+	return o.Currency
 }
 
 func (o *CreateTransferRequest) GetDirection() Direction {

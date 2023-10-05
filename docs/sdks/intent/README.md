@@ -87,9 +87,9 @@ func main() {
     res, err := s.Intent.CreateIntent(ctx, operations.CreateIntentRequest{
         CreateIntentRequest: &shared.CreateIntentRequest{
             Amount: 135934,
-            Currency: "Seychelles Rupee",
-            Direction: shared.DirectionCashIn,
-            UserID: "Chair Music failing",
+            Currency: shared.CurrencyUsd,
+            Direction: shared.DirectionCashOut,
+            UserID: "Dodge",
         },
         XIdempotencyKey: "f1bbb856-fb17-11ed-be56-0242ac120002",
     })

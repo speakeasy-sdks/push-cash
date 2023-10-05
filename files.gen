@@ -40,6 +40,7 @@ pkg/models/operations/listusers.go
 pkg/models/operations/updateuser.go
 pkg/models/shared/error.go
 pkg/models/shared/accountbalance.go
+pkg/models/shared/currency.go
 pkg/models/shared/transaction.go
 pkg/models/shared/transactionstatus.go
 pkg/models/shared/event.go
@@ -96,6 +97,7 @@ docs/models/operations/updateuserrequest.md
 docs/models/operations/updateuserresponse.md
 docs/models/shared/error.md
 docs/models/shared/accountbalance.md
+docs/models/shared/currency.md
 docs/models/shared/transactionfeedetailstype.md
 docs/models/shared/transactionfeedetails.md
 docs/models/shared/transactionsourcetype.md
@@ -119,6 +121,7 @@ docs/models/shared/userstatus.md
 docs/models/shared/paymentcredentialaccount.md
 docs/models/shared/paymentcredentialcard.md
 docs/models/shared/paymentcredential.md
+docs/models/shared/kycmethod.md
 docs/models/shared/kyc.md
 docs/models/shared/createuserrequest.md
 docs/models/shared/updateuserrequeststatus.md

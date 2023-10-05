@@ -38,12 +38,12 @@ func main() {
             Address: "4290 Kutch Courts",
             Email: "Americo26@gmail.com",
             Kyc: shared.Kyc{
-                Method: "Cargo silver Toys",
-                Token: "connect projection Plastic",
+                Method: shared.KYCMethodAlloy,
+                Token: "Cargo silver Toys",
             },
-            Name: "Bespoke",
-            Phone: "(712) 600-8072 x0568",
-            Tag: "rudely utilize",
+            Name: "connect projection Plastic",
+            Phone: "456-425-6125 x008",
+            Tag: "female",
         },
         XIdempotencyKey: "f1bbb856-fb17-11ed-be56-0242ac120002",
     })

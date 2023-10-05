@@ -13,7 +13,7 @@ type Transfer struct {
 	// Date the funds will arrive, formatted "YYYY-MM-DD"
 	ArrivalDate types.Date `json:"arrival_date"`
 	// Currency associated with the amount
-	currency string `const:"USD" json:"currency"`
+	Currency Currency `json:"currency"`
 	// Direction of the money
 	Direction Direction `json:"direction"`
 	// The unique identifier assigned by Push, prefix is "transfer_"
@@ -46,8 +46,11 @@ func (o *Transfer) GetArrivalDate() types.Date {
 	return o.ArrivalDate
 }
 
-func (o *Transfer) GetCurrency() string {
-	return "USD"
+func (o *Transfer) GetCurrency() Currency {
+	if o == nil {
+		return Currency("")
+	}
+	return o.Currency
 }
 
 func (o *Transfer) GetDirection() Direction {

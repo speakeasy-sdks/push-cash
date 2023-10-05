@@ -44,22 +44,11 @@ type TransactionFeeDetails struct {
 	// Push User ID associated with payment credential
 	Amount int64 `json:"amount"`
 	// Currency associated with the amount
-	currency string `const:"USD" json:"currency"`
+	Currency Currency `json:"currency"`
 	// Description of the fee
 	Description string `json:"description"`
 	// Type of the fee
 	Type TransactionFeeDetailsType `json:"type"`
-}
-
-func (t TransactionFeeDetails) MarshalJSON() ([]byte, error) {
-	return utils.MarshalJSON(t, "", false)
-}
-
-func (t *TransactionFeeDetails) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &t, "", false, false); err != nil {
-		return err
-	}
-	return nil
 }
 
 func (o *TransactionFeeDetails) GetAmount() int64 {
@@ -69,8 +58,11 @@ func (o *TransactionFeeDetails) GetAmount() int64 {
 	return o.Amount
 }
 
-func (o *TransactionFeeDetails) GetCurrency() string {
-	return "USD"
+func (o *TransactionFeeDetails) GetCurrency() Currency {
+	if o == nil {
+		return Currency("")
+	}
+	return o.Currency
 }
 
 func (o *TransactionFeeDetails) GetDescription() string {
@@ -144,7 +136,7 @@ type Transaction struct {
 	// When the transaction was created (ISO 8061 date string)
 	CreatedAt time.Time `json:"created_at"`
 	// Currency associated with the amount
-	currency string `const:"USD" json:"currency"`
+	Currency Currency `json:"currency"`
 	// Fee paid to Push for the transaction
 	Fee int64 `json:"fee"`
 	// Details on the fees paid
@@ -190,8 +182,11 @@ func (o *Transaction) GetCreatedAt() time.Time {
 	return o.CreatedAt
 }
 
-func (o *Transaction) GetCurrency() string {
-	return "USD"
+func (o *Transaction) GetCurrency() Currency {
+	if o == nil {
+		return Currency("")
+	}
+	return o.Currency
 }
 
 func (o *Transaction) GetFee() int64 {

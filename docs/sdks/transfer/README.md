@@ -35,7 +35,7 @@ func main() {
     res, err := s.Transfer.CreateTransfer(ctx, operations.CreateTransferRequest{
         CreateTransferRequest: &shared.CreateTransferRequest{
             Amount: 759686,
-            Currency: "Argentine Peso",
+            Currency: shared.CurrencyUsd,
             Direction: shared.DirectionCashIn,
         },
         XIdempotencyKey: "f1bbb856-fb17-11ed-be56-0242ac120002",
