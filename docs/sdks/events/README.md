@@ -72,7 +72,6 @@ import(
 	pushcash "push-cash"
 	"push-cash/pkg/models/shared"
 	"push-cash/pkg/models/operations"
-	"push-cash/pkg/types"
 )
 
 func main() {
@@ -84,8 +83,6 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Events.List(ctx, operations.ListEventsRequest{
-        CreatedAtAfter: types.MustTimeFromString("2023-04-22T14:13:10.937Z"),
-        CreatedAtBefore: types.MustTimeFromString("2021-04-20T09:15:20.369Z"),
         Cursor: pushcash.String("vjl8vk3l4o8dhsjlzh=="),
     })
     if err != nil {

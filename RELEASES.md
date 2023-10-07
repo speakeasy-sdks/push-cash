@@ -53,3 +53,13 @@ Based on:
 - [go v1.4.0] .
 ### Releases
 - [Go v1.4.0] https://github.com/speakeasy-sdks/push-cash/releases/tag/v1.4.0 - .
+
+## 2023-10-07 00:32:39
+### Changes
+Based on:
+- OpenAPI Doc 0.0.1 
+- Speakeasy CLI 1.96.1 (2.150.0) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [go v1.4.1] .
+### Releases
+- [Go v1.4.1] https://github.com/speakeasy-sdks/push-cash/releases/tag/v1.4.1 - .
