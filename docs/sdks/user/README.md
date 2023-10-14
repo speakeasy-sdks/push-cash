@@ -27,9 +27,7 @@ import(
 
 func main() {
     s := pushcash.New(
-        pushcash.WithSecurity(shared.Security{
-            Bearer: "",
-        }),
+        pushcash.WithSecurity(""),
     )
 
     ctx := context.Background()
@@ -89,9 +87,7 @@ import(
 
 func main() {
     s := pushcash.New(
-        pushcash.WithSecurity(shared.Security{
-            Bearer: "",
-        }),
+        pushcash.WithSecurity(""),
     )
 
     ctx := context.Background()
@@ -140,9 +136,7 @@ import(
 
 func main() {
     s := pushcash.New(
-        pushcash.WithSecurity(shared.Security{
-            Bearer: "",
-        }),
+        pushcash.WithSecurity(""),
     )
 
     ctx := context.Background()
@@ -189,9 +183,7 @@ import(
 
 func main() {
     s := pushcash.New(
-        pushcash.WithSecurity(shared.Security{
-            Bearer: "",
-        }),
+        pushcash.WithSecurity(""),
     )
 
     ctx := context.Background()
