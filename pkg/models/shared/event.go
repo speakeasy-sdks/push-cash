@@ -5,6 +5,7 @@ package shared
 import (
 	"encoding/json"
 	"fmt"
+	"push-cash/pkg/utils"
 	"time"
 )
 
@@ -67,7 +68,6 @@ func (e *EventSourceType) UnmarshalJSON(data []byte) error {
 	}
 }
 
-// Event - Successful operation
 type Event struct {
 	// when the event occurred
 	CreatedAt *time.Time `json:"created_at,omitempty"`
@@ -79,6 +79,17 @@ type Event struct {
 	SourceID string `json:"source_id"`
 	// the type of the resource which has been updated
 	SourceType EventSourceType `json:"source_type"`
+}
+
+func (e Event) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(e, "", false)
+}
+
+func (e *Event) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &e, "", false, false); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (o *Event) GetCreatedAt() *time.Time {

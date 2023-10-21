@@ -5,6 +5,7 @@ package operations
 import (
 	"net/http"
 	"push-cash/pkg/models/shared"
+	"push-cash/pkg/utils"
 	"time"
 )
 
@@ -13,6 +14,17 @@ type ListUsersRequest struct {
 	CreatedAtAfter *time.Time `queryParam:"style=form,explode=true,name=created_at.after"`
 	// Return users created before this [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) timestamp.
 	CreatedAtBefore *time.Time `queryParam:"style=form,explode=true,name=created_at.before"`
+}
+
+func (l ListUsersRequest) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(l, "", false)
+}
+
+func (l *ListUsersRequest) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &l, "", false, false); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (o *ListUsersRequest) GetCreatedAtAfter() *time.Time {
@@ -52,8 +64,11 @@ func (o *ListUsers200ApplicationJSON) GetNextCursor() string {
 }
 
 type ListUsersResponse struct {
+	// HTTP response content type for this operation
 	ContentType string
-	StatusCode  int
+	// HTTP response status code for this operation
+	StatusCode int
+	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
 	// Error
 	Error *shared.Error

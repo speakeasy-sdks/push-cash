@@ -1,4 +1,5 @@
 # Transfer
+(*Transfer*)
 
 ### Available Operations
 
@@ -18,24 +19,22 @@ package main
 import(
 	"context"
 	"log"
-	"push-cash"
+	pushcash "push-cash"
 	"push-cash/pkg/models/shared"
 	"push-cash/pkg/models/operations"
 )
 
 func main() {
     s := pushcash.New(
-        pushcash.WithSecurity(shared.Security{
-            Bearer: "",
-        }),
+        pushcash.WithSecurity(""),
     )
 
     ctx := context.Background()
     res, err := s.Transfer.CreateTransfer(ctx, operations.CreateTransferRequest{
         CreateTransferRequest: &shared.CreateTransferRequest{
-            Amount: 55714,
+            Amount: 759686,
             Currency: shared.CurrencyUsd,
-            Direction: shared.DirectionCashOut,
+            Direction: shared.DirectionCashIn,
         },
         XIdempotencyKey: "f1bbb856-fb17-11ed-be56-0242ac120002",
     })
@@ -74,21 +73,19 @@ package main
 import(
 	"context"
 	"log"
-	"push-cash"
+	pushcash "push-cash"
 	"push-cash/pkg/models/shared"
 	"push-cash/pkg/models/operations"
 )
 
 func main() {
     s := pushcash.New(
-        pushcash.WithSecurity(shared.Security{
-            Bearer: "",
-        }),
+        pushcash.WithSecurity(""),
     )
 
     ctx := context.Background()
     res, err := s.Transfer.GetTransfer(ctx, operations.GetTransferRequest{
-        ID: "7b0074f1-5471-4b5e-ae13-b99d488e1e91",
+        ID: "<ID>",
     })
     if err != nil {
         log.Fatal(err)
@@ -125,28 +122,21 @@ package main
 import(
 	"context"
 	"log"
-	"push-cash"
+	pushcash "push-cash"
 	"push-cash/pkg/models/shared"
 	"push-cash/pkg/models/operations"
-	"push-cash/pkg/types"
 )
 
 func main() {
     s := pushcash.New(
-        pushcash.WithSecurity(shared.Security{
-            Bearer: "",
-        }),
+        pushcash.WithSecurity(""),
     )
 
     ctx := context.Background()
     res, err := s.Transfer.List(ctx, operations.ListTransfersRequest{
-        CreatedAtAfter: types.MustTimeFromString("2022-03-02T21:33:21.372Z"),
-        CreatedAtBefore: types.MustTimeFromString("2022-12-28T14:02:06.064Z"),
         Cursor: pushcash.String("vjl8vk3l4o8dhsjlzh=="),
         Status: []shared.TransferStatus{
             shared.TransferStatusFailed,
-            shared.TransferStatusCreated,
-            shared.TransferStatusSubmitted,
         },
     })
     if err != nil {

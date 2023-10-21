@@ -1,4 +1,5 @@
 # Intent
+(*Intent*)
 
 ### Available Operations
 
@@ -19,21 +20,19 @@ package main
 import(
 	"context"
 	"log"
-	"push-cash"
+	pushcash "push-cash"
 	"push-cash/pkg/models/shared"
 	"push-cash/pkg/models/operations"
 )
 
 func main() {
     s := pushcash.New(
-        pushcash.WithSecurity(shared.Security{
-            Bearer: "",
-        }),
+        pushcash.WithSecurity(""),
     )
 
     ctx := context.Background()
     res, err := s.Intent.CancelIntent(ctx, operations.CancelIntentRequest{
-        ID: "29396fea-7596-4eb1-8faa-a2352c595590",
+        ID: "<ID>",
     })
     if err != nil {
         log.Fatal(err)
@@ -70,25 +69,23 @@ package main
 import(
 	"context"
 	"log"
-	"push-cash"
+	pushcash "push-cash"
 	"push-cash/pkg/models/shared"
 	"push-cash/pkg/models/operations"
 )
 
 func main() {
     s := pushcash.New(
-        pushcash.WithSecurity(shared.Security{
-            Bearer: "",
-        }),
+        pushcash.WithSecurity(""),
     )
 
     ctx := context.Background()
     res, err := s.Intent.CreateIntent(ctx, operations.CreateIntentRequest{
         CreateIntentRequest: &shared.CreateIntentRequest{
-            Amount: 438601,
+            Amount: 135934,
             Currency: shared.CurrencyUsd,
             Direction: shared.DirectionCashOut,
-            UserID: "doloribus",
+            UserID: "string",
         },
         XIdempotencyKey: "f1bbb856-fb17-11ed-be56-0242ac120002",
     })
@@ -127,21 +124,19 @@ package main
 import(
 	"context"
 	"log"
-	"push-cash"
+	pushcash "push-cash"
 	"push-cash/pkg/models/shared"
 	"push-cash/pkg/models/operations"
 )
 
 func main() {
     s := pushcash.New(
-        pushcash.WithSecurity(shared.Security{
-            Bearer: "",
-        }),
+        pushcash.WithSecurity(""),
     )
 
     ctx := context.Background()
     res, err := s.Intent.GetIntent(ctx, operations.GetIntentRequest{
-        ID: "f1a3a2fa-9467-4739-a51a-a52c3f5ad019",
+        ID: "<ID>",
     })
     if err != nil {
         log.Fatal(err)
@@ -178,29 +173,21 @@ package main
 import(
 	"context"
 	"log"
-	"push-cash"
+	pushcash "push-cash"
 	"push-cash/pkg/models/shared"
 	"push-cash/pkg/models/operations"
-	"push-cash/pkg/types"
 )
 
 func main() {
     s := pushcash.New(
-        pushcash.WithSecurity(shared.Security{
-            Bearer: "",
-        }),
+        pushcash.WithSecurity(""),
     )
 
     ctx := context.Background()
     res, err := s.Intent.List(ctx, operations.ListIntentsRequest{
-        CreatedAtAfter: types.MustTimeFromString("2020-12-24T08:13:29.299Z"),
-        CreatedAtBefore: types.MustTimeFromString("2022-01-11T05:45:42.485Z"),
         Cursor: pushcash.String("vjl8vk3l4o8dhsjlzh=="),
         Status: []shared.IntentStatus{
-            shared.IntentStatusTimedout,
-            shared.IntentStatusDeclined,
-            shared.IntentStatusDeclined,
-            shared.IntentStatusChargedback,
+            shared.IntentStatusProcessed,
         },
     })
     if err != nil {

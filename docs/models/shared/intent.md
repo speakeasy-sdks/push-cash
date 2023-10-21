@@ -1,7 +1,5 @@
 # Intent
 
-successful operation
-
 
 ## Fields
 

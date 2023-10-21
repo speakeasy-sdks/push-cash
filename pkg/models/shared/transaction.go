@@ -5,6 +5,7 @@ package shared
 import (
 	"encoding/json"
 	"fmt"
+	"push-cash/pkg/utils"
 	"time"
 )
 
@@ -127,7 +128,6 @@ func (o *TransactionSource) GetType() TransactionSourceType {
 	return o.Type
 }
 
-// Transaction - Successful operation
 type Transaction struct {
 	// Gross amount of the transaction
 	Amount int64 `json:"amount"`
@@ -148,6 +148,17 @@ type Transaction struct {
 	Source TransactionSource `json:"source"`
 	// Indicates how the funds from the transaction are represented in the account balance
 	Status TransactionStatus `json:"status"`
+}
+
+func (t Transaction) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(t, "", false)
+}
+
+func (t *Transaction) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &t, "", false, false); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (o *Transaction) GetAmount() int64 {

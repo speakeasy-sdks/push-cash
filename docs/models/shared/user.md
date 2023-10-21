@@ -1,7 +1,5 @@
 # User
 
-User created successfully
-
 
 ## Fields
 
