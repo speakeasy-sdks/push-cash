@@ -37,11 +37,11 @@ func main() {
             Email: "Americo26@gmail.com",
             Kyc: shared.Kyc{
                 Method: shared.KYCMethodAlloy,
-                Token: "Cargo silver Toys",
+                Token: "string",
             },
-            Name: "connect projection Plastic",
-            Phone: "456-425-6125 x008",
-            Tag: "female",
+            Name: "string",
+            Phone: "1-801-391-5854 x37232",
+            Tag: "string",
         },
         XIdempotencyKey: "f1bbb856-fb17-11ed-be56-0242ac120002",
     })

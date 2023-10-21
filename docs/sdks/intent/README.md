@@ -85,7 +85,7 @@ func main() {
             Amount: 135934,
             Currency: shared.CurrencyUsd,
             Direction: shared.DirectionCashOut,
-            UserID: "Dodge",
+            UserID: "string",
         },
         XIdempotencyKey: "f1bbb856-fb17-11ed-be56-0242ac120002",
     })
