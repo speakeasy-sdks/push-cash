@@ -1,7 +1,5 @@
 # Event
 
-Successful operation
-
 
 ## Fields
 

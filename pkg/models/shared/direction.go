@@ -7,7 +7,7 @@ import (
 	"fmt"
 )
 
-// Direction - Direction of the money
+// Direction of the money
 type Direction string
 
 const (

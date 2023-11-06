@@ -2,17 +2,24 @@ configVersion: 1.0.0
 management:
   docChecksum: 652c7395dce528446ba648c0ecb47796
   docVersion: 0.0.1
-  speakeasyVersion: 1.65.0
-  generationVersion: 2.73.0
+  speakeasyVersion: 1.112.1
+  generationVersion: 2.173.0
 generation:
-  comments:
-    disableComments: false
-    omitDescriptionIfSummaryPresent: false
-  baseServerURL: ""
+  comments: {}
   sdkClassName: push-cash
-  singleTagPerOp: false
-  tagNamespacingDisabled: false
+  repoURL: https://github.com/speakeasy-sdks/push-cash.git
+features:
+  go:
+    core: 2.94.0
+    globalSecurity: 2.82.2
+    globalServerURLs: 2.82.0
+    nameOverrides: 2.81.1
+    serverIDs: 2.81.1
 go:
-  version: 1.1.0
+  version: 1.2.0
+  flattenGlobalSecurity: true
+  installationURL: https://github.com/speakeasy-sdks/push-cash
   maxMethodParams: 0
   packageName: push-cash
+  published: true
+  repoSubDirectory: .

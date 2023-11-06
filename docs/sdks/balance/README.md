@@ -1,4 +1,5 @@
 # Balance
+(*Balance*)
 
 ### Available Operations
 
@@ -18,15 +19,13 @@ package main
 import(
 	"context"
 	"log"
-	"push-cash"
+	pushcash "push-cash"
 	"push-cash/pkg/models/shared"
 )
 
 func main() {
     s := pushcash.New(
-        pushcash.WithSecurity(shared.Security{
-            Bearer: "",
-        }),
+        pushcash.WithSecurity(""),
     )
 
     ctx := context.Background()
@@ -65,21 +64,19 @@ package main
 import(
 	"context"
 	"log"
-	"push-cash"
+	pushcash "push-cash"
 	"push-cash/pkg/models/shared"
 	"push-cash/pkg/models/operations"
 )
 
 func main() {
     s := pushcash.New(
-        pushcash.WithSecurity(shared.Security{
-            Bearer: "",
-        }),
+        pushcash.WithSecurity(""),
     )
 
     ctx := context.Background()
     res, err := s.Balance.GetTransaction(ctx, operations.GetTransactionRequest{
-        ID: "89bd9d8d-69a6-474e-8f46-7cc8796ed151",
+        ID: "<ID>",
     })
     if err != nil {
         log.Fatal(err)
@@ -116,25 +113,19 @@ package main
 import(
 	"context"
 	"log"
-	"push-cash"
+	pushcash "push-cash"
 	"push-cash/pkg/models/shared"
 	"push-cash/pkg/models/operations"
-	"push-cash/pkg/types"
 )
 
 func main() {
     s := pushcash.New(
-        pushcash.WithSecurity(shared.Security{
-            Bearer: "",
-        }),
+        pushcash.WithSecurity(""),
     )
 
     ctx := context.Background()
     res, err := s.Balance.List(ctx, operations.ListTransactionsRequest{
-        CreatedAtAfter: types.MustTimeFromString("2022-12-17T05:46:24.151Z"),
-        CreatedAtBefore: types.MustTimeFromString("2022-03-03T02:15:00.468Z"),
         Cursor: pushcash.String("vjl8vk3l4o8dhsjlzh=="),
-        Status: shared.TransactionStatusAvailable.ToPointer(),
     })
     if err != nil {
         log.Fatal(err)

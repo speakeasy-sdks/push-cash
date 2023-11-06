@@ -5,6 +5,7 @@ package operations
 import (
 	"net/http"
 	"push-cash/pkg/models/shared"
+	"push-cash/pkg/utils"
 	"time"
 )
 
@@ -17,6 +18,17 @@ type ListTransfersRequest struct {
 	Cursor *string `queryParam:"style=form,explode=true,name=cursor"`
 	// filter transfers by status, can provide multiple values
 	Status []shared.TransferStatus `queryParam:"style=form,explode=true,name=status"`
+}
+
+func (l ListTransfersRequest) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(l, "", false)
+}
+
+func (l *ListTransfersRequest) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &l, "", false, false); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (o *ListTransfersRequest) GetCreatedAtAfter() *time.Time {
@@ -70,8 +82,11 @@ func (o *ListTransfers200ApplicationJSON) GetNextCursor() string {
 }
 
 type ListTransfersResponse struct {
+	// HTTP response content type for this operation
 	ContentType string
-	StatusCode  int
+	// HTTP response status code for this operation
+	StatusCode int
+	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
 	// Error
 	Error *shared.Error

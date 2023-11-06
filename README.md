@@ -17,35 +17,32 @@ go get github.com/speakeasy-sdks/push-cash
 
 ## SDK Example Usage
 <!-- Start SDK Example Usage -->
-
-
 ```go
 package main
 
-import(
+import (
 	"context"
 	"log"
-	"push-cash"
+	pushcash "push-cash"
 	"push-cash/pkg/models/shared"
 )
 
 func main() {
-    s := pushcash.New(
-        pushcash.WithSecurity(shared.Security{
-            Bearer: "",
-        }),
-    )
+	s := pushcash.New(
+		pushcash.WithSecurity(""),
+	)
 
-    ctx := context.Background()
-    res, err := s.Balance.GetBalance(ctx)
-    if err != nil {
-        log.Fatal(err)
-    }
+	ctx := context.Background()
+	res, err := s.Balance.GetBalance(ctx)
+	if err != nil {
+		log.Fatal(err)
+	}
 
-    if res.AccountBalance != nil {
-        // handle response
-    }
+	if res.AccountBalance != nil {
+		// handle response
+	}
 }
+
 ```
 <!-- End SDK Example Usage -->
 
@@ -84,6 +81,169 @@ func main() {
 * [List](docs/sdks/user/README.md#list) - List users
 * [UpdateUser](docs/sdks/user/README.md#updateuser) - Update a user's status
 <!-- End SDK Available Operations -->
+
+
+
+<!-- Start Dev Containers -->
+
+
+
+<!-- End Dev Containers -->
+
+
+
+<!-- Start Error Handling -->
+# Error Handling
+
+Handling errors in your SDK should largely match your expectations.  All operations return a response object or an error, they will never return both.  When specified by the OpenAPI spec document, the SDK will return the appropriate subclass.
+
+
+<!-- End Error Handling -->
+
+
+
+<!-- Start Server Selection -->
+# Server Selection
+
+## Select Server by Name
+
+You can override the default server globally using the `WithServer` option when initializing the SDK client instance. The selected server will then be used as the default on the operations that use it. This table lists the names associated with the available servers:
+
+| Name | Server | Variables |
+| ----- | ------ | --------- |
+| `prod` | `https://api.pushcash.co` | None |
+| `sandbox` | `https://sandbox.pushcash.co` | None |
+
+For example:
+
+
+```go
+package main
+
+import (
+	"context"
+	"log"
+	pushcash "push-cash"
+	"push-cash/pkg/models/shared"
+)
+
+func main() {
+	s := pushcash.New(
+		pushcash.WithSecurity(""),
+		pushcash.WithServer("sandbox"),
+	)
+
+	ctx := context.Background()
+	res, err := s.Balance.GetBalance(ctx)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	if res.AccountBalance != nil {
+		// handle response
+	}
+}
+
+```
+
+
+## Override Server URL Per-Client
+
+The default server can also be overridden globally using the `WithServerURL` option when initializing the SDK client instance. For example:
+
+
+```go
+package main
+
+import (
+	"context"
+	"log"
+	pushcash "push-cash"
+	"push-cash/pkg/models/shared"
+)
+
+func main() {
+	s := pushcash.New(
+		pushcash.WithSecurity(""),
+		pushcash.WithServerURL("https://api.pushcash.co"),
+	)
+
+	ctx := context.Background()
+	res, err := s.Balance.GetBalance(ctx)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	if res.AccountBalance != nil {
+		// handle response
+	}
+}
+
+```
+<!-- End Server Selection -->
+
+
+
+<!-- Start Custom HTTP Client -->
+# Custom HTTP Client
+
+The Go SDK makes API calls that wrap an internal HTTP client. The requirements for the HTTP client are very simple. It must match this interface:
+
+```go
+type HTTPClient interface {
+	Do(req *http.Request) (*http.Response, error)
+}
+```
+
+The built-in `net/http` client satisfies this interface and a default client based on the built-in is provided by default. To replace this default with a client of your own, you can implement this interface yourself or provide your own client configured as desired. Here's a simple example, which adds a client with a 30 second timeout.
+
+```go
+import (
+	"net/http"
+	"time"
+	"github.com/myorg/your-go-sdk"
+)
+
+var (
+	httpClient = &http.Client{Timeout: 30 * time.Second}
+	sdkClient  = sdk.New(sdk.WithClient(httpClient))
+)
+```
+
+This can be a convenient way to configure timeouts, cookies, proxies, custom headers, and other low-level configuration.
+<!-- End Custom HTTP Client -->
+
+
+
+<!-- Start Go Types -->
+# Special Types
+
+This SDK defines the following custom types to assist with marshalling and unmarshalling data.
+
+## Date
+
+`types.Date` is a wrapper around time.Time that allows for JSON marshaling a date string formatted as "2006-01-02".
+
+### Usage
+
+```go
+d1 := types.NewDate(time.Now()) // returns *types.Date
+
+d2 := types.DateFromTime(time.Now()) // returns types.Date
+
+d3, err := types.NewDateFromString("2019-01-01") // returns *types.Date, error
+
+d4, err := types.DateFromString("2019-01-01") // returns types.Date, error
+
+d5 := types.MustNewDateFromString("2019-01-01") // returns *types.Date and panics on error
+
+d6 := types.MustDateFromString("2019-01-01") // returns types.Date and panics on error
+```
+<!-- End Go Types -->
+
+<!-- Placeholder for Future Speakeasy SDK Sections -->
+
+
 
 ### Maturity
 

@@ -3,6 +3,7 @@
 package shared
 
 import (
+	"push-cash/pkg/utils"
 	"time"
 )
 
@@ -28,7 +29,6 @@ func (o *IntentFailureDetails) GetDescription() string {
 	return o.Description
 }
 
-// Intent - successful operation
 type Intent struct {
 	// amount (in cents) for the transaction
 	Amount int64 `json:"amount"`
@@ -39,10 +39,21 @@ type Intent struct {
 	// Direction of the money
 	Direction Direction `json:"direction"`
 	// Failure details is non-null only for 'declined', 'error', 'timedout', 'chargedback'
-	FailureDetails IntentFailureDetails `json:"failure_details"`
-	ID             string               `json:"id"`
-	Status         IntentStatus         `json:"status"`
-	UserID         string               `json:"user_id"`
+	FailureDetails *IntentFailureDetails `json:"failure_details"`
+	ID             string                `json:"id"`
+	Status         IntentStatus          `json:"status"`
+	UserID         string                `json:"user_id"`
+}
+
+func (i Intent) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(i, "", false)
+}
+
+func (i *Intent) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &i, "", false, false); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (o *Intent) GetAmount() int64 {
@@ -73,9 +84,9 @@ func (o *Intent) GetDirection() Direction {
 	return o.Direction
 }
 
-func (o *Intent) GetFailureDetails() IntentFailureDetails {
+func (o *Intent) GetFailureDetails() *IntentFailureDetails {
 	if o == nil {
-		return IntentFailureDetails{}
+		return nil
 	}
 	return o.FailureDetails
 }

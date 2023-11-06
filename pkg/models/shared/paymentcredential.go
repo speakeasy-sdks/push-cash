@@ -4,6 +4,7 @@ package shared
 
 import (
 	"push-cash/pkg/types"
+	"push-cash/pkg/utils"
 	"time"
 )
 
@@ -35,6 +36,17 @@ type PaymentCredentialCard struct {
 	PrimaryAccountNumberMask string `json:"primary_account_number_mask"`
 }
 
+func (p PaymentCredentialCard) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(p, "", false)
+}
+
+func (p *PaymentCredentialCard) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &p, "", false, false); err != nil {
+		return err
+	}
+	return nil
+}
+
 func (o *PaymentCredentialCard) GetExpiration() types.Date {
 	if o == nil {
 		return types.Date{}
@@ -57,6 +69,17 @@ type PaymentCredential struct {
 	Card     PaymentCredentialCard `json:"card"`
 	// Datetime for when the payment credential was created for the user
 	CreatedAt time.Time `json:"created_at"`
+}
+
+func (p PaymentCredential) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(p, "", false)
+}
+
+func (p *PaymentCredential) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &p, "", false, false); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (o *PaymentCredential) GetAccount() PaymentCredentialAccount {
