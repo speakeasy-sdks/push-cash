@@ -7,8 +7,8 @@ package main
 import (
 	"context"
 	"log"
-	pushcash "push-cash"
-	"push-cash/pkg/models/shared"
+	pushcash "push-cash/v2"
+	"push-cash/v2/pkg/models/shared"
 )
 
 func main() {

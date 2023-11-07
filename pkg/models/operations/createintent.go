@@ -4,7 +4,7 @@ package operations
 
 import (
 	"net/http"
-	"push-cash/pkg/models/shared"
+	"push-cash/v2/pkg/models/shared"
 )
 
 type CreateIntentRequest struct {

@@ -4,8 +4,8 @@ package operations
 
 import (
 	"net/http"
-	"push-cash/pkg/models/shared"
-	"push-cash/pkg/utils"
+	"push-cash/v2/pkg/models/shared"
+	"push-cash/v2/pkg/utils"
 	"time"
 )
 
@@ -50,22 +50,22 @@ func (o *ListEventsRequest) GetCursor() *string {
 	return o.Cursor
 }
 
-// ListEvents200ApplicationJSON - Successful operation
-type ListEvents200ApplicationJSON struct {
+// ListEventsResponseBody - Successful operation
+type ListEventsResponseBody struct {
 	Data []shared.Event `json:"data"`
 	// Use cursor for paginating list endpoints in conjunction with the cursor request parameter.
 	//
 	NextCursor string `json:"next_cursor"`
 }
 
-func (o *ListEvents200ApplicationJSON) GetData() []shared.Event {
+func (o *ListEventsResponseBody) GetData() []shared.Event {
 	if o == nil {
 		return []shared.Event{}
 	}
 	return o.Data
 }
 
-func (o *ListEvents200ApplicationJSON) GetNextCursor() string {
+func (o *ListEventsResponseBody) GetNextCursor() string {
 	if o == nil {
 		return ""
 	}
@@ -82,7 +82,7 @@ type ListEventsResponse struct {
 	// Error
 	Error *shared.Error
 	// Successful operation
-	ListEvents200ApplicationJSONObject *ListEvents200ApplicationJSON
+	Object *ListEventsResponseBody
 }
 
 func (o *ListEventsResponse) GetContentType() string {
@@ -113,9 +113,9 @@ func (o *ListEventsResponse) GetError() *shared.Error {
 	return o.Error
 }
 
-func (o *ListEventsResponse) GetListEvents200ApplicationJSONObject() *ListEvents200ApplicationJSON {
+func (o *ListEventsResponse) GetObject() *ListEventsResponseBody {
 	if o == nil {
 		return nil
 	}
-	return o.ListEvents200ApplicationJSONObject
+	return o.Object
 }

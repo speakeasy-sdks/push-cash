@@ -1,4 +1,4 @@
-# PaymentCredentialCard
+# Card
 
 
 ## Fields

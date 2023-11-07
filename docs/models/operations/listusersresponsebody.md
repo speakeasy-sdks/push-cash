@@ -1,4 +1,4 @@
-# ListUsers200ApplicationJSON
+# ListUsersResponseBody
 
 successful operation
 

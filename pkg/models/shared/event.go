@@ -5,24 +5,24 @@ package shared
 import (
 	"encoding/json"
 	"fmt"
-	"push-cash/pkg/utils"
+	"push-cash/v2/pkg/utils"
 	"time"
 )
 
-// EventEventType - the type of event indicates how the status of the resource has changed
-type EventEventType string
+// EventType - the type of event indicates how the status of the resource has changed
+type EventType string
 
 const (
-	EventEventTypeIntentProcessed      EventEventType = "intent.processed"
-	EventEventTypeIntentChargedback    EventEventType = "intent.chargedback"
-	EventEventTypeTransactionAvailable EventEventType = "transaction.available"
+	EventTypeIntentProcessed      EventType = "intent.processed"
+	EventTypeIntentChargedback    EventType = "intent.chargedback"
+	EventTypeTransactionAvailable EventType = "transaction.available"
 )
 
-func (e EventEventType) ToPointer() *EventEventType {
+func (e EventType) ToPointer() *EventType {
 	return &e
 }
 
-func (e *EventEventType) UnmarshalJSON(data []byte) error {
+func (e *EventType) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
@@ -33,26 +33,26 @@ func (e *EventEventType) UnmarshalJSON(data []byte) error {
 	case "intent.chargedback":
 		fallthrough
 	case "transaction.available":
-		*e = EventEventType(v)
+		*e = EventType(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for EventEventType: %v", v)
+		return fmt.Errorf("invalid value for EventType: %v", v)
 	}
 }
 
-// EventSourceType - the type of the resource which has been updated
-type EventSourceType string
+// SourceType - the type of the resource which has been updated
+type SourceType string
 
 const (
-	EventSourceTypeIntent      EventSourceType = "intent"
-	EventSourceTypeTransaction EventSourceType = "transaction"
+	SourceTypeIntent      SourceType = "intent"
+	SourceTypeTransaction SourceType = "transaction"
 )
 
-func (e EventSourceType) ToPointer() *EventSourceType {
+func (e SourceType) ToPointer() *SourceType {
 	return &e
 }
 
-func (e *EventSourceType) UnmarshalJSON(data []byte) error {
+func (e *SourceType) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
@@ -61,10 +61,10 @@ func (e *EventSourceType) UnmarshalJSON(data []byte) error {
 	case "intent":
 		fallthrough
 	case "transaction":
-		*e = EventSourceType(v)
+		*e = SourceType(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for EventSourceType: %v", v)
+		return fmt.Errorf("invalid value for SourceType: %v", v)
 	}
 }
 
@@ -72,13 +72,13 @@ type Event struct {
 	// when the event occurred
 	CreatedAt *time.Time `json:"created_at,omitempty"`
 	// the type of event indicates how the status of the resource has changed
-	EventType EventEventType `json:"event_type"`
+	EventType EventType `json:"event_type"`
 	// the identifier for the event
 	ID string `json:"id"`
 	// the identifier of the resource who's status has updated
 	SourceID string `json:"source_id"`
 	// the type of the resource which has been updated
-	SourceType EventSourceType `json:"source_type"`
+	SourceType SourceType `json:"source_type"`
 }
 
 func (e Event) MarshalJSON() ([]byte, error) {
@@ -99,9 +99,9 @@ func (o *Event) GetCreatedAt() *time.Time {
 	return o.CreatedAt
 }
 
-func (o *Event) GetEventType() EventEventType {
+func (o *Event) GetEventType() EventType {
 	if o == nil {
-		return EventEventType("")
+		return EventType("")
 	}
 	return o.EventType
 }
@@ -120,9 +120,9 @@ func (o *Event) GetSourceID() string {
 	return o.SourceID
 }
 
-func (o *Event) GetSourceType() EventSourceType {
+func (o *Event) GetSourceType() SourceType {
 	if o == nil {
-		return EventSourceType("")
+		return SourceType("")
 	}
 	return o.SourceType
 }

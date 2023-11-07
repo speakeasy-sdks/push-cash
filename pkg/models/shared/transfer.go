@@ -3,8 +3,8 @@
 package shared
 
 import (
-	"push-cash/pkg/types"
-	"push-cash/pkg/utils"
+	"push-cash/v2/pkg/types"
+	"push-cash/v2/pkg/utils"
 )
 
 type Transfer struct {

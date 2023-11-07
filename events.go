@@ -8,26 +8,26 @@ import (
 	"fmt"
 	"io"
 	"net/http"
-	"push-cash/pkg/models/operations"
-	"push-cash/pkg/models/sdkerrors"
-	"push-cash/pkg/models/shared"
-	"push-cash/pkg/utils"
+	"push-cash/v2/pkg/models/operations"
+	"push-cash/v2/pkg/models/sdkerrors"
+	"push-cash/v2/pkg/models/shared"
+	"push-cash/v2/pkg/utils"
 	"strings"
 )
 
-type events struct {
+type Events struct {
 	sdkConfiguration sdkConfiguration
 }
 
-func newEvents(sdkConfig sdkConfiguration) *events {
-	return &events{
+func newEvents(sdkConfig sdkConfiguration) *Events {
+	return &Events{
 		sdkConfiguration: sdkConfig,
 	}
 }
 
 // GetEvent - Retrieve an event
 // Retrieves a specific event by its ID.
-func (s *events) GetEvent(ctx context.Context, request operations.GetEventRequest) (*operations.GetEventResponse, error) {
+func (s *Events) GetEvent(ctx context.Context, request operations.GetEventRequest) (*operations.GetEventResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/event/{id}", request, nil)
 	if err != nil {
@@ -78,6 +78,10 @@ func (s *events) GetEvent(ctx context.Context, request operations.GetEventReques
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
+	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
+		fallthrough
+	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
+		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
 	default:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
@@ -97,7 +101,7 @@ func (s *events) GetEvent(ctx context.Context, request operations.GetEventReques
 
 // List events
 // Retrieves a list of events.
-func (s *events) List(ctx context.Context, request operations.ListEventsRequest) (*operations.ListEventsResponse, error) {
+func (s *Events) List(ctx context.Context, request operations.ListEventsRequest) (*operations.ListEventsResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/event/list"
 
@@ -140,15 +144,19 @@ func (s *events) List(ctx context.Context, request operations.ListEventsRequest)
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.ListEvents200ApplicationJSON
+			var out operations.ListEventsResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.ListEvents200ApplicationJSONObject = &out
+			res.Object = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
+	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
+		fallthrough
+	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
+		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
 	default:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):

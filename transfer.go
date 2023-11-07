@@ -8,25 +8,25 @@ import (
 	"fmt"
 	"io"
 	"net/http"
-	"push-cash/pkg/models/operations"
-	"push-cash/pkg/models/sdkerrors"
-	"push-cash/pkg/models/shared"
-	"push-cash/pkg/utils"
+	"push-cash/v2/pkg/models/operations"
+	"push-cash/v2/pkg/models/sdkerrors"
+	"push-cash/v2/pkg/models/shared"
+	"push-cash/v2/pkg/utils"
 	"strings"
 )
 
-type transfer struct {
+type Transfer struct {
 	sdkConfiguration sdkConfiguration
 }
 
-func newTransfer(sdkConfig sdkConfiguration) *transfer {
-	return &transfer{
+func newTransfer(sdkConfig sdkConfiguration) *Transfer {
+	return &Transfer{
 		sdkConfiguration: sdkConfig,
 	}
 }
 
 // CreateTransfer - Create a transfer
-func (s *transfer) CreateTransfer(ctx context.Context, request operations.CreateTransferRequest) (*operations.CreateTransferResponse, error) {
+func (s *Transfer) CreateTransfer(ctx context.Context, request operations.CreateTransferRequest) (*operations.CreateTransferResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/transfer"
 
@@ -83,6 +83,10 @@ func (s *transfer) CreateTransfer(ctx context.Context, request operations.Create
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
+	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
+		fallthrough
+	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
+		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
 	default:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
@@ -102,7 +106,7 @@ func (s *transfer) CreateTransfer(ctx context.Context, request operations.Create
 
 // GetTransfer - Retrieve a transfer
 // Retrieves a specific transfer by its ID.
-func (s *transfer) GetTransfer(ctx context.Context, request operations.GetTransferRequest) (*operations.GetTransferResponse, error) {
+func (s *Transfer) GetTransfer(ctx context.Context, request operations.GetTransferRequest) (*operations.GetTransferResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/transfer/{id}", request, nil)
 	if err != nil {
@@ -153,6 +157,10 @@ func (s *transfer) GetTransfer(ctx context.Context, request operations.GetTransf
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
+	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
+		fallthrough
+	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
+		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
 	default:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
@@ -172,7 +180,7 @@ func (s *transfer) GetTransfer(ctx context.Context, request operations.GetTransf
 
 // List transfers
 // Retrieves a list of transfers.
-func (s *transfer) List(ctx context.Context, request operations.ListTransfersRequest) (*operations.ListTransfersResponse, error) {
+func (s *Transfer) List(ctx context.Context, request operations.ListTransfersRequest) (*operations.ListTransfersResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/transfer/list"
 
@@ -215,15 +223,19 @@ func (s *transfer) List(ctx context.Context, request operations.ListTransfersReq
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.ListTransfers200ApplicationJSON
+			var out operations.ListTransfersResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.ListTransfers200ApplicationJSONObject = &out
+			res.Object = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
+	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
+		fallthrough
+	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
+		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
 	default:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):

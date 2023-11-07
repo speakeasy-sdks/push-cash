@@ -4,8 +4,8 @@ package operations
 
 import (
 	"net/http"
-	"push-cash/pkg/models/shared"
-	"push-cash/pkg/utils"
+	"push-cash/v2/pkg/models/shared"
+	"push-cash/v2/pkg/utils"
 	"time"
 )
 
@@ -59,22 +59,22 @@ func (o *ListIntentsRequest) GetStatus() []shared.IntentStatus {
 	return o.Status
 }
 
-// ListIntents200ApplicationJSON - successful operation
-type ListIntents200ApplicationJSON struct {
+// ListIntentsResponseBody - successful operation
+type ListIntentsResponseBody struct {
 	Data []shared.Intent `json:"data"`
 	// Use cursor for paginating list endpoints in conjunction with the cursor request parameter.
 	//
 	NextCursor string `json:"next_cursor"`
 }
 
-func (o *ListIntents200ApplicationJSON) GetData() []shared.Intent {
+func (o *ListIntentsResponseBody) GetData() []shared.Intent {
 	if o == nil {
 		return []shared.Intent{}
 	}
 	return o.Data
 }
 
-func (o *ListIntents200ApplicationJSON) GetNextCursor() string {
+func (o *ListIntentsResponseBody) GetNextCursor() string {
 	if o == nil {
 		return ""
 	}
@@ -91,7 +91,7 @@ type ListIntentsResponse struct {
 	// Error
 	Error *shared.Error
 	// successful operation
-	ListIntents200ApplicationJSONObject *ListIntents200ApplicationJSON
+	Object *ListIntentsResponseBody
 }
 
 func (o *ListIntentsResponse) GetContentType() string {
@@ -122,9 +122,9 @@ func (o *ListIntentsResponse) GetError() *shared.Error {
 	return o.Error
 }
 
-func (o *ListIntentsResponse) GetListIntents200ApplicationJSONObject() *ListIntents200ApplicationJSON {
+func (o *ListIntentsResponse) GetObject() *ListIntentsResponseBody {
 	if o == nil {
 		return nil
 	}
-	return o.ListIntents200ApplicationJSONObject
+	return o.Object
 }

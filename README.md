@@ -23,8 +23,8 @@ package main
 import (
 	"context"
 	"log"
-	pushcash "push-cash"
-	"push-cash/pkg/models/shared"
+	pushcash "push-cash/v2"
+	"push-cash/v2/pkg/models/shared"
 )
 
 func main() {
@@ -50,31 +50,31 @@ func main() {
 ## Available Resources and Operations
 
 
-### [Balance](docs/sdks/balance/README.md)
+### [.Balance](docs/sdks/balance/README.md)
 
 * [GetBalance](docs/sdks/balance/README.md#getbalance) - Get Push Account balance
 * [GetTransaction](docs/sdks/balance/README.md#gettransaction) - Get a transaction
 * [List](docs/sdks/balance/README.md#list) - List transactions
 
-### [Events](docs/sdks/events/README.md)
+### [.Events](docs/sdks/events/README.md)
 
 * [GetEvent](docs/sdks/events/README.md#getevent) - Retrieve an event
 * [List](docs/sdks/events/README.md#list) - List events
 
-### [Intent](docs/sdks/intent/README.md)
+### [.Intent](docs/sdks/intent/README.md)
 
 * [CancelIntent](docs/sdks/intent/README.md#cancelintent) - Cancel an intent
 * [CreateIntent](docs/sdks/intent/README.md#createintent) - Create intent
 * [GetIntent](docs/sdks/intent/README.md#getintent) - Get an intent
 * [List](docs/sdks/intent/README.md#list) - List intents
 
-### [Transfer](docs/sdks/transfer/README.md)
+### [.Transfer](docs/sdks/transfer/README.md)
 
 * [CreateTransfer](docs/sdks/transfer/README.md#createtransfer) - Create a transfer
 * [GetTransfer](docs/sdks/transfer/README.md#gettransfer) - Retrieve a transfer
 * [List](docs/sdks/transfer/README.md#list) - List transfers
 
-### [User](docs/sdks/user/README.md)
+### [.User](docs/sdks/user/README.md)
 
 * [CreateUser](docs/sdks/user/README.md#createuser) - Create user
 * [GetUser](docs/sdks/user/README.md#getuser) - Get a user
@@ -86,8 +86,6 @@ func main() {
 
 <!-- Start Dev Containers -->
 
-
-
 <!-- End Dev Containers -->
 
 
@@ -96,8 +94,6 @@ func main() {
 # Error Handling
 
 Handling errors in your SDK should largely match your expectations.  All operations return a response object or an error, they will never return both.  When specified by the OpenAPI spec document, the SDK will return the appropriate subclass.
-
-
 <!-- End Error Handling -->
 
 
@@ -116,21 +112,20 @@ You can override the default server globally using the `WithServer` option when 
 
 For example:
 
-
 ```go
 package main
 
 import (
 	"context"
 	"log"
-	pushcash "push-cash"
-	"push-cash/pkg/models/shared"
+	pushcash "push-cash/v2"
+	"push-cash/v2/pkg/models/shared"
 )
 
 func main() {
 	s := pushcash.New(
-		pushcash.WithSecurity(""),
 		pushcash.WithServer("sandbox"),
+		pushcash.WithSecurity(""),
 	)
 
 	ctx := context.Background()
@@ -151,21 +146,20 @@ func main() {
 
 The default server can also be overridden globally using the `WithServerURL` option when initializing the SDK client instance. For example:
 
-
 ```go
 package main
 
 import (
 	"context"
 	"log"
-	pushcash "push-cash"
-	"push-cash/pkg/models/shared"
+	pushcash "push-cash/v2"
+	"push-cash/v2/pkg/models/shared"
 )
 
 func main() {
 	s := pushcash.New(
-		pushcash.WithSecurity(""),
 		pushcash.WithServerURL("https://api.pushcash.co"),
+		pushcash.WithSecurity(""),
 	)
 
 	ctx := context.Background()
@@ -240,6 +234,51 @@ d5 := types.MustNewDateFromString("2019-01-01") // returns *types.Date and panic
 d6 := types.MustDateFromString("2019-01-01") // returns types.Date and panics on error
 ```
 <!-- End Go Types -->
+
+
+
+<!-- Start Authentication -->
+
+# Authentication
+
+## Per-Client Security Schemes
+
+Your SDK supports the following security scheme globally:
+
+| Name        | Type        | Scheme      |
+| ----------- | ----------- | ----------- |
+| `Bearer`    | http        | HTTP Bearer |
+
+You can configure it using the `WithSecurity` option when initializing the SDK client instance. For example:
+
+```go
+package main
+
+import (
+	"context"
+	"log"
+	pushcash "push-cash/v2"
+	"push-cash/v2/pkg/models/shared"
+)
+
+func main() {
+	s := pushcash.New(
+		pushcash.WithSecurity(""),
+	)
+
+	ctx := context.Background()
+	res, err := s.Balance.GetBalance(ctx)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	if res.AccountBalance != nil {
+		// handle response
+	}
+}
+
+```
+<!-- End Authentication -->
 
 <!-- Placeholder for Future Speakeasy SDK Sections -->
 

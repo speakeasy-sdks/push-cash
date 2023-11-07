@@ -8,26 +8,26 @@ import (
 	"fmt"
 	"io"
 	"net/http"
-	"push-cash/pkg/models/operations"
-	"push-cash/pkg/models/sdkerrors"
-	"push-cash/pkg/models/shared"
-	"push-cash/pkg/utils"
+	"push-cash/v2/pkg/models/operations"
+	"push-cash/v2/pkg/models/sdkerrors"
+	"push-cash/v2/pkg/models/shared"
+	"push-cash/v2/pkg/utils"
 	"strings"
 )
 
-type user struct {
+type User struct {
 	sdkConfiguration sdkConfiguration
 }
 
-func newUser(sdkConfig sdkConfiguration) *user {
-	return &user{
+func newUser(sdkConfig sdkConfiguration) *User {
+	return &User{
 		sdkConfiguration: sdkConfig,
 	}
 }
 
 // CreateUser - Create user
 // Create new Push users
-func (s *user) CreateUser(ctx context.Context, request operations.CreateUserRequest) (*operations.CreateUserResponse, error) {
+func (s *User) CreateUser(ctx context.Context, request operations.CreateUserRequest) (*operations.CreateUserResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/user"
 
@@ -87,6 +87,10 @@ func (s *user) CreateUser(ctx context.Context, request operations.CreateUserRequ
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
+	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
+		fallthrough
+	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
+		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
 	default:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
@@ -106,7 +110,7 @@ func (s *user) CreateUser(ctx context.Context, request operations.CreateUserRequ
 
 // GetUser - Get a user
 // Retrieve a user by ID
-func (s *user) GetUser(ctx context.Context, request operations.GetUserRequest) (*operations.GetUserResponse, error) {
+func (s *User) GetUser(ctx context.Context, request operations.GetUserRequest) (*operations.GetUserResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/user/{id}", request, nil)
 	if err != nil {
@@ -157,6 +161,10 @@ func (s *user) GetUser(ctx context.Context, request operations.GetUserRequest) (
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
+	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
+		fallthrough
+	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
+		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
 	default:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
@@ -176,7 +184,7 @@ func (s *user) GetUser(ctx context.Context, request operations.GetUserRequest) (
 
 // List users
 // Retrieves a list of users
-func (s *user) List(ctx context.Context, request operations.ListUsersRequest) (*operations.ListUsersResponse, error) {
+func (s *User) List(ctx context.Context, request operations.ListUsersRequest) (*operations.ListUsersResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/user/list"
 
@@ -219,15 +227,19 @@ func (s *user) List(ctx context.Context, request operations.ListUsersRequest) (*
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.ListUsers200ApplicationJSON
+			var out operations.ListUsersResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.ListUsers200ApplicationJSONObject = &out
+			res.Object = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
+	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
+		fallthrough
+	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
+		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
 	default:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
@@ -247,7 +259,7 @@ func (s *user) List(ctx context.Context, request operations.ListUsersRequest) (*
 
 // UpdateUser - Update a user's status
 // Updates a user's status to either active or suspended
-func (s *user) UpdateUser(ctx context.Context, request operations.UpdateUserRequest) (*operations.UpdateUserResponse, error) {
+func (s *User) UpdateUser(ctx context.Context, request operations.UpdateUserRequest) (*operations.UpdateUserResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/user/{id}", request, nil)
 	if err != nil {
@@ -305,6 +317,10 @@ func (s *user) UpdateUser(ctx context.Context, request operations.UpdateUserRequ
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
+	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
+		fallthrough
+	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
+		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
 	default:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):

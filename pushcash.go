@@ -6,8 +6,8 @@ import (
 	"context"
 	"fmt"
 	"net/http"
-	"push-cash/pkg/models/shared"
-	"push-cash/pkg/utils"
+	"push-cash/v2/pkg/models/shared"
+	"push-cash/v2/pkg/utils"
 	"time"
 )
 
@@ -74,11 +74,11 @@ func (c *sdkConfiguration) GetServerDetails() (string, map[string]string) {
 }
 
 type PushCash struct {
-	Balance  *balance
-	Events   *events
-	Intent   *intent
-	Transfer *transfer
-	User     *user
+	Balance  *Balance
+	Events   *Events
+	Intent   *Intent
+	Transfer *Transfer
+	User     *User
 
 	sdkConfiguration sdkConfiguration
 }
@@ -149,9 +149,9 @@ func New(opts ...SDKOption) *PushCash {
 		sdkConfiguration: sdkConfiguration{
 			Language:          "go",
 			OpenAPIDocVersion: "0.0.1",
-			SDKVersion:        "1.2.0",
-			GenVersion:        "2.173.0",
-			UserAgent:         "speakeasy-sdk/go 1.2.0 2.173.0 0.0.1 push-cash",
+			SDKVersion:        "2.0.0",
+			GenVersion:        "2.181.1",
+			UserAgent:         "speakeasy-sdk/go 2.0.0 2.181.1 0.0.1 push-cash",
 		},
 	}
 	for _, opt := range opts {

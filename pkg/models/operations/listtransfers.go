@@ -4,8 +4,8 @@ package operations
 
 import (
 	"net/http"
-	"push-cash/pkg/models/shared"
-	"push-cash/pkg/utils"
+	"push-cash/v2/pkg/models/shared"
+	"push-cash/v2/pkg/utils"
 	"time"
 )
 
@@ -59,22 +59,22 @@ func (o *ListTransfersRequest) GetStatus() []shared.TransferStatus {
 	return o.Status
 }
 
-// ListTransfers200ApplicationJSON - Successful operation
-type ListTransfers200ApplicationJSON struct {
+// ListTransfersResponseBody - Successful operation
+type ListTransfersResponseBody struct {
 	Data []shared.Transfer `json:"data"`
 	// Use cursor for paginating list endpoints in conjunction with the cursor request parameter.
 	//
 	NextCursor string `json:"next_cursor"`
 }
 
-func (o *ListTransfers200ApplicationJSON) GetData() []shared.Transfer {
+func (o *ListTransfersResponseBody) GetData() []shared.Transfer {
 	if o == nil {
 		return []shared.Transfer{}
 	}
 	return o.Data
 }
 
-func (o *ListTransfers200ApplicationJSON) GetNextCursor() string {
+func (o *ListTransfersResponseBody) GetNextCursor() string {
 	if o == nil {
 		return ""
 	}
@@ -91,7 +91,7 @@ type ListTransfersResponse struct {
 	// Error
 	Error *shared.Error
 	// Successful operation
-	ListTransfers200ApplicationJSONObject *ListTransfers200ApplicationJSON
+	Object *ListTransfersResponseBody
 }
 
 func (o *ListTransfersResponse) GetContentType() string {
@@ -122,9 +122,9 @@ func (o *ListTransfersResponse) GetError() *shared.Error {
 	return o.Error
 }
 
-func (o *ListTransfersResponse) GetListTransfers200ApplicationJSONObject() *ListTransfers200ApplicationJSON {
+func (o *ListTransfersResponse) GetObject() *ListTransfersResponseBody {
 	if o == nil {
 		return nil
 	}
-	return o.ListTransfers200ApplicationJSONObject
+	return o.Object
 }

@@ -1,5 +1,5 @@
 # Transfer
-(*Transfer*)
+(*.Transfer*)
 
 ### Available Operations
 
@@ -19,9 +19,9 @@ package main
 import(
 	"context"
 	"log"
-	pushcash "push-cash"
-	"push-cash/pkg/models/shared"
-	"push-cash/pkg/models/operations"
+	pushcash "push-cash/v2"
+	"push-cash/v2/pkg/models/shared"
+	"push-cash/v2/pkg/models/operations"
 )
 
 func main() {
@@ -73,9 +73,9 @@ package main
 import(
 	"context"
 	"log"
-	pushcash "push-cash"
-	"push-cash/pkg/models/shared"
-	"push-cash/pkg/models/operations"
+	pushcash "push-cash/v2"
+	"push-cash/v2/pkg/models/shared"
+	"push-cash/v2/pkg/models/operations"
 )
 
 func main() {
@@ -122,9 +122,9 @@ package main
 import(
 	"context"
 	"log"
-	pushcash "push-cash"
-	"push-cash/pkg/models/shared"
-	"push-cash/pkg/models/operations"
+	pushcash "push-cash/v2"
+	"push-cash/v2/pkg/models/shared"
+	"push-cash/v2/pkg/models/operations"
 )
 
 func main() {
@@ -143,7 +143,7 @@ func main() {
         log.Fatal(err)
     }
 
-    if res.ListTransfers200ApplicationJSONObject != nil {
+    if res.Object != nil {
         // handle response
     }
 }

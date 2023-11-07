@@ -1,4 +1,4 @@
-# PaymentCredentialAccount
+# Account
 
 
 ## Fields

@@ -3,7 +3,7 @@
 package shared
 
 import (
-	"push-cash/pkg/utils"
+	"push-cash/v2/pkg/utils"
 	"time"
 )
 

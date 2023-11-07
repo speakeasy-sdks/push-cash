@@ -5,24 +5,24 @@ package shared
 import (
 	"encoding/json"
 	"fmt"
-	"push-cash/pkg/utils"
+	"push-cash/v2/pkg/utils"
 	"time"
 )
 
-// TransactionFeeDetailsType - Type of the fee
-type TransactionFeeDetailsType string
+// Type of the fee
+type Type string
 
 const (
-	TransactionFeeDetailsTypeUserSetupFee  TransactionFeeDetailsType = "user_setup_fee"
-	TransactionFeeDetailsTypeInitiationFee TransactionFeeDetailsType = "initiation_fee"
-	TransactionFeeDetailsTypePushTxnFee    TransactionFeeDetailsType = "push_txn_fee"
+	TypeUserSetupFee  Type = "user_setup_fee"
+	TypeInitiationFee Type = "initiation_fee"
+	TypePushTxnFee    Type = "push_txn_fee"
 )
 
-func (e TransactionFeeDetailsType) ToPointer() *TransactionFeeDetailsType {
+func (e Type) ToPointer() *Type {
 	return &e
 }
 
-func (e *TransactionFeeDetailsType) UnmarshalJSON(data []byte) error {
+func (e *Type) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
@@ -33,14 +33,14 @@ func (e *TransactionFeeDetailsType) UnmarshalJSON(data []byte) error {
 	case "initiation_fee":
 		fallthrough
 	case "push_txn_fee":
-		*e = TransactionFeeDetailsType(v)
+		*e = Type(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for TransactionFeeDetailsType: %v", v)
+		return fmt.Errorf("invalid value for Type: %v", v)
 	}
 }
 
-type TransactionFeeDetails struct {
+type FeeDetails struct {
 	// Push User ID associated with payment credential
 	Amount int64 `json:"amount"`
 	// Currency associated with the amount
@@ -48,50 +48,50 @@ type TransactionFeeDetails struct {
 	// Description of the fee
 	Description string `json:"description"`
 	// Type of the fee
-	Type TransactionFeeDetailsType `json:"type"`
+	Type Type `json:"type"`
 }
 
-func (o *TransactionFeeDetails) GetAmount() int64 {
+func (o *FeeDetails) GetAmount() int64 {
 	if o == nil {
 		return 0
 	}
 	return o.Amount
 }
 
-func (o *TransactionFeeDetails) GetCurrency() Currency {
+func (o *FeeDetails) GetCurrency() Currency {
 	if o == nil {
 		return Currency("")
 	}
 	return o.Currency
 }
 
-func (o *TransactionFeeDetails) GetDescription() string {
+func (o *FeeDetails) GetDescription() string {
 	if o == nil {
 		return ""
 	}
 	return o.Description
 }
 
-func (o *TransactionFeeDetails) GetType() TransactionFeeDetailsType {
+func (o *FeeDetails) GetType() Type {
 	if o == nil {
-		return TransactionFeeDetailsType("")
+		return Type("")
 	}
 	return o.Type
 }
 
-// TransactionSourceType - The type for the source entity of this transaction
-type TransactionSourceType string
+// TransactionType - The type for the source entity of this transaction
+type TransactionType string
 
 const (
-	TransactionSourceTypeIntent   TransactionSourceType = "intent"
-	TransactionSourceTypeTransfer TransactionSourceType = "transfer"
+	TransactionTypeIntent   TransactionType = "intent"
+	TransactionTypeTransfer TransactionType = "transfer"
 )
 
-func (e TransactionSourceType) ToPointer() *TransactionSourceType {
+func (e TransactionType) ToPointer() *TransactionType {
 	return &e
 }
 
-func (e *TransactionSourceType) UnmarshalJSON(data []byte) error {
+func (e *TransactionType) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
@@ -100,30 +100,30 @@ func (e *TransactionSourceType) UnmarshalJSON(data []byte) error {
 	case "intent":
 		fallthrough
 	case "transfer":
-		*e = TransactionSourceType(v)
+		*e = TransactionType(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for TransactionSourceType: %v", v)
+		return fmt.Errorf("invalid value for TransactionType: %v", v)
 	}
 }
 
-type TransactionSource struct {
+type Source struct {
 	// The identifier of the source entity
 	ID string `json:"id"`
 	// The type for the source entity of this transaction
-	Type TransactionSourceType `json:"type"`
+	Type TransactionType `json:"type"`
 }
 
-func (o *TransactionSource) GetID() string {
+func (o *Source) GetID() string {
 	if o == nil {
 		return ""
 	}
 	return o.ID
 }
 
-func (o *TransactionSource) GetType() TransactionSourceType {
+func (o *Source) GetType() TransactionType {
 	if o == nil {
-		return TransactionSourceType("")
+		return TransactionType("")
 	}
 	return o.Type
 }
@@ -140,12 +140,12 @@ type Transaction struct {
 	// Fee paid to Push for the transaction
 	Fee int64 `json:"fee"`
 	// Details on the fees paid
-	FeeDetails []TransactionFeeDetails `json:"fee_details"`
+	FeeDetails []FeeDetails `json:"fee_details"`
 	// The unique identifier assigned by Push
 	ID string `json:"id"`
 	// Net amount of the transaction
-	Net    int64             `json:"net"`
-	Source TransactionSource `json:"source"`
+	Net    int64  `json:"net"`
+	Source Source `json:"source"`
 	// Indicates how the funds from the transaction are represented in the account balance
 	Status TransactionStatus `json:"status"`
 }
@@ -196,9 +196,9 @@ func (o *Transaction) GetFee() int64 {
 	return o.Fee
 }
 
-func (o *Transaction) GetFeeDetails() []TransactionFeeDetails {
+func (o *Transaction) GetFeeDetails() []FeeDetails {
 	if o == nil {
-		return []TransactionFeeDetails{}
+		return []FeeDetails{}
 	}
 	return o.FeeDetails
 }
@@ -217,9 +217,9 @@ func (o *Transaction) GetNet() int64 {
 	return o.Net
 }
 
-func (o *Transaction) GetSource() TransactionSource {
+func (o *Transaction) GetSource() Source {
 	if o == nil {
-		return TransactionSource{}
+		return Source{}
 	}
 	return o.Source
 }

@@ -1,5 +1,5 @@
 # User
-(*User*)
+(*.User*)
 
 ### Available Operations
 
@@ -20,9 +20,9 @@ package main
 import(
 	"context"
 	"log"
-	pushcash "push-cash"
-	"push-cash/pkg/models/shared"
-	"push-cash/pkg/models/operations"
+	pushcash "push-cash/v2"
+	"push-cash/v2/pkg/models/shared"
+	"push-cash/v2/pkg/models/operations"
 )
 
 func main() {
@@ -36,7 +36,7 @@ func main() {
             Address: "4290 Kutch Courts",
             Email: "Americo26@gmail.com",
             Kyc: shared.Kyc{
-                Method: shared.KYCMethodAlloy,
+                Method: shared.MethodAlloy,
                 Token: "string",
             },
             Name: "string",
@@ -80,9 +80,9 @@ package main
 import(
 	"context"
 	"log"
-	pushcash "push-cash"
-	"push-cash/pkg/models/shared"
-	"push-cash/pkg/models/operations"
+	pushcash "push-cash/v2"
+	"push-cash/v2/pkg/models/shared"
+	"push-cash/v2/pkg/models/operations"
 )
 
 func main() {
@@ -129,9 +129,9 @@ package main
 import(
 	"context"
 	"log"
-	pushcash "push-cash"
-	"push-cash/pkg/models/shared"
-	"push-cash/pkg/models/operations"
+	pushcash "push-cash/v2"
+	"push-cash/v2/pkg/models/shared"
+	"push-cash/v2/pkg/models/operations"
 )
 
 func main() {
@@ -145,7 +145,7 @@ func main() {
         log.Fatal(err)
     }
 
-    if res.ListUsers200ApplicationJSONObject != nil {
+    if res.Object != nil {
         // handle response
     }
 }
@@ -176,9 +176,9 @@ package main
 import(
 	"context"
 	"log"
-	pushcash "push-cash"
-	"push-cash/pkg/models/shared"
-	"push-cash/pkg/models/operations"
+	pushcash "push-cash/v2"
+	"push-cash/v2/pkg/models/shared"
+	"push-cash/v2/pkg/models/operations"
 )
 
 func main() {
@@ -189,7 +189,7 @@ func main() {
     ctx := context.Background()
     res, err := s.User.UpdateUser(ctx, operations.UpdateUserRequest{
         UpdateUserRequest: &shared.UpdateUserRequest{
-            Status: shared.UpdateUserRequestStatusActive,
+            Status: shared.StatusActive,
         },
         ID: "user_28CJjV7P4Go5PNJvfzghiD",
     })

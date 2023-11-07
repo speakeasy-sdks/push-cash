@@ -1,4 +1,4 @@
-# IntentFailureDetails
+# FailureDetails
 
 Failure details is non-null only for 'declined', 'error', 'timedout', 'chargedback'
 

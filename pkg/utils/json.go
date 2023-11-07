@@ -12,7 +12,7 @@ import (
 	"time"
 	"unsafe"
 
-	"push-cash/pkg/types"
+	"push-cash/v2/pkg/types"
 
 	"github.com/ericlagergren/decimal"
 )

@@ -4,8 +4,8 @@ package operations
 
 import (
 	"net/http"
-	"push-cash/pkg/models/shared"
-	"push-cash/pkg/utils"
+	"push-cash/v2/pkg/models/shared"
+	"push-cash/v2/pkg/utils"
 	"time"
 )
 
@@ -41,22 +41,22 @@ func (o *ListUsersRequest) GetCreatedAtBefore() *time.Time {
 	return o.CreatedAtBefore
 }
 
-// ListUsers200ApplicationJSON - successful operation
-type ListUsers200ApplicationJSON struct {
+// ListUsersResponseBody - successful operation
+type ListUsersResponseBody struct {
 	Data []shared.User `json:"data"`
 	// Use cursor for paginating list endpoints in conjunction with the cursor request parameter.
 	//
 	NextCursor string `json:"next_cursor"`
 }
 
-func (o *ListUsers200ApplicationJSON) GetData() []shared.User {
+func (o *ListUsersResponseBody) GetData() []shared.User {
 	if o == nil {
 		return []shared.User{}
 	}
 	return o.Data
 }
 
-func (o *ListUsers200ApplicationJSON) GetNextCursor() string {
+func (o *ListUsersResponseBody) GetNextCursor() string {
 	if o == nil {
 		return ""
 	}
@@ -73,7 +73,7 @@ type ListUsersResponse struct {
 	// Error
 	Error *shared.Error
 	// successful operation
-	ListUsers200ApplicationJSONObject *ListUsers200ApplicationJSON
+	Object *ListUsersResponseBody
 }
 
 func (o *ListUsersResponse) GetContentType() string {
@@ -104,9 +104,9 @@ func (o *ListUsersResponse) GetError() *shared.Error {
 	return o.Error
 }
 
-func (o *ListUsersResponse) GetListUsers200ApplicationJSONObject() *ListUsers200ApplicationJSON {
+func (o *ListUsersResponse) GetObject() *ListUsersResponseBody {
 	if o == nil {
 		return nil
 	}
-	return o.ListUsers200ApplicationJSONObject
+	return o.Object
 }
