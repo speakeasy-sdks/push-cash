@@ -50,31 +50,31 @@ func main() {
 ## Available Resources and Operations
 
 
-### [.Balance](docs/sdks/balance/README.md)
+### [Balance](docs/sdks/balance/README.md)
 
 * [GetBalance](docs/sdks/balance/README.md#getbalance) - Get Push Account balance
 * [GetTransaction](docs/sdks/balance/README.md#gettransaction) - Get a transaction
 * [List](docs/sdks/balance/README.md#list) - List transactions
 
-### [.Events](docs/sdks/events/README.md)
+### [Events](docs/sdks/events/README.md)
 
 * [GetEvent](docs/sdks/events/README.md#getevent) - Retrieve an event
 * [List](docs/sdks/events/README.md#list) - List events
 
-### [.Intent](docs/sdks/intent/README.md)
+### [Intent](docs/sdks/intent/README.md)
 
 * [CancelIntent](docs/sdks/intent/README.md#cancelintent) - Cancel an intent
 * [CreateIntent](docs/sdks/intent/README.md#createintent) - Create intent
 * [GetIntent](docs/sdks/intent/README.md#getintent) - Get an intent
 * [List](docs/sdks/intent/README.md#list) - List intents
 
-### [.Transfer](docs/sdks/transfer/README.md)
+### [Transfer](docs/sdks/transfer/README.md)
 
 * [CreateTransfer](docs/sdks/transfer/README.md#createtransfer) - Create a transfer
 * [GetTransfer](docs/sdks/transfer/README.md#gettransfer) - Retrieve a transfer
 * [List](docs/sdks/transfer/README.md#list) - List transfers
 
-### [.User](docs/sdks/user/README.md)
+### [User](docs/sdks/user/README.md)
 
 * [CreateUser](docs/sdks/user/README.md#createuser) - Create user
 * [GetUser](docs/sdks/user/README.md#getuser) - Get a user
@@ -93,7 +93,43 @@ func main() {
 <!-- Start Error Handling -->
 # Error Handling
 
-Handling errors in your SDK should largely match your expectations.  All operations return a response object or an error, they will never return both.  When specified by the OpenAPI spec document, the SDK will return the appropriate subclass.
+Handling errors in this SDK should largely match your expectations.  All operations return a response object or an error, they will never return both.  When specified by the OpenAPI spec document, the SDK will return the appropriate subclass.
+
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |
+
+
+## Example
+
+```go
+package main
+
+import (
+	"context"
+	"log"
+	pushcash "push-cash/v2"
+	"push-cash/v2/pkg/models/shared"
+)
+
+func main() {
+	s := pushcash.New(
+		pushcash.WithSecurity(""),
+	)
+
+	ctx := context.Background()
+	res, err := s.Balance.GetBalance(ctx)
+	if err != nil {
+
+		var e *sdkerrors.SDKError
+		if errors.As(err, &e) {
+			// handle error
+			log.Fatal(e.Error())
+		}
+	}
+}
+
+```
 <!-- End Error Handling -->
 
 
@@ -238,12 +274,11 @@ d6 := types.MustDateFromString("2019-01-01") // returns types.Date and panics on
 
 
 <!-- Start Authentication -->
-
 # Authentication
 
 ## Per-Client Security Schemes
 
-Your SDK supports the following security scheme globally:
+This SDK supports the following security scheme globally:
 
 | Name        | Type        | Scheme      |
 | ----------- | ----------- | ----------- |
