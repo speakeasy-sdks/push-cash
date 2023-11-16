@@ -18,11 +18,11 @@ Create new Push users
 package main
 
 import(
-	"context"
-	"log"
-	pushcash "push-cash/v2"
 	"push-cash/v2/pkg/models/shared"
+	pushcash "push-cash/v2"
+	"context"
 	"push-cash/v2/pkg/models/operations"
+	"log"
 )
 
 func main() {
@@ -80,11 +80,11 @@ Retrieve a user by ID
 package main
 
 import(
-	"context"
-	"log"
-	pushcash "push-cash/v2"
 	"push-cash/v2/pkg/models/shared"
+	pushcash "push-cash/v2"
+	"context"
 	"push-cash/v2/pkg/models/operations"
+	"log"
 )
 
 func main() {
@@ -131,11 +131,11 @@ Retrieves a list of users
 package main
 
 import(
-	"context"
-	"log"
-	pushcash "push-cash/v2"
 	"push-cash/v2/pkg/models/shared"
+	pushcash "push-cash/v2"
+	"context"
 	"push-cash/v2/pkg/models/operations"
+	"log"
 )
 
 func main() {
@@ -180,11 +180,11 @@ Updates a user's status to either active or suspended
 package main
 
 import(
-	"context"
-	"log"
-	pushcash "push-cash/v2"
 	"push-cash/v2/pkg/models/shared"
+	pushcash "push-cash/v2"
+	"context"
 	"push-cash/v2/pkg/models/operations"
+	"log"
 )
 
 func main() {

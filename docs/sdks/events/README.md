@@ -16,11 +16,11 @@ Retrieves a specific event by its ID.
 package main
 
 import(
-	"context"
-	"log"
-	pushcash "push-cash/v2"
 	"push-cash/v2/pkg/models/shared"
+	pushcash "push-cash/v2"
+	"context"
 	"push-cash/v2/pkg/models/operations"
+	"log"
 )
 
 func main() {
@@ -67,11 +67,11 @@ Retrieves a list of events.
 package main
 
 import(
-	"context"
-	"log"
-	pushcash "push-cash/v2"
 	"push-cash/v2/pkg/models/shared"
+	pushcash "push-cash/v2"
+	"context"
 	"push-cash/v2/pkg/models/operations"
+	"log"
 )
 
 func main() {

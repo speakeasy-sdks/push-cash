@@ -17,11 +17,11 @@ Create a transfer
 package main
 
 import(
-	"context"
-	"log"
-	pushcash "push-cash/v2"
 	"push-cash/v2/pkg/models/shared"
+	pushcash "push-cash/v2"
+	"context"
 	"push-cash/v2/pkg/models/operations"
+	"log"
 )
 
 func main() {
@@ -73,11 +73,11 @@ Retrieves a specific transfer by its ID.
 package main
 
 import(
-	"context"
-	"log"
-	pushcash "push-cash/v2"
 	"push-cash/v2/pkg/models/shared"
+	pushcash "push-cash/v2"
+	"context"
 	"push-cash/v2/pkg/models/operations"
+	"log"
 )
 
 func main() {
@@ -124,11 +124,11 @@ Retrieves a list of transfers.
 package main
 
 import(
-	"context"
-	"log"
-	pushcash "push-cash/v2"
 	"push-cash/v2/pkg/models/shared"
+	pushcash "push-cash/v2"
+	"context"
 	"push-cash/v2/pkg/models/operations"
+	"log"
 )
 
 func main() {

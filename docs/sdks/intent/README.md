@@ -18,11 +18,11 @@ Cancels a specific intent identified by its ID
 package main
 
 import(
-	"context"
-	"log"
-	pushcash "push-cash/v2"
 	"push-cash/v2/pkg/models/shared"
+	pushcash "push-cash/v2"
+	"context"
 	"push-cash/v2/pkg/models/operations"
+	"log"
 )
 
 func main() {
@@ -69,11 +69,11 @@ Create a payment intent
 package main
 
 import(
-	"context"
-	"log"
-	pushcash "push-cash/v2"
 	"push-cash/v2/pkg/models/shared"
+	pushcash "push-cash/v2"
+	"context"
 	"push-cash/v2/pkg/models/operations"
+	"log"
 )
 
 func main() {
@@ -126,11 +126,11 @@ Get an intent by ID
 package main
 
 import(
-	"context"
-	"log"
-	pushcash "push-cash/v2"
 	"push-cash/v2/pkg/models/shared"
+	pushcash "push-cash/v2"
+	"context"
 	"push-cash/v2/pkg/models/operations"
+	"log"
 )
 
 func main() {
@@ -177,11 +177,11 @@ Retrieves a list of intents
 package main
 
 import(
-	"context"
-	"log"
-	pushcash "push-cash/v2"
 	"push-cash/v2/pkg/models/shared"
+	pushcash "push-cash/v2"
+	"context"
 	"push-cash/v2/pkg/models/operations"
+	"log"
 )
 
 func main() {
