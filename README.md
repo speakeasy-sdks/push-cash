@@ -7,16 +7,17 @@
   <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-blue.svg?style=for-the-badge" /></a>
 </div>
 
-<!-- Start SDK Installation -->
+<!-- Start SDK Installation [installation] -->
 ## SDK Installation
 
 ```bash
 go get github.com/speakeasy-sdks/push-cash
 ```
-<!-- End SDK Installation -->
+<!-- End SDK Installation [installation] -->
 
+<!-- Start SDK Example Usage [usage] -->
 ## SDK Example Usage
-<!-- Start SDK Example Usage -->
+
 ### Example
 
 ```go
@@ -46,11 +47,10 @@ func main() {
 }
 
 ```
-<!-- End SDK Example Usage -->
+<!-- End SDK Example Usage [usage] -->
 
-<!-- Start SDK Available Operations -->
+<!-- Start Available Resources and Operations [operations] -->
 ## Available Resources and Operations
-
 
 ### [Balance](docs/sdks/balance/README.md)
 
@@ -82,17 +82,13 @@ func main() {
 * [GetUser](docs/sdks/user/README.md#getuser) - Get a user
 * [List](docs/sdks/user/README.md#list) - List users
 * [UpdateUser](docs/sdks/user/README.md#updateuser) - Update a user's status
-<!-- End SDK Available Operations -->
+<!-- End Available Resources and Operations [operations] -->
 
 
 
-<!-- Start Dev Containers -->
-
-<!-- End Dev Containers -->
 
 
-
-<!-- Start Error Handling -->
+<!-- Start Error Handling [errors] -->
 ## Error Handling
 
 Handling errors in this SDK should largely match your expectations.  All operations return a response object or an error, they will never return both.  When specified by the OpenAPI spec document, the SDK will return the appropriate subclass.
@@ -133,11 +129,11 @@ func main() {
 }
 
 ```
-<!-- End Error Handling -->
+<!-- End Error Handling [errors] -->
 
 
 
-<!-- Start Server Selection -->
+<!-- Start Server Selection [server] -->
 ## Server Selection
 
 ### Select Server by Name
@@ -148,6 +144,7 @@ You can override the default server globally using the `WithServer` option when 
 | ----- | ------ | --------- |
 | `prod` | `https://api.pushcash.co` | None |
 | `sandbox` | `https://sandbox.pushcash.co` | None |
+
 #### Example
 
 ```go
@@ -211,11 +208,11 @@ func main() {
 }
 
 ```
-<!-- End Server Selection -->
+<!-- End Server Selection [server] -->
 
 
 
-<!-- Start Custom HTTP Client -->
+<!-- Start Custom HTTP Client [http-client] -->
 ## Custom HTTP Client
 
 The Go SDK makes API calls that wrap an internal HTTP client. The requirements for the HTTP client are very simple. It must match this interface:
@@ -242,20 +239,20 @@ var (
 ```
 
 This can be a convenient way to configure timeouts, cookies, proxies, custom headers, and other low-level configuration.
-<!-- End Custom HTTP Client -->
+<!-- End Custom HTTP Client [http-client] -->
 
 
 
-<!-- Start Go Types -->
-# Special Types
+<!-- Start Special Types [types] -->
+## Special Types
 
 This SDK defines the following custom types to assist with marshalling and unmarshalling data.
 
-## Date
+### Date
 
 `types.Date` is a wrapper around time.Time that allows for JSON marshaling a date string formatted as "2006-01-02".
 
-### Usage
+#### Usage
 
 ```go
 d1 := types.NewDate(time.Now()) // returns *types.Date
@@ -270,11 +267,11 @@ d5 := types.MustNewDateFromString("2019-01-01") // returns *types.Date and panic
 
 d6 := types.MustDateFromString("2019-01-01") // returns types.Date and panics on error
 ```
-<!-- End Go Types -->
+<!-- End Special Types [types] -->
 
 
 
-<!-- Start Authentication -->
+<!-- Start Authentication [security] -->
 ## Authentication
 
 ### Per-Client Security Schemes
@@ -312,7 +309,7 @@ func main() {
 }
 
 ```
-<!-- End Authentication -->
+<!-- End Authentication [security] -->
 
 <!-- Placeholder for Future Speakeasy SDK Sections -->
 

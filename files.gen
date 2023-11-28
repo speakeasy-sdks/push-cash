@@ -59,7 +59,6 @@ pkg/utils/utils.go
 /pkg/models/shared/createuserrequest.go
 /pkg/models/shared/updateuserrequest.go
 /pkg/models/shared/security.go
-USAGE.md
 docs/pkg/models/operations/getbalanceresponse.md
 docs/pkg/models/operations/gettransactionrequest.md
 docs/pkg/models/operations/gettransactionresponse.md
@@ -134,4 +133,5 @@ docs/sdks/events/README.md
 docs/sdks/intent/README.md
 docs/sdks/transfer/README.md
 docs/sdks/user/README.md
+USAGE.md
 .gitattributes
