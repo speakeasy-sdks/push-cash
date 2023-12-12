@@ -129,7 +129,6 @@ func withSecurity(security interface{}) func(context.Context) (interface{}, erro
 }
 
 // WithSecurity configures the SDK to use the provided security details
-
 func WithSecurity(bearer string) SDKOption {
 	return func(sdk *PushCash) {
 		security := shared.Security{Bearer: bearer}
@@ -149,9 +148,9 @@ func New(opts ...SDKOption) *PushCash {
 		sdkConfiguration: sdkConfiguration{
 			Language:          "go",
 			OpenAPIDocVersion: "0.0.1",
-			SDKVersion:        "2.0.3",
-			GenVersion:        "2.202.2",
-			UserAgent:         "speakeasy-sdk/go 2.0.3 2.202.2 0.0.1 push-cash",
+			SDKVersion:        "2.1.0",
+			GenVersion:        "2.213.3",
+			UserAgent:         "speakeasy-sdk/go 2.1.0 2.213.3 0.0.1 push-cash",
 		},
 	}
 	for _, opt := range opts {

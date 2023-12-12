@@ -25,7 +25,7 @@ import(
 
 func main() {
     s := pushcash.New(
-        pushcash.WithSecurity(""),
+        pushcash.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
     )
 
     ctx := context.Background()
@@ -76,7 +76,7 @@ import(
 
 func main() {
     s := pushcash.New(
-        pushcash.WithSecurity(""),
+        pushcash.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
     )
 
     ctx := context.Background()
