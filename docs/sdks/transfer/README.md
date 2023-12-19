@@ -61,7 +61,7 @@ func main() {
 **[*operations.CreateTransferResponse](../../pkg/models/operations/createtransferresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 400-600            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## GetTransfer
 
@@ -112,7 +112,7 @@ func main() {
 **[*operations.GetTransferResponse](../../pkg/models/operations/gettransferresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 400-600            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## List
 
@@ -166,4 +166,4 @@ func main() {
 **[*operations.ListTransfersResponse](../../pkg/models/operations/listtransfersresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 400-600            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |

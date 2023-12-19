@@ -57,7 +57,7 @@ func main() {
 **[*operations.CancelIntentResponse](../../pkg/models/operations/cancelintentresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 400-600            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## CreateIntent
 
@@ -114,7 +114,7 @@ func main() {
 **[*operations.CreateIntentResponse](../../pkg/models/operations/createintentresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 400-600            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## GetIntent
 
@@ -165,7 +165,7 @@ func main() {
 **[*operations.GetIntentResponse](../../pkg/models/operations/getintentresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 400-600            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## List
 
@@ -219,4 +219,4 @@ func main() {
 **[*operations.ListIntentsResponse](../../pkg/models/operations/listintentsresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 400-600            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |

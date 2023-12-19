@@ -52,7 +52,7 @@ func main() {
 **[*operations.GetBalanceResponse](../../pkg/models/operations/getbalanceresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 400-600            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## GetTransaction
 
@@ -103,7 +103,7 @@ func main() {
 **[*operations.GetTransactionResponse](../../pkg/models/operations/gettransactionresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 400-600            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## List
 
@@ -154,4 +154,4 @@ func main() {
 **[*operations.ListTransactionsResponse](../../pkg/models/operations/listtransactionsresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 400-600            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |

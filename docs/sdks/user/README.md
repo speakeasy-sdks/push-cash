@@ -68,7 +68,7 @@ func main() {
 **[*operations.CreateUserResponse](../../pkg/models/operations/createuserresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 400-600            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## GetUser
 
@@ -119,7 +119,7 @@ func main() {
 **[*operations.GetUserResponse](../../pkg/models/operations/getuserresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 400-600            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## List
 
@@ -168,7 +168,7 @@ func main() {
 **[*operations.ListUsersResponse](../../pkg/models/operations/listusersresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 400-600            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## UpdateUser
 
@@ -222,4 +222,4 @@ func main() {
 **[*operations.UpdateUserResponse](../../pkg/models/operations/updateuserresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 400-600            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
