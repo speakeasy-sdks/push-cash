@@ -7,41 +7,41 @@ import (
 	"fmt"
 )
 
-// KYCMethod - The KYC provider
-type KYCMethod string
+// Method - The KYC provider
+type Method string
 
 const (
-	KYCMethodAlloy KYCMethod = "alloy"
+	MethodAlloy Method = "alloy"
 )
 
-func (e KYCMethod) ToPointer() *KYCMethod {
+func (e Method) ToPointer() *Method {
 	return &e
 }
 
-func (e *KYCMethod) UnmarshalJSON(data []byte) error {
+func (e *Method) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
 	}
 	switch v {
 	case "alloy":
-		*e = KYCMethod(v)
+		*e = Method(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for KYCMethod: %v", v)
+		return fmt.Errorf("invalid value for Method: %v", v)
 	}
 }
 
 type Kyc struct {
 	// The KYC provider
-	Method KYCMethod `json:"method"`
+	Method Method `json:"method"`
 	// the token representing the user entity at your KYC provider
 	Token string `json:"token"`
 }
 
-func (o *Kyc) GetMethod() KYCMethod {
+func (o *Kyc) GetMethod() Method {
 	if o == nil {
-		return KYCMethod("")
+		return Method("")
 	}
 	return o.Method
 }

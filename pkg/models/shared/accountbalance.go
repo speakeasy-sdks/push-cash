@@ -2,7 +2,6 @@
 
 package shared
 
-// AccountBalance - Account balance retrieved successfully
 type AccountBalance struct {
 	// Funds that are available to be transferred to your primary business checking account,
 	// or used to fund your users “cash-out” transactions.

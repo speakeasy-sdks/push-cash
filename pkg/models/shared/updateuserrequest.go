@@ -7,18 +7,18 @@ import (
 	"fmt"
 )
 
-type UpdateUserRequestStatus string
+type Status string
 
 const (
-	UpdateUserRequestStatusActive    UpdateUserRequestStatus = "active"
-	UpdateUserRequestStatusSuspended UpdateUserRequestStatus = "suspended"
+	StatusActive    Status = "active"
+	StatusSuspended Status = "suspended"
 )
 
-func (e UpdateUserRequestStatus) ToPointer() *UpdateUserRequestStatus {
+func (e Status) ToPointer() *Status {
 	return &e
 }
 
-func (e *UpdateUserRequestStatus) UnmarshalJSON(data []byte) error {
+func (e *Status) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
@@ -27,20 +27,20 @@ func (e *UpdateUserRequestStatus) UnmarshalJSON(data []byte) error {
 	case "active":
 		fallthrough
 	case "suspended":
-		*e = UpdateUserRequestStatus(v)
+		*e = Status(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for UpdateUserRequestStatus: %v", v)
+		return fmt.Errorf("invalid value for Status: %v", v)
 	}
 }
 
 type UpdateUserRequest struct {
-	Status UpdateUserRequestStatus `json:"status"`
+	Status Status `json:"status"`
 }
 
-func (o *UpdateUserRequest) GetStatus() UpdateUserRequestStatus {
+func (o *UpdateUserRequest) GetStatus() Status {
 	if o == nil {
-		return UpdateUserRequestStatus("")
+		return Status("")
 	}
 	return o.Status
 }

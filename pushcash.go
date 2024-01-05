@@ -3,17 +3,18 @@
 package pushcash
 
 import (
+	"context"
 	"fmt"
 	"net/http"
-	"push-cash/pkg/models/shared"
-	"push-cash/pkg/utils"
+	"push-cash/v2/pkg/models/shared"
+	"push-cash/v2/pkg/utils"
 	"time"
 )
 
 const (
-	// ServerProd - Production API
+	// Production API
 	ServerProd string = "prod"
-	// ServerSandbox - Sandbox API used for developing an integration with Push
+	// Sandbox API used for developing an integration with Push
 	ServerSandbox string = "sandbox"
 )
 
@@ -49,13 +50,15 @@ func Float64(f float64) *float64 { return &f }
 type sdkConfiguration struct {
 	DefaultClient     HTTPClient
 	SecurityClient    HTTPClient
-	Security          *shared.Security
+	Security          func(context.Context) (interface{}, error)
 	ServerURL         string
 	Server            string
 	Language          string
 	OpenAPIDocVersion string
 	SDKVersion        string
 	GenVersion        string
+	UserAgent         string
+	RetryConfig       *utils.RetryConfig
 }
 
 func (c *sdkConfiguration) GetServerDetails() (string, map[string]string) {
@@ -70,13 +73,12 @@ func (c *sdkConfiguration) GetServerDetails() (string, map[string]string) {
 	return ServerList[c.Server], nil
 }
 
-// PushCash
 type PushCash struct {
-	Balance  *balance
-	Events   *events
-	Intent   *intent
-	Transfer *transfer
-	User     *user
+	Balance  *Balance
+	Events   *Events
+	Intent   *Intent
+	Transfer *Transfer
+	User     *User
 
 	sdkConfiguration sdkConfiguration
 }
@@ -120,10 +122,23 @@ func WithClient(client HTTPClient) SDKOption {
 	}
 }
 
+func withSecurity(security interface{}) func(context.Context) (interface{}, error) {
+	return func(context.Context) (interface{}, error) {
+		return &security, nil
+	}
+}
+
 // WithSecurity configures the SDK to use the provided security details
-func WithSecurity(security shared.Security) SDKOption {
+func WithSecurity(bearer string) SDKOption {
 	return func(sdk *PushCash) {
-		sdk.sdkConfiguration.Security = &security
+		security := shared.Security{Bearer: bearer}
+		sdk.sdkConfiguration.Security = withSecurity(&security)
+	}
+}
+
+func WithRetryConfig(retryConfig utils.RetryConfig) SDKOption {
+	return func(sdk *PushCash) {
+		sdk.sdkConfiguration.RetryConfig = &retryConfig
 	}
 }
 
@@ -133,8 +148,9 @@ func New(opts ...SDKOption) *PushCash {
 		sdkConfiguration: sdkConfiguration{
 			Language:          "go",
 			OpenAPIDocVersion: "0.0.1",
-			SDKVersion:        "1.1.0",
-			GenVersion:        "2.73.0",
+			SDKVersion:        "2.1.1",
+			GenVersion:        "2.225.2",
+			UserAgent:         "speakeasy-sdk/go 2.1.1 2.225.2 0.0.1 push-cash",
 		},
 	}
 	for _, opt := range opts {
