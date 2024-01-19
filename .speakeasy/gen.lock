@@ -4,9 +4,9 @@ management:
   docChecksum: 652c7395dce528446ba648c0ecb47796
   docVersion: 0.0.1
   speakeasyVersion: internal
-  generationVersion: 2.234.3
-  releaseVersion: 2.1.2
-  configChecksum: 5be6f30ae93cf858f58e60f1eacc1f9a
+  generationVersion: 2.237.2
+  releaseVersion: 2.1.3
+  configChecksum: c81ed1f4b353e1356c55baa5d968220b
   repoURL: https://github.com/speakeasy-sdks/push-cash.git
   repoSubDirectory: .
   installationURL: https://github.com/speakeasy-sdks/push-cash
@@ -14,7 +14,7 @@ management:
 features:
   go:
     core: 3.3.1
-    globalSecurity: 2.82.3
+    globalSecurity: 2.82.4
     globalServerURLs: 2.82.1
     nameOverrides: 2.81.1
     serverIDs: 2.81.1
@@ -27,7 +27,6 @@ generatedFiles:
   - pushcash.go
   - go.mod
   - go.sum
-  - tests/helpers.go
   - pkg/models/sdkerrors/sdkerror.go
   - pkg/types/bigint.go
   - pkg/types/date.go
