@@ -8,10 +8,10 @@ import (
 	"fmt"
 	"io"
 	"net/http"
-	"push-cash/v2/pkg/models/operations"
-	"push-cash/v2/pkg/models/sdkerrors"
-	"push-cash/v2/pkg/models/shared"
-	"push-cash/v2/pkg/utils"
+	"push-cash/v3/pkg/models/operations"
+	"push-cash/v3/pkg/models/sdkerrors"
+	"push-cash/v3/pkg/models/shared"
+	"push-cash/v3/pkg/utils"
 	"strings"
 )
 

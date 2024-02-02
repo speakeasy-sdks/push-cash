@@ -5,8 +5,8 @@ package main
 import (
 	"context"
 	"log"
-	pushcash "push-cash/v2"
-	"push-cash/v2/pkg/models/shared"
+	pushcash "push-cash/v3"
+	"push-cash/v3/pkg/models/shared"
 )
 
 func main() {

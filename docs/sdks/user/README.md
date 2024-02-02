@@ -18,10 +18,10 @@ Create new Push users
 package main
 
 import(
-	"push-cash/v2/pkg/models/shared"
-	pushcash "push-cash/v2"
+	"push-cash/v3/pkg/models/shared"
+	pushcash "push-cash/v3"
 	"context"
-	"push-cash/v2/pkg/models/operations"
+	"push-cash/v3/pkg/models/operations"
 	"log"
 )
 
@@ -80,10 +80,10 @@ Retrieve a user by ID
 package main
 
 import(
-	"push-cash/v2/pkg/models/shared"
-	pushcash "push-cash/v2"
+	"push-cash/v3/pkg/models/shared"
+	pushcash "push-cash/v3"
 	"context"
-	"push-cash/v2/pkg/models/operations"
+	"push-cash/v3/pkg/models/operations"
 	"log"
 )
 
@@ -131,10 +131,10 @@ Retrieves a list of users
 package main
 
 import(
-	"push-cash/v2/pkg/models/shared"
-	pushcash "push-cash/v2"
+	"push-cash/v3/pkg/models/shared"
+	pushcash "push-cash/v3"
 	"context"
-	"push-cash/v2/pkg/models/operations"
+	"push-cash/v3/pkg/models/operations"
 	"log"
 )
 
@@ -180,10 +180,10 @@ Updates a user's status to either active or suspended
 package main
 
 import(
-	"push-cash/v2/pkg/models/shared"
-	pushcash "push-cash/v2"
+	"push-cash/v3/pkg/models/shared"
+	pushcash "push-cash/v3"
 	"context"
-	"push-cash/v2/pkg/models/operations"
+	"push-cash/v3/pkg/models/operations"
 	"log"
 )
 

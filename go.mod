@@ -1,4 +1,4 @@
-module push-cash/v2
+module push-cash/v3
 
 go 1.20
 

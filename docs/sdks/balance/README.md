@@ -17,8 +17,8 @@ View Push Account balance
 package main
 
 import(
-	"push-cash/v2/pkg/models/shared"
-	pushcash "push-cash/v2"
+	"push-cash/v3/pkg/models/shared"
+	pushcash "push-cash/v3"
 	"context"
 	"log"
 )
@@ -64,10 +64,10 @@ Retrieves a specific transaction by its ID.
 package main
 
 import(
-	"push-cash/v2/pkg/models/shared"
-	pushcash "push-cash/v2"
+	"push-cash/v3/pkg/models/shared"
+	pushcash "push-cash/v3"
 	"context"
-	"push-cash/v2/pkg/models/operations"
+	"push-cash/v3/pkg/models/operations"
 	"log"
 )
 
@@ -115,10 +115,10 @@ Retrieves a list of transactions
 package main
 
 import(
-	"push-cash/v2/pkg/models/shared"
-	pushcash "push-cash/v2"
+	"push-cash/v3/pkg/models/shared"
+	pushcash "push-cash/v3"
 	"context"
-	"push-cash/v2/pkg/models/operations"
+	"push-cash/v3/pkg/models/operations"
 	"log"
 )
 

@@ -16,10 +16,10 @@ Retrieves a specific event by its ID.
 package main
 
 import(
-	"push-cash/v2/pkg/models/shared"
-	pushcash "push-cash/v2"
+	"push-cash/v3/pkg/models/shared"
+	pushcash "push-cash/v3"
 	"context"
-	"push-cash/v2/pkg/models/operations"
+	"push-cash/v3/pkg/models/operations"
 	"log"
 )
 
@@ -67,10 +67,10 @@ Retrieves a list of events.
 package main
 
 import(
-	"push-cash/v2/pkg/models/shared"
-	pushcash "push-cash/v2"
+	"push-cash/v3/pkg/models/shared"
+	pushcash "push-cash/v3"
 	"context"
-	"push-cash/v2/pkg/models/operations"
+	"push-cash/v3/pkg/models/operations"
 	"log"
 )
 

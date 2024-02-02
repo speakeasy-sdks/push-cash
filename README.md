@@ -26,8 +26,8 @@ package main
 import (
 	"context"
 	"log"
-	pushcash "push-cash/v2"
-	"push-cash/v2/pkg/models/shared"
+	pushcash "push-cash/v3"
+	"push-cash/v3/pkg/models/shared"
 )
 
 func main() {
@@ -106,9 +106,9 @@ import (
 	"context"
 	"errors"
 	"log"
-	pushcash "push-cash/v2"
-	"push-cash/v2/pkg/models/sdkerrors"
-	"push-cash/v2/pkg/models/shared"
+	pushcash "push-cash/v3"
+	"push-cash/v3/pkg/models/sdkerrors"
+	"push-cash/v3/pkg/models/shared"
 )
 
 func main() {
@@ -153,8 +153,8 @@ package main
 import (
 	"context"
 	"log"
-	pushcash "push-cash/v2"
-	"push-cash/v2/pkg/models/shared"
+	pushcash "push-cash/v3"
+	"push-cash/v3/pkg/models/shared"
 )
 
 func main() {
@@ -186,8 +186,8 @@ package main
 import (
 	"context"
 	"log"
-	pushcash "push-cash/v2"
-	"push-cash/v2/pkg/models/shared"
+	pushcash "push-cash/v3"
+	"push-cash/v3/pkg/models/shared"
 )
 
 func main() {
@@ -289,7 +289,7 @@ package main
 import (
 	"context"
 	"log"
-	pushcash "push-cash/v2"
+	pushcash "push-cash/v3"
 )
 
 func main() {
