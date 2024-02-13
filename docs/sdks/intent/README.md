@@ -84,10 +84,10 @@ func main() {
     ctx := context.Background()
     res, err := s.Intent.CreateIntent(ctx, operations.CreateIntentRequest{
         CreateIntentRequest: &shared.CreateIntentRequest{
-            Amount: 135934,
+            Amount: 1450,
             Currency: shared.CurrencyUsd,
-            Direction: shared.DirectionCashOut,
-            UserID: "string",
+            Direction: shared.DirectionCashIn,
+            UserID: "user_28CJjV7P4Go5PNJvfzghiD",
         },
         XIdempotencyKey: "f1bbb856-fb17-11ed-be56-0242ac120002",
     })
@@ -192,9 +192,6 @@ func main() {
     ctx := context.Background()
     res, err := s.Intent.List(ctx, operations.ListIntentsRequest{
         Cursor: pushcash.String("vjl8vk3l4o8dhsjlzh=="),
-        Status: []shared.IntentStatus{
-            shared.IntentStatusProcessed,
-        },
     })
     if err != nil {
         log.Fatal(err)

@@ -33,15 +33,15 @@ func main() {
     ctx := context.Background()
     res, err := s.User.CreateUser(ctx, operations.CreateUserRequest{
         CreateUserRequest: shared.CreateUserRequest{
-            Address: "4290 Kutch Courts",
-            Email: "Americo26@gmail.com",
+            Address: "1609 10th Ave, Bodega Bay, CA 94923",
+            Email: "alfred@imdb.com",
             Kyc: shared.Kyc{
                 Method: shared.MethodAlloy,
-                Token: "string",
+                Token: "vjl257dsdko48ch38",
             },
-            Name: "string",
-            Phone: "1-801-391-5854 x37232",
-            Tag: "string",
+            Name: "Alfred Hitchcock",
+            Phone: "(555) 681-3485",
+            Tag: "dlsjleurvlkrweru",
         },
         XIdempotencyKey: "f1bbb856-fb17-11ed-be56-0242ac120002",
     })
@@ -195,7 +195,7 @@ func main() {
     ctx := context.Background()
     res, err := s.User.UpdateUser(ctx, operations.UpdateUserRequest{
         UpdateUserRequest: &shared.UpdateUserRequest{
-            Status: shared.StatusActive,
+            Status: shared.StatusSuspended,
         },
         ID: "user_28CJjV7P4Go5PNJvfzghiD",
     })

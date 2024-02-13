@@ -4,9 +4,9 @@ management:
   docChecksum: 652c7395dce528446ba648c0ecb47796
   docVersion: 0.0.1
   speakeasyVersion: internal
-  generationVersion: 2.250.2
-  releaseVersion: 3.0.1
-  configChecksum: e4a78b51e295731667a12dfd2ca93399
+  generationVersion: 2.253.0
+  releaseVersion: 3.0.2
+  configChecksum: 0f52133a55b2d6f9c064443683f43c73
   repoURL: https://github.com/speakeasy-sdks/push-cash.git
   repoSubDirectory: .
   installationURL: https://github.com/speakeasy-sdks/push-cash

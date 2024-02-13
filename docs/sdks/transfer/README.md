@@ -32,9 +32,9 @@ func main() {
     ctx := context.Background()
     res, err := s.Transfer.CreateTransfer(ctx, operations.CreateTransferRequest{
         CreateTransferRequest: &shared.CreateTransferRequest{
-            Amount: 759686,
+            Amount: 500000,
             Currency: shared.CurrencyUsd,
-            Direction: shared.DirectionCashIn,
+            Direction: shared.DirectionCashOut,
         },
         XIdempotencyKey: "f1bbb856-fb17-11ed-be56-0242ac120002",
     })
@@ -139,9 +139,6 @@ func main() {
     ctx := context.Background()
     res, err := s.Transfer.List(ctx, operations.ListTransfersRequest{
         Cursor: pushcash.String("vjl8vk3l4o8dhsjlzh=="),
-        Status: []shared.TransferStatus{
-            shared.TransferStatusFailed,
-        },
     })
     if err != nil {
         log.Fatal(err)
