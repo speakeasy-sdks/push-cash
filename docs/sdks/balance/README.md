@@ -78,7 +78,7 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Balance.GetTransaction(ctx, operations.GetTransactionRequest{
-        ID: "<ID>",
+        ID: "<id>",
     })
     if err != nil {
         log.Fatal(err)

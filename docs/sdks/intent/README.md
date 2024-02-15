@@ -32,7 +32,7 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Intent.CancelIntent(ctx, operations.CancelIntentRequest{
-        ID: "<ID>",
+        ID: "<id>",
     })
     if err != nil {
         log.Fatal(err)
@@ -140,7 +140,7 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Intent.GetIntent(ctx, operations.GetIntentRequest{
-        ID: "<ID>",
+        ID: "<id>",
     })
     if err != nil {
         log.Fatal(err)

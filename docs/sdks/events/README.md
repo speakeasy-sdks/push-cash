@@ -30,7 +30,7 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Events.GetEvent(ctx, operations.GetEventRequest{
-        ID: "<ID>",
+        ID: "<id>",
     })
     if err != nil {
         log.Fatal(err)

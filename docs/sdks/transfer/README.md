@@ -87,7 +87,7 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Transfer.GetTransfer(ctx, operations.GetTransferRequest{
-        ID: "<ID>",
+        ID: "<id>",
     })
     if err != nil {
         log.Fatal(err)
