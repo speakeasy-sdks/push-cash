@@ -159,9 +159,9 @@ func New(opts ...SDKOption) *PushCash {
 		sdkConfiguration: sdkConfiguration{
 			Language:          "go",
 			OpenAPIDocVersion: "0.0.1",
-			SDKVersion:        "3.1.2",
-			GenVersion:        "2.272.4",
-			UserAgent:         "speakeasy-sdk/go 3.1.2 2.272.4 0.0.1 push-cash",
+			SDKVersion:        "3.1.3",
+			GenVersion:        "2.272.7",
+			UserAgent:         "speakeasy-sdk/go 3.1.3 2.272.7 0.0.1 push-cash",
 			Hooks:             hooks.New(),
 		},
 	}
