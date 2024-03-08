@@ -49,8 +49,7 @@ func Float32(f float32) *float32 { return &f }
 func Float64(f float64) *float64 { return &f }
 
 type sdkConfiguration struct {
-	DefaultClient     HTTPClient
-	SecurityClient    HTTPClient
+	Client            HTTPClient
 	Security          func(context.Context) (interface{}, error)
 	ServerURL         string
 	Server            string
@@ -120,7 +119,7 @@ func WithServer(server string) SDKOption {
 // WithClient allows the overriding of the default HTTP client used by the SDK
 func WithClient(client HTTPClient) SDKOption {
 	return func(sdk *PushCash) {
-		sdk.sdkConfiguration.DefaultClient = client
+		sdk.sdkConfiguration.Client = client
 	}
 }
 
@@ -159,9 +158,9 @@ func New(opts ...SDKOption) *PushCash {
 		sdkConfiguration: sdkConfiguration{
 			Language:          "go",
 			OpenAPIDocVersion: "0.0.1",
-			SDKVersion:        "3.1.3",
-			GenVersion:        "2.272.7",
-			UserAgent:         "speakeasy-sdk/go 3.1.3 2.272.7 0.0.1 push-cash",
+			SDKVersion:        "3.2.0",
+			GenVersion:        "2.279.1",
+			UserAgent:         "speakeasy-sdk/go 3.2.0 2.279.1 0.0.1 push-cash",
 			Hooks:             hooks.New(),
 		},
 	}
@@ -170,23 +169,15 @@ func New(opts ...SDKOption) *PushCash {
 	}
 
 	// Use WithClient to override the default client if you would like to customize the timeout
-	if sdk.sdkConfiguration.DefaultClient == nil {
-		sdk.sdkConfiguration.DefaultClient = &http.Client{Timeout: 60 * time.Second}
+	if sdk.sdkConfiguration.Client == nil {
+		sdk.sdkConfiguration.Client = &http.Client{Timeout: 60 * time.Second}
 	}
 
 	currentServerURL, _ := sdk.sdkConfiguration.GetServerDetails()
 	serverURL := currentServerURL
-	serverURL, sdk.sdkConfiguration.DefaultClient = sdk.sdkConfiguration.Hooks.SDKInit(currentServerURL, sdk.sdkConfiguration.DefaultClient)
+	serverURL, sdk.sdkConfiguration.Client = sdk.sdkConfiguration.Hooks.SDKInit(currentServerURL, sdk.sdkConfiguration.Client)
 	if serverURL != currentServerURL {
 		sdk.sdkConfiguration.ServerURL = serverURL
-	}
-
-	if sdk.sdkConfiguration.SecurityClient == nil {
-		if sdk.sdkConfiguration.Security != nil {
-			sdk.sdkConfiguration.SecurityClient = utils.ConfigureSecurityClient(sdk.sdkConfiguration.DefaultClient, sdk.sdkConfiguration.Security)
-		} else {
-			sdk.sdkConfiguration.SecurityClient = sdk.sdkConfiguration.DefaultClient
-		}
 	}
 
 	sdk.Balance = newBalance(sdk.sdkConfiguration)
