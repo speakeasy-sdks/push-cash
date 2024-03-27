@@ -7,7 +7,7 @@ import (
 	"fmt"
 )
 
-// Currency - Currency associated with the amount
+// Currency associated with the amount
 type Currency string
 
 const (

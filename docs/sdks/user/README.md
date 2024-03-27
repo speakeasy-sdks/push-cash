@@ -1,4 +1,5 @@
 # User
+(*User*)
 
 ### Available Operations
 
@@ -17,39 +18,36 @@ Create new Push users
 package main
 
 import(
+	"push-cash/v3/pkg/models/shared"
+	pushcash "push-cash/v3"
 	"context"
+	"push-cash/v3/pkg/models/operations"
 	"log"
-	"push-cash"
-	"push-cash/pkg/models/shared"
-	"push-cash/pkg/models/operations"
 )
 
 func main() {
     s := pushcash.New(
-        pushcash.WithSecurity(shared.Security{
-            Bearer: "",
-        }),
+        pushcash.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
     )
 
     ctx := context.Background()
     res, err := s.User.CreateUser(ctx, operations.CreateUserRequest{
         CreateUserRequest: shared.CreateUserRequest{
-            Address: "822 Grant Oval",
-            Email: "Aiyana.Cummerata0@yahoo.com",
+            Address: "1609 10th Ave, Bodega Bay, CA 94923",
+            Email: "alfred@imdb.com",
             Kyc: shared.Kyc{
-                Method: shared.KYCMethodAlloy,
-                Token: "fugit",
+                Method: shared.MethodAlloy,
+                Token: "vjl257dsdko48ch38",
             },
-            Name: "Marshall Glover",
-            Phone: "942-853-5856 x289",
-            Tag: "dolorum",
+            Name: "Alfred Hitchcock",
+            Phone: "(555) 681-3485",
+            Tag: "dlsjleurvlkrweru",
         },
         XIdempotencyKey: "f1bbb856-fb17-11ed-be56-0242ac120002",
     })
     if err != nil {
         log.Fatal(err)
     }
-
     if res.User != nil {
         // handle response
     }
@@ -58,16 +56,18 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                    | Type                                                                         | Required                                                                     | Description                                                                  |
-| ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
-| `ctx`                                                                        | [context.Context](https://pkg.go.dev/context#Context)                        | :heavy_check_mark:                                                           | The context to use for the request.                                          |
-| `request`                                                                    | [operations.CreateUserRequest](../../models/operations/createuserrequest.md) | :heavy_check_mark:                                                           | The request object to use for the request.                                   |
+| Parameter                                                                        | Type                                                                             | Required                                                                         | Description                                                                      |
+| -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| `ctx`                                                                            | [context.Context](https://pkg.go.dev/context#Context)                            | :heavy_check_mark:                                                               | The context to use for the request.                                              |
+| `request`                                                                        | [operations.CreateUserRequest](../../pkg/models/operations/createuserrequest.md) | :heavy_check_mark:                                                               | The request object to use for the request.                                       |
 
 
 ### Response
 
-**[*operations.CreateUserResponse](../../models/operations/createuserresponse.md), error**
-
+**[*operations.CreateUserResponse](../../pkg/models/operations/createuserresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## GetUser
 
@@ -79,18 +79,16 @@ Retrieve a user by ID
 package main
 
 import(
+	"push-cash/v3/pkg/models/shared"
+	pushcash "push-cash/v3"
 	"context"
+	"push-cash/v3/pkg/models/operations"
 	"log"
-	"push-cash"
-	"push-cash/pkg/models/shared"
-	"push-cash/pkg/models/operations"
 )
 
 func main() {
     s := pushcash.New(
-        pushcash.WithSecurity(shared.Security{
-            Bearer: "",
-        }),
+        pushcash.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
     )
 
     ctx := context.Background()
@@ -100,7 +98,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.User != nil {
         // handle response
     }
@@ -109,16 +106,18 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                              | Type                                                                   | Required                                                               | Description                                                            |
-| ---------------------------------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------- |
-| `ctx`                                                                  | [context.Context](https://pkg.go.dev/context#Context)                  | :heavy_check_mark:                                                     | The context to use for the request.                                    |
-| `request`                                                              | [operations.GetUserRequest](../../models/operations/getuserrequest.md) | :heavy_check_mark:                                                     | The request object to use for the request.                             |
+| Parameter                                                                  | Type                                                                       | Required                                                                   | Description                                                                |
+| -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
+| `ctx`                                                                      | [context.Context](https://pkg.go.dev/context#Context)                      | :heavy_check_mark:                                                         | The context to use for the request.                                        |
+| `request`                                                                  | [operations.GetUserRequest](../../pkg/models/operations/getuserrequest.md) | :heavy_check_mark:                                                         | The request object to use for the request.                                 |
 
 
 ### Response
 
-**[*operations.GetUserResponse](../../models/operations/getuserresponse.md), error**
-
+**[*operations.GetUserResponse](../../pkg/models/operations/getuserresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## List
 
@@ -130,31 +129,24 @@ Retrieves a list of users
 package main
 
 import(
+	"push-cash/v3/pkg/models/shared"
+	pushcash "push-cash/v3"
 	"context"
+	"push-cash/v3/pkg/models/operations"
 	"log"
-	"push-cash"
-	"push-cash/pkg/models/shared"
-	"push-cash/pkg/models/operations"
-	"push-cash/pkg/types"
 )
 
 func main() {
     s := pushcash.New(
-        pushcash.WithSecurity(shared.Security{
-            Bearer: "",
-        }),
+        pushcash.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
     )
 
     ctx := context.Background()
-    res, err := s.User.List(ctx, operations.ListUsersRequest{
-        CreatedAtAfter: types.MustTimeFromString("2022-07-21T01:01:39.776Z"),
-        CreatedAtBefore: types.MustTimeFromString("2020-01-25T11:09:22.009Z"),
-    })
+    res, err := s.User.List(ctx, operations.ListUsersRequest{})
     if err != nil {
         log.Fatal(err)
     }
-
-    if res.ListUsers200ApplicationJSONObject != nil {
+    if res.Object != nil {
         // handle response
     }
 }
@@ -162,16 +154,18 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                  | Type                                                                       | Required                                                                   | Description                                                                |
-| -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
-| `ctx`                                                                      | [context.Context](https://pkg.go.dev/context#Context)                      | :heavy_check_mark:                                                         | The context to use for the request.                                        |
-| `request`                                                                  | [operations.ListUsersRequest](../../models/operations/listusersrequest.md) | :heavy_check_mark:                                                         | The request object to use for the request.                                 |
+| Parameter                                                                      | Type                                                                           | Required                                                                       | Description                                                                    |
+| ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ |
+| `ctx`                                                                          | [context.Context](https://pkg.go.dev/context#Context)                          | :heavy_check_mark:                                                             | The context to use for the request.                                            |
+| `request`                                                                      | [operations.ListUsersRequest](../../pkg/models/operations/listusersrequest.md) | :heavy_check_mark:                                                             | The request object to use for the request.                                     |
 
 
 ### Response
 
-**[*operations.ListUsersResponse](../../models/operations/listusersresponse.md), error**
-
+**[*operations.ListUsersResponse](../../pkg/models/operations/listusersresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## UpdateUser
 
@@ -183,31 +177,28 @@ Updates a user's status to either active or suspended
 package main
 
 import(
+	"push-cash/v3/pkg/models/shared"
+	pushcash "push-cash/v3"
 	"context"
+	"push-cash/v3/pkg/models/operations"
 	"log"
-	"push-cash"
-	"push-cash/pkg/models/shared"
-	"push-cash/pkg/models/operations"
 )
 
 func main() {
     s := pushcash.New(
-        pushcash.WithSecurity(shared.Security{
-            Bearer: "",
-        }),
+        pushcash.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
     )
 
     ctx := context.Background()
     res, err := s.User.UpdateUser(ctx, operations.UpdateUserRequest{
         UpdateUserRequest: &shared.UpdateUserRequest{
-            Status: shared.UpdateUserRequestStatusSuspended,
+            Status: shared.StatusSuspended,
         },
         ID: "user_28CJjV7P4Go5PNJvfzghiD",
     })
     if err != nil {
         log.Fatal(err)
     }
-
     if res.User != nil {
         // handle response
     }
@@ -216,13 +207,15 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                    | Type                                                                         | Required                                                                     | Description                                                                  |
-| ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
-| `ctx`                                                                        | [context.Context](https://pkg.go.dev/context#Context)                        | :heavy_check_mark:                                                           | The context to use for the request.                                          |
-| `request`                                                                    | [operations.UpdateUserRequest](../../models/operations/updateuserrequest.md) | :heavy_check_mark:                                                           | The request object to use for the request.                                   |
+| Parameter                                                                        | Type                                                                             | Required                                                                         | Description                                                                      |
+| -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| `ctx`                                                                            | [context.Context](https://pkg.go.dev/context#Context)                            | :heavy_check_mark:                                                               | The context to use for the request.                                              |
+| `request`                                                                        | [operations.UpdateUserRequest](../../pkg/models/operations/updateuserrequest.md) | :heavy_check_mark:                                                               | The request object to use for the request.                                       |
 
 
 ### Response
 
-**[*operations.UpdateUserResponse](../../models/operations/updateuserresponse.md), error**
-
+**[*operations.UpdateUserResponse](../../pkg/models/operations/updateuserresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |

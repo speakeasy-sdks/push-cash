@@ -4,7 +4,8 @@ package operations
 
 import (
 	"net/http"
-	"push-cash/pkg/models/shared"
+	"push-cash/v3/pkg/models/shared"
+	"push-cash/v3/pkg/utils"
 	"time"
 )
 
@@ -17,6 +18,17 @@ type ListIntentsRequest struct {
 	Cursor *string `queryParam:"style=form,explode=true,name=cursor"`
 	// filter intents by status, can provide multiple values
 	Status []shared.IntentStatus `queryParam:"style=form,explode=true,name=status"`
+}
+
+func (l ListIntentsRequest) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(l, "", false)
+}
+
+func (l *ListIntentsRequest) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &l, "", false, false); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (o *ListIntentsRequest) GetCreatedAtAfter() *time.Time {
@@ -47,22 +59,22 @@ func (o *ListIntentsRequest) GetStatus() []shared.IntentStatus {
 	return o.Status
 }
 
-// ListIntents200ApplicationJSON - successful operation
-type ListIntents200ApplicationJSON struct {
+// ListIntentsResponseBody - successful operation
+type ListIntentsResponseBody struct {
 	Data []shared.Intent `json:"data"`
 	// Use cursor for paginating list endpoints in conjunction with the cursor request parameter.
 	//
 	NextCursor string `json:"next_cursor"`
 }
 
-func (o *ListIntents200ApplicationJSON) GetData() []shared.Intent {
+func (o *ListIntentsResponseBody) GetData() []shared.Intent {
 	if o == nil {
 		return []shared.Intent{}
 	}
 	return o.Data
 }
 
-func (o *ListIntents200ApplicationJSON) GetNextCursor() string {
+func (o *ListIntentsResponseBody) GetNextCursor() string {
 	if o == nil {
 		return ""
 	}
@@ -70,13 +82,16 @@ func (o *ListIntents200ApplicationJSON) GetNextCursor() string {
 }
 
 type ListIntentsResponse struct {
+	// HTTP response content type for this operation
 	ContentType string
-	StatusCode  int
+	// HTTP response status code for this operation
+	StatusCode int
+	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
 	// Error
 	Error *shared.Error
 	// successful operation
-	ListIntents200ApplicationJSONObject *ListIntents200ApplicationJSON
+	Object *ListIntentsResponseBody
 }
 
 func (o *ListIntentsResponse) GetContentType() string {
@@ -107,9 +122,9 @@ func (o *ListIntentsResponse) GetError() *shared.Error {
 	return o.Error
 }
 
-func (o *ListIntentsResponse) GetListIntents200ApplicationJSONObject() *ListIntents200ApplicationJSON {
+func (o *ListIntentsResponse) GetObject() *ListIntentsResponseBody {
 	if o == nil {
 		return nil
 	}
-	return o.ListIntents200ApplicationJSONObject
+	return o.Object
 }

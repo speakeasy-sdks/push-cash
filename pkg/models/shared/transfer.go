@@ -3,10 +3,10 @@
 package shared
 
 import (
-	"push-cash/pkg/types"
+	"push-cash/v3/pkg/types"
+	"push-cash/v3/pkg/utils"
 )
 
-// Transfer - Successful operation
 type Transfer struct {
 	// Amount of the transfer
 	Amount int64 `json:"amount"`
@@ -19,6 +19,17 @@ type Transfer struct {
 	// The unique identifier assigned by Push, prefix is "transfer_"
 	ID     string         `json:"id"`
 	Status TransferStatus `json:"status"`
+}
+
+func (t Transfer) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(t, "", false)
+}
+
+func (t *Transfer) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &t, "", false, false); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (o *Transfer) GetAmount() int64 {

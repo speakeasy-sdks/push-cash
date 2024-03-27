@@ -4,15 +4,18 @@ package operations
 
 import (
 	"net/http"
-	"push-cash/pkg/models/shared"
+	"push-cash/v3/pkg/models/shared"
 )
 
 type GetBalanceResponse struct {
 	// Account balance retrieved successfully
 	AccountBalance *shared.AccountBalance
-	ContentType    string
-	StatusCode     int
-	RawResponse    *http.Response
+	// HTTP response content type for this operation
+	ContentType string
+	// HTTP response status code for this operation
+	StatusCode int
+	// Raw HTTP response; suitable for custom response parsing
+	RawResponse *http.Response
 	// Error
 	Error *shared.Error
 }

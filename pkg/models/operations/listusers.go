@@ -4,7 +4,8 @@ package operations
 
 import (
 	"net/http"
-	"push-cash/pkg/models/shared"
+	"push-cash/v3/pkg/models/shared"
+	"push-cash/v3/pkg/utils"
 	"time"
 )
 
@@ -13,6 +14,17 @@ type ListUsersRequest struct {
 	CreatedAtAfter *time.Time `queryParam:"style=form,explode=true,name=created_at.after"`
 	// Return users created before this [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) timestamp.
 	CreatedAtBefore *time.Time `queryParam:"style=form,explode=true,name=created_at.before"`
+}
+
+func (l ListUsersRequest) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(l, "", false)
+}
+
+func (l *ListUsersRequest) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &l, "", false, false); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (o *ListUsersRequest) GetCreatedAtAfter() *time.Time {
@@ -29,22 +41,22 @@ func (o *ListUsersRequest) GetCreatedAtBefore() *time.Time {
 	return o.CreatedAtBefore
 }
 
-// ListUsers200ApplicationJSON - successful operation
-type ListUsers200ApplicationJSON struct {
+// ListUsersResponseBody - successful operation
+type ListUsersResponseBody struct {
 	Data []shared.User `json:"data"`
 	// Use cursor for paginating list endpoints in conjunction with the cursor request parameter.
 	//
 	NextCursor string `json:"next_cursor"`
 }
 
-func (o *ListUsers200ApplicationJSON) GetData() []shared.User {
+func (o *ListUsersResponseBody) GetData() []shared.User {
 	if o == nil {
 		return []shared.User{}
 	}
 	return o.Data
 }
 
-func (o *ListUsers200ApplicationJSON) GetNextCursor() string {
+func (o *ListUsersResponseBody) GetNextCursor() string {
 	if o == nil {
 		return ""
 	}
@@ -52,13 +64,16 @@ func (o *ListUsers200ApplicationJSON) GetNextCursor() string {
 }
 
 type ListUsersResponse struct {
+	// HTTP response content type for this operation
 	ContentType string
-	StatusCode  int
+	// HTTP response status code for this operation
+	StatusCode int
+	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
 	// Error
 	Error *shared.Error
 	// successful operation
-	ListUsers200ApplicationJSONObject *ListUsers200ApplicationJSON
+	Object *ListUsersResponseBody
 }
 
 func (o *ListUsersResponse) GetContentType() string {
@@ -89,9 +104,9 @@ func (o *ListUsersResponse) GetError() *shared.Error {
 	return o.Error
 }
 
-func (o *ListUsersResponse) GetListUsers200ApplicationJSONObject() *ListUsers200ApplicationJSON {
+func (o *ListUsersResponse) GetObject() *ListUsersResponseBody {
 	if o == nil {
 		return nil
 	}
-	return o.ListUsers200ApplicationJSONObject
+	return o.Object
 }

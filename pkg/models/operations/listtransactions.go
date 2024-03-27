@@ -4,7 +4,8 @@ package operations
 
 import (
 	"net/http"
-	"push-cash/pkg/models/shared"
+	"push-cash/v3/pkg/models/shared"
+	"push-cash/v3/pkg/utils"
 	"time"
 )
 
@@ -17,6 +18,17 @@ type ListTransactionsRequest struct {
 	Cursor *string `queryParam:"style=form,explode=true,name=cursor"`
 	// filter transactions by status
 	Status *shared.TransactionStatus `queryParam:"style=form,explode=true,name=status"`
+}
+
+func (l ListTransactionsRequest) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(l, "", false)
+}
+
+func (l *ListTransactionsRequest) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &l, "", false, false); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (o *ListTransactionsRequest) GetCreatedAtAfter() *time.Time {
@@ -47,22 +59,22 @@ func (o *ListTransactionsRequest) GetStatus() *shared.TransactionStatus {
 	return o.Status
 }
 
-// ListTransactions200ApplicationJSON - Successful operation
-type ListTransactions200ApplicationJSON struct {
+// ListTransactionsResponseBody - Successful operation
+type ListTransactionsResponseBody struct {
 	Data []shared.Transaction `json:"data"`
 	// Use cursor for paginating list endpoints in conjunction with the cursor request parameter.
 	//
 	NextCursor string `json:"next_cursor"`
 }
 
-func (o *ListTransactions200ApplicationJSON) GetData() []shared.Transaction {
+func (o *ListTransactionsResponseBody) GetData() []shared.Transaction {
 	if o == nil {
 		return []shared.Transaction{}
 	}
 	return o.Data
 }
 
-func (o *ListTransactions200ApplicationJSON) GetNextCursor() string {
+func (o *ListTransactionsResponseBody) GetNextCursor() string {
 	if o == nil {
 		return ""
 	}
@@ -70,13 +82,16 @@ func (o *ListTransactions200ApplicationJSON) GetNextCursor() string {
 }
 
 type ListTransactionsResponse struct {
+	// HTTP response content type for this operation
 	ContentType string
-	StatusCode  int
+	// HTTP response status code for this operation
+	StatusCode int
+	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
 	// Error
 	Error *shared.Error
 	// Successful operation
-	ListTransactions200ApplicationJSONObject *ListTransactions200ApplicationJSON
+	Object *ListTransactionsResponseBody
 }
 
 func (o *ListTransactionsResponse) GetContentType() string {
@@ -107,9 +122,9 @@ func (o *ListTransactionsResponse) GetError() *shared.Error {
 	return o.Error
 }
 
-func (o *ListTransactionsResponse) GetListTransactions200ApplicationJSONObject() *ListTransactions200ApplicationJSON {
+func (o *ListTransactionsResponse) GetObject() *ListTransactionsResponseBody {
 	if o == nil {
 		return nil
 	}
-	return o.ListTransactions200ApplicationJSONObject
+	return o.Object
 }

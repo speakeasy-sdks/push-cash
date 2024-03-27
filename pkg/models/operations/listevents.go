@@ -4,7 +4,8 @@ package operations
 
 import (
 	"net/http"
-	"push-cash/pkg/models/shared"
+	"push-cash/v3/pkg/models/shared"
+	"push-cash/v3/pkg/utils"
 	"time"
 )
 
@@ -15,6 +16,17 @@ type ListEventsRequest struct {
 	CreatedAtBefore *time.Time `queryParam:"style=form,explode=true,name=created_at.before"`
 	// the cursor for the next page of results to fetch
 	Cursor *string `queryParam:"style=form,explode=true,name=cursor"`
+}
+
+func (l ListEventsRequest) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(l, "", false)
+}
+
+func (l *ListEventsRequest) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &l, "", false, false); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (o *ListEventsRequest) GetCreatedAtAfter() *time.Time {
@@ -38,22 +50,22 @@ func (o *ListEventsRequest) GetCursor() *string {
 	return o.Cursor
 }
 
-// ListEvents200ApplicationJSON - Successful operation
-type ListEvents200ApplicationJSON struct {
+// ListEventsResponseBody - Successful operation
+type ListEventsResponseBody struct {
 	Data []shared.Event `json:"data"`
 	// Use cursor for paginating list endpoints in conjunction with the cursor request parameter.
 	//
 	NextCursor string `json:"next_cursor"`
 }
 
-func (o *ListEvents200ApplicationJSON) GetData() []shared.Event {
+func (o *ListEventsResponseBody) GetData() []shared.Event {
 	if o == nil {
 		return []shared.Event{}
 	}
 	return o.Data
 }
 
-func (o *ListEvents200ApplicationJSON) GetNextCursor() string {
+func (o *ListEventsResponseBody) GetNextCursor() string {
 	if o == nil {
 		return ""
 	}
@@ -61,13 +73,16 @@ func (o *ListEvents200ApplicationJSON) GetNextCursor() string {
 }
 
 type ListEventsResponse struct {
+	// HTTP response content type for this operation
 	ContentType string
-	StatusCode  int
+	// HTTP response status code for this operation
+	StatusCode int
+	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
 	// Error
 	Error *shared.Error
 	// Successful operation
-	ListEvents200ApplicationJSONObject *ListEvents200ApplicationJSON
+	Object *ListEventsResponseBody
 }
 
 func (o *ListEventsResponse) GetContentType() string {
@@ -98,9 +113,9 @@ func (o *ListEventsResponse) GetError() *shared.Error {
 	return o.Error
 }
 
-func (o *ListEventsResponse) GetListEvents200ApplicationJSONObject() *ListEvents200ApplicationJSON {
+func (o *ListEventsResponse) GetObject() *ListEventsResponseBody {
 	if o == nil {
 		return nil
 	}
-	return o.ListEvents200ApplicationJSONObject
+	return o.Object
 }

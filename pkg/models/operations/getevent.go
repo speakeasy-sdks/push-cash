@@ -4,7 +4,7 @@ package operations
 
 import (
 	"net/http"
-	"push-cash/pkg/models/shared"
+	"push-cash/v3/pkg/models/shared"
 )
 
 type GetEventRequest struct {
@@ -20,10 +20,13 @@ func (o *GetEventRequest) GetID() string {
 }
 
 type GetEventResponse struct {
+	// HTTP response content type for this operation
 	ContentType string
 	// Successful operation
-	Event       *shared.Event
-	StatusCode  int
+	Event *shared.Event
+	// HTTP response status code for this operation
+	StatusCode int
+	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
 	// Error
 	Error *shared.Error

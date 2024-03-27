@@ -1,4 +1,5 @@
 # Events
+(*Events*)
 
 ### Available Operations
 
@@ -15,28 +16,25 @@ Retrieves a specific event by its ID.
 package main
 
 import(
+	"push-cash/v3/pkg/models/shared"
+	pushcash "push-cash/v3"
 	"context"
+	"push-cash/v3/pkg/models/operations"
 	"log"
-	"push-cash"
-	"push-cash/pkg/models/shared"
-	"push-cash/pkg/models/operations"
 )
 
 func main() {
     s := pushcash.New(
-        pushcash.WithSecurity(shared.Security{
-            Bearer: "",
-        }),
+        pushcash.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
     )
 
     ctx := context.Background()
     res, err := s.Events.GetEvent(ctx, operations.GetEventRequest{
-        ID: "c2ddf7cc-78ca-41ba-928f-c816742cb739",
+        ID: "<id>",
     })
     if err != nil {
         log.Fatal(err)
     }
-
     if res.Event != nil {
         // handle response
     }
@@ -45,16 +43,18 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                | Type                                                                     | Required                                                                 | Description                                                              |
-| ------------------------------------------------------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ |
-| `ctx`                                                                    | [context.Context](https://pkg.go.dev/context#Context)                    | :heavy_check_mark:                                                       | The context to use for the request.                                      |
-| `request`                                                                | [operations.GetEventRequest](../../models/operations/geteventrequest.md) | :heavy_check_mark:                                                       | The request object to use for the request.                               |
+| Parameter                                                                    | Type                                                                         | Required                                                                     | Description                                                                  |
+| ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| `ctx`                                                                        | [context.Context](https://pkg.go.dev/context#Context)                        | :heavy_check_mark:                                                           | The context to use for the request.                                          |
+| `request`                                                                    | [operations.GetEventRequest](../../pkg/models/operations/geteventrequest.md) | :heavy_check_mark:                                                           | The request object to use for the request.                                   |
 
 
 ### Response
 
-**[*operations.GetEventResponse](../../models/operations/geteventresponse.md), error**
-
+**[*operations.GetEventResponse](../../pkg/models/operations/geteventresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## List
 
@@ -66,32 +66,26 @@ Retrieves a list of events.
 package main
 
 import(
+	"push-cash/v3/pkg/models/shared"
+	pushcash "push-cash/v3"
 	"context"
+	"push-cash/v3/pkg/models/operations"
 	"log"
-	"push-cash"
-	"push-cash/pkg/models/shared"
-	"push-cash/pkg/models/operations"
-	"push-cash/pkg/types"
 )
 
 func main() {
     s := pushcash.New(
-        pushcash.WithSecurity(shared.Security{
-            Bearer: "",
-        }),
+        pushcash.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
     )
 
     ctx := context.Background()
     res, err := s.Events.List(ctx, operations.ListEventsRequest{
-        CreatedAtAfter: types.MustTimeFromString("2022-12-25T03:24:03.949Z"),
-        CreatedAtBefore: types.MustTimeFromString("2022-05-20T13:30:46.463Z"),
         Cursor: pushcash.String("vjl8vk3l4o8dhsjlzh=="),
     })
     if err != nil {
         log.Fatal(err)
     }
-
-    if res.ListEvents200ApplicationJSONObject != nil {
+    if res.Object != nil {
         // handle response
     }
 }
@@ -99,13 +93,15 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                    | Type                                                                         | Required                                                                     | Description                                                                  |
-| ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
-| `ctx`                                                                        | [context.Context](https://pkg.go.dev/context#Context)                        | :heavy_check_mark:                                                           | The context to use for the request.                                          |
-| `request`                                                                    | [operations.ListEventsRequest](../../models/operations/listeventsrequest.md) | :heavy_check_mark:                                                           | The request object to use for the request.                                   |
+| Parameter                                                                        | Type                                                                             | Required                                                                         | Description                                                                      |
+| -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| `ctx`                                                                            | [context.Context](https://pkg.go.dev/context#Context)                            | :heavy_check_mark:                                                               | The context to use for the request.                                              |
+| `request`                                                                        | [operations.ListEventsRequest](../../pkg/models/operations/listeventsrequest.md) | :heavy_check_mark:                                                               | The request object to use for the request.                                       |
 
 
 ### Response
 
-**[*operations.ListEventsResponse](../../models/operations/listeventsresponse.md), error**
-
+**[*operations.ListEventsResponse](../../pkg/models/operations/listeventsresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |

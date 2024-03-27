@@ -3,46 +3,58 @@
 package shared
 
 import (
-	"push-cash/pkg/types"
+	"push-cash/v3/pkg/types"
+	"push-cash/v3/pkg/utils"
 	"time"
 )
 
-type PaymentCredentialAccount struct {
+type Account struct {
 	// the account number (mask)
 	NumberMask string `json:"number_mask"`
 	// the routing number for the account
 	Routing string `json:"routing"`
 }
 
-func (o *PaymentCredentialAccount) GetNumberMask() string {
+func (o *Account) GetNumberMask() string {
 	if o == nil {
 		return ""
 	}
 	return o.NumberMask
 }
 
-func (o *PaymentCredentialAccount) GetRouting() string {
+func (o *Account) GetRouting() string {
 	if o == nil {
 		return ""
 	}
 	return o.Routing
 }
 
-type PaymentCredentialCard struct {
+type Card struct {
 	// the expiration date for the card
 	Expiration types.Date `json:"expiration"`
 	// the primary account number (mask)
 	PrimaryAccountNumberMask string `json:"primary_account_number_mask"`
 }
 
-func (o *PaymentCredentialCard) GetExpiration() types.Date {
+func (c Card) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(c, "", false)
+}
+
+func (c *Card) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &c, "", false, false); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o *Card) GetExpiration() types.Date {
 	if o == nil {
 		return types.Date{}
 	}
 	return o.Expiration
 }
 
-func (o *PaymentCredentialCard) GetPrimaryAccountNumberMask() string {
+func (o *Card) GetPrimaryAccountNumberMask() string {
 	if o == nil {
 		return ""
 	}
@@ -51,17 +63,28 @@ func (o *PaymentCredentialCard) GetPrimaryAccountNumberMask() string {
 
 // PaymentCredential - The array will be empty until the user completes their first transaction. Additional transactions will utilize stored payment credentials
 type PaymentCredential struct {
-	Account PaymentCredentialAccount `json:"account"`
+	Account Account `json:"account"`
 	// the name of the bank associated with the credential
-	BankName string                `json:"bank_name"`
-	Card     PaymentCredentialCard `json:"card"`
+	BankName string `json:"bank_name"`
+	Card     Card   `json:"card"`
 	// Datetime for when the payment credential was created for the user
 	CreatedAt time.Time `json:"created_at"`
 }
 
-func (o *PaymentCredential) GetAccount() PaymentCredentialAccount {
+func (p PaymentCredential) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(p, "", false)
+}
+
+func (p *PaymentCredential) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &p, "", false, false); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o *PaymentCredential) GetAccount() Account {
 	if o == nil {
-		return PaymentCredentialAccount{}
+		return Account{}
 	}
 	return o.Account
 }
@@ -73,9 +96,9 @@ func (o *PaymentCredential) GetBankName() string {
 	return o.BankName
 }
 
-func (o *PaymentCredential) GetCard() PaymentCredentialCard {
+func (o *PaymentCredential) GetCard() Card {
 	if o == nil {
-		return PaymentCredentialCard{}
+		return Card{}
 	}
 	return o.Card
 }
